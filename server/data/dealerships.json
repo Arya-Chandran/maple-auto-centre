@@ -1,0 +1,37 @@
+[
+    {
+        "dealerId": "3922h243-16cd-4z45-ab97-c79f698ibac1",
+        "dealerName": "Markville Ford Lincoln",
+        "dealerAddress": "8210 Kennedy Road Unionville, ON L3R5X3",
+        "dealerPhoneNumber": "+1 (646) 123-1234",
+        "emailId": "abc@xyz.com"
+    },
+    {
+        "dealerId": "3922h243-16cd-4z45-ab97-c79f698ibac2",
+        "dealerName": "Markville Ford Lincoln",
+        "dealerAddress": "8210 Kennedy Road Unionville, ON L3R5X3",
+        "dealerPhoneNumber": "+1 (646) 123-1234",
+        "emailId": "abc@xyz.com"
+    },
+    {
+        "dealerId": "3922h243-16cd-4z45-ab97-c79f698ibac3",
+        "dealerName": "Markville Ford Lincoln",
+        "dealerAddress": "8210 Kennedy Road Unionville, ON L3R5X3",
+        "dealerPhoneNumber": "+1 (646) 123-1234",
+        "emailId": "abc@xyz.com"
+    },
+    {
+        "dealerId": "3922h243-16cd-4z45-ab97-c79f698ibac4",
+        "dealerName": "Markville Ford Lincoln",
+        "dealerAddress": "8210 Kennedy Road Unionville, ON L3R5X3",
+        "dealerPhoneNumber": "+1 (646) 123-1234",
+        "emailId": "abc@xyz.com"
+    },
+    {
+        "dealerId": "3922h243-16cd-4z45-ab97-c79f698ibac5",
+        "dealerName": "Markville Ford Lincoln",
+        "dealerAddress": "8210 Kennedy Road Unionville, ON L3R5X3",
+        "dealerPhoneNumber": "+1 (646) 123-1234",
+        "emailId": "abc@xyz.com"
+    }
+]

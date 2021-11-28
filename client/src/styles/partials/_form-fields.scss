@@ -1,0 +1,29 @@
+@use "./layout-grid" as *;
+@use "./type-kit" as *;
+@use "./colors" as *;
+
+/* form field */
+
+@mixin form-field {
+    width: 100%;
+    height: pxToRem(36);
+    padding: 0 pxToRem(16) 0;
+    border: pxToRem(1) solid $base-color;
+    border-radius: pxToRem(20);
+    margin-top: pxToRem(4);
+    background-color: $white;
+    @include mobile-p2;
+    &::placeholder {
+        color: $dark-grey;
+    }
+    &:focus {
+        outline: none;
+        border-color: $light-blue;
+    }
+    @include tablet-breakpoint {
+        height: pxToRem(38);
+        @include tablet-p2;
+    }
+}
+
+//for mobile and tablet breakpoint for form fields. 

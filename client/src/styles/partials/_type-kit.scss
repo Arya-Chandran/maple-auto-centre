@@ -1,0 +1,106 @@
+@use "./layout-grid" as *;
+@use "./colors" as *;
+
+/* typeface & weights */
+
+/* typeface */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+$montserrat: 'Montserrat', sans-serif;
+
+/* weights */
+
+$regular: 400;
+$semi-bold: 600;
+
+/* text styles */
+
+/* templates */
+
+@mixin regular-style($size, $height, $color: $instock-black) {
+    font-family: $montserrat;
+    font-weight: $regular;
+    font-size: $size;
+    line-height: $height;
+    color: $color;
+}
+
+@mixin bold-style($size, $height, $color: $instock-black) {
+    font-family: $montserrat;
+    font-weight: $semi-bold;
+    font-size: $size;
+    line-height: $height;
+    color: $color;
+}
+
+/* page header */
+
+@mixin mobile-h1 {
+    @include bold-style(pxToRem(28), pxToRem(36));
+}
+
+@mixin tablet-h1 {
+    @include bold-style(pxToRem(32), pxToRem(40));
+}
+
+/* subheader */
+
+@mixin mobile-h2 {
+    @include bold-style(pxToRem(20), pxToRem(28));
+}
+
+@mixin tablet-h2 {
+    @include bold-style(pxToRem(24), pxToRem(32));
+}
+
+/* labels, links & buttons */
+
+@mixin mobile-h3 {
+    @include bold-style(pxToRem(13), pxToRem(20));
+}
+
+@mixin tablet-h3 {
+    @include bold-style(pxToRem(14), pxToRem(22));
+}
+
+/* table header */
+
+@mixin mobile-h4 {
+    @include bold-style(pxToRem(11), pxToRem(16), $slate);
+    text-transform: uppercase;
+}
+
+@mixin tablet-h4 {
+    @include bold-style(pxToRem(12), pxToRem(18), $slate);
+    text-transform: uppercase;
+}
+
+/* body large */
+
+@mixin mobile-p1 {
+    @include regular-style(pxToRem(15), pxToRem(26));
+}
+
+@mixin tablet-p1 {
+    @include regular-style(pxToRem(16), pxToRem(28));
+}
+
+/* body medium */
+
+@mixin mobile-p2 {
+    @include regular-style(pxToRem(13), pxToRem(20));
+}
+
+@mixin tablet-p2 {
+    @include regular-style(pxToRem(14), pxToRem(22));
+}
+
+/* body small */
+
+@mixin mobile-p3 {
+    @include regular-style(pxToRem(11), pxToRem(16));
+}
+
+@mixin tablet-p3 {
+    @include regular-style(pxToRem(12), pxToRem(18));
+}

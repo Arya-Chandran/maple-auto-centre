@@ -1,0 +1,21 @@
+@use "./layout-grid" as *;
+@use "./type-kit" as *;
+@use "./colors" as *;
+
+/* text link */
+
+@mixin text-link {
+    margin-right: pxToRem(4);
+    @include mobile-h3;
+    color: $light-blue;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+    @include tablet-breakpoint {
+        @include tablet-h3;
+        color: $light-blue;
+    }
+}
+
+//this is for the mobile and tablet breakpoint for text link that has the h3 header on figma
