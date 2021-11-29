@@ -27,7 +27,7 @@
         "dealerName": "Markville Ford Lincoln",
         "dealerId": "12345",
         "price": "37694",
-        "images": [],
+        "images": ["/images/vehicle.webp"],
         "features": ["Lane Assist", "Heated Seats", "Blind Spot Monitor", "Automatic LED Headlights", "2.0L Turbo Engine", "Adaptive Cruise Control"],
         "details": {
             "engine": "1.5L EcoBoost® Engine with Auto Start-Stop Technology",
@@ -46,7 +46,7 @@
         "dealerName": "Markville Ford Lincoln",
         "dealerId": "12345",
         "price": "37694",
-        "images": [],
+        "images": ["/images/vehicle.webp"],
         "features": ["Lane Assist", "Heated Seats", "Blind Spot Monitor", "Automatic LED Headlights", "2.0L Turbo Engine", "Adaptive Cruise Control"],
         "details": {
             "engine": "1.5L EcoBoost® Engine with Auto Start-Stop Technology",
@@ -65,7 +65,7 @@
         "dealerName": "Markville Ford Lincoln",
         "dealerId": "12345",
         "price": "37694",
-        "images": [],
+        "images": ["/images/vehicle.webp"],
         "features": ["Lane Assist", "Heated Seats", "Blind Spot Monitor", "Automatic LED Headlights", "2.0L Turbo Engine", "Adaptive Cruise Control"],
         "details": {
             "engine": "1.5L EcoBoost® Engine with Auto Start-Stop Technology",

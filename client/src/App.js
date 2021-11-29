@@ -1,20 +1,23 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import './App.css';
-import InventoryPage from './pages/InventoryPage';
-
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import "./App.css";
+import InventoryPage from "./pages/InventoryPage";
+import VehiclePage from "./pages/VehiclePage";
 
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <InventoryPage/>
-   
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" exact component={InventoryPage} />
+            <Route path="/vehicle/:vin" exact component={VehiclePage} />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
 }
 
 export default App;
-
