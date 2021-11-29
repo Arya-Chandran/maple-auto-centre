@@ -1,14 +1,20 @@
-import logo from './logo.svg';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
-import DealershipDetails from './components/DealershipDetails';
+import InventoryPage from './pages/InventoryPage';
 
-function App() {
-  return (
-    <div className="App">
 
-      <DealershipDetails/>
-    </div>
-  );
+
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <InventoryPage/>
+   
+      </div>
+    );
+  }
 }
 
 export default App;
+
