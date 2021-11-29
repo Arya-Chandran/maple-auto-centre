@@ -6,17 +6,19 @@ import DealershipDetails from "../DealershipDetails"
 
 const host = "http://localhost:8080";
 
-function VehicleDetails() {
+function VehicleDetails(props) {
   const [vehicle, setVehicle] = useState({});
-
+  
   useEffect(() => {
-    getCurrentVehicle();
+    console.log(props)
+    const {vin} = props.match.params;
+    getCurrentVehicle(vin);
     console.log("vehicle", vehicle);
   }, []);
 
-  const getCurrentVehicle = () => {
+  const getCurrentVehicle = (vin) => {
     axios
-      .get(`${host}/inventory/3FMCR9B69MRA657151`)
+      .get(`${host}/inventory/${vin}`)
       .then((response) => {
         setVehicle(response.data);
       })
@@ -28,7 +30,7 @@ function VehicleDetails() {
     <div>
       {Object.keys(vehicle).length !== 0 && (
         <div>
-          <img src={"http://localhost:8080" + vehicle.images} alt="Images" />
+          <img src={`${host}/${vehicle.images[0]}`} alt="Images" />
           <p></p>
           <p>{vehicle.make}</p>
           <p>Adjusted price</p>
