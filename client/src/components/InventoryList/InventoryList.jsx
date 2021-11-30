@@ -26,6 +26,10 @@ function InventoryList(props) {
 
   return (
     <div>
+      <Link  to="/inventory/add/">
+            <button> Add Vehicle</button>
+      </Link>
+      
       {inventory &&
         inventory.map((vehicle) => (
           <div key={vehicle.vin}>
@@ -37,6 +41,11 @@ function InventoryList(props) {
             <Link  to={`/vehicle/${vehicle.vin}`}>
             <button> View Details</button>
             </Link>
+            <Link  to={`/vehicle/edit/${vehicle.vin}`}>
+            <button> Edit</button>
+            </Link>
+          
+
           </div>
         ))}
     </div>
