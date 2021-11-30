@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const path = require("path");
+const { v4: uuidv4 } = require("uuid");
 
 // read and parse dealership data file
 const dealershipDataFile = path.join(__dirname, "../data/dealerships.json");
@@ -43,6 +44,7 @@ router.get("/:dealerId", (req, res) => {
       return inventory.dealerId;
     }
   });
+
   if (!foundInventory) {
     res.status(404).send("Inventory not found");
   }
@@ -50,5 +52,91 @@ router.get("/:dealerId", (req, res) => {
   const DealershipResponse = { foundDealership, foundInventory };
   res.json(DealershipResponse);
 });
+
+// add new dealership
+router.post("/add-dealer", (req, res) => {
+  if (!req.body) {
+    res.status(400).send("Error: missing dealership data!");
+  }
+  const { dealerId, dealerName, dealerAddress, dealerPhoneNumber, emailId } =
+    req.body;
+  console.log(req.body);
+  const newDealership = {
+    id: uuidv4(),
+    dealerId,
+    dealerName,
+    dealerAddress,
+    dealerPhoneNumber,
+    emailId,
+  };
+  parseDealershipData.push(newDealership);
+  fs.writeFileSync(
+    dealershipDataFile,
+    JSON.stringify(parseDealershipData),
+    (error) => {
+      if (error) {
+        return;
+      }
+    }
+  );
+  res.status(201).json(newDealership);
+});
+
+// edit dealership data
+router.put("/:dealerId", (req, res) => {
+  const { dealerId } = req.params;
+  console.log("id:",req.params.dealerId);
+  const {dealerId :Id, dealerName, dealerAddress, dealerPhoneNumber, emailId } = req.body;
+  console.log("body:",req.body);
+
+  if (!dealerName || !dealerAddress || !dealerPhoneNumber || !emailId) {
+      res.status(404).send("Error: Invalid dealership data!");
+  }
+
+  const activeDealership = parseDealershipData.find(
+      (dealership) => dealership.dealerId === dealerId
+  );
+
+  console.log("active:", activeDealership);
+
+  if (!activeDealership) {
+      res.status(404).send(
+          `Error: Dealership with dealership id:${dealerId} doesn't exist in database!`
+      );
+  }
+
+  if (activeDealership) {
+    activeDealership.dealerId = Id;
+    activeDealership.dealerName = dealerName;
+    activeDealership.dealerAddress = dealerAddress;
+    activeDealership.dealerPhoneNumber = dealerPhoneNumber;
+    activeDealership.emailId = emailId;
+     
+  }
+  console.log("active2:", activeDealership);
+  
+  const updatedactiveDealership = parseDealershipData.map((dealership) => {
+      if (dealership.Id === dealerId) {
+          dealership = activeDealership;
+      }
+      return dealership;
+  });
+
+  fs.writeFile(
+    dealershipDataFile,
+      JSON.stringify(updatedactiveDealership),
+      (error) => {
+          if (error) {
+              res.status(404).send("Error: data updation failed!");
+              return;
+          }
+          res.status(200).send({
+              message: "Dealership data updated successfully",
+              updatedData: activeDealership,
+          });
+      }
+  );
+});
+
 
 module.exports = router;
