@@ -26,14 +26,17 @@ function InventoryList(props) {
 
   return (
     <div>
-      <Link  to="/inventory/add/">
+      <Link  to="/inventory/">
             <button> Add Vehicle</button>
       </Link>
+      <Link  to="/form/">
+            <button> Contact Dealer</button>
+          </Link>
       
       {inventory &&
         inventory.map((vehicle) => (
           <div key={vehicle.vin}>
-            <img src={`${host}/${vehicle.images[0]}`}  alt="Images" />
+            <img src={`${host}/${vehicle.images}`}  alt="Images" />
             <p>{vehicle.make}</p>
             <p>{vehicle.model}</p>
             <p>{vehicle.trim}</p>

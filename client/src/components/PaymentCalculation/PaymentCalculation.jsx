@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DealershipPage(props) {
+function PaymentCalculation(props) {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function DealershipPage(props) {
     );
 }
 
-export default DealershipPage;
+export default PaymentCalculation;

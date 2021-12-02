@@ -8,6 +8,7 @@ const { v4: uuidv4 } = require("uuid");
 const inventoryDataFile = path.join(__dirname, "../data/inventories.json");
 const inventoryData = fs.readFileSync(inventoryDataFile);
 const parseInventoryData = JSON.parse(inventoryData);
+const uploadPath = "./public/images/";
 
 //function to read the inventory data
 const getInventory = () => {
@@ -30,11 +31,38 @@ router.get("/:vin", (req, res) => {
   res.json(foundvehicle);
 });
 
+ /* return an array of options for dropdown */
+router.get("/dropdown/:property", (req, res) => {
+  const { property } = req.params;
+
+  const propertyOptions = parseInventoryData
+      .map((vehicle) => {
+          if (property === "dealership") {
+              const { dealerId, dealerName } = vehicle;
+              return {  dealerId, dealerName };
+          }
+          return vehicle[property];
+      })
+      .filter(
+          (item, index, array) =>
+              array.findIndex((t) => {
+                  if (property === "dealership") {
+                      return t.dealerId === item.dealerId;
+                  }
+                  return t === item;
+              }) == index
+      );
+
+  res.json(propertyOptions);
+}); 
+
 // add new vehicle
-router.post("/add", (req, res) => {
-  if (!req.body) {
+router.post("/", (req, res) => {
+
+  if (!req.body || !req.files || Object.keys(req.files).length === 0) {
     res.status(400).send("Error: missing vehicle data!");
   }
+
   const {
     year,
     make,
@@ -44,11 +72,18 @@ router.post("/add", (req, res) => {
     dealerId,
     dealerName,
     price,
-    images,
     features,
-    details,
+    engine,
+    driveTrain,
+    transmission,
+    interior,
+    exterior,
   } = req.body;
-  console.log(req.body);
+  console.log("vehicle.req.body:", req.body);
+  console.log("vehicle.req.files:", req.files);
+
+  const imageFile = req.files.images;
+  const imageName = imageFile.name;
   const newVehicle = {
     id: uuidv4(),
     year,
@@ -59,28 +94,42 @@ router.post("/add", (req, res) => {
     dealerId,
     dealerName,
     price,
-    images,
-    features,
-    details,
+    images: [`/images/${imageName}`],
+    features: JSON.parse(features),
+    details: {
+      engine,
+      driveTrain,
+      transmission,
+      interior,
+      exterior,
+    },
   };
+
   parseInventoryData.push(newVehicle);
-  fs.writeFileSync(
+
+  fs.writeFile(
     inventoryDataFile,
     JSON.stringify(parseInventoryData),
     (error) => {
       if (error) {
-        return;
+        res.status(500).send("New inventory failed to add!");
       }
-    }
-  );
-  res.status(201).json(newVehicle);
+      imageFile.mv(uploadPath + imageFile.name, function (err) {
+        if (err) {
+          res.status(500).send("Image upload failed");
+        } else {
+          res.status(201).send("File uploaded");
+        }  
+      });
+    });
 });
 
 // edit vehicle details
 router.put("/:vin", (req, res) => {
   const { vin } = req.params;
   console.log("vin:", req.params.vin);
-  const { vin:Vin,
+  const {
+    vin: Vin,
     year,
     make,
     model,
@@ -93,8 +142,20 @@ router.put("/:vin", (req, res) => {
     details,
   } = req.body;
   console.log("vehicle.req.body:", req.body);
+  console.log("vehicle.req.files:", req.body);
 
-  if (!year || !make || !model || !trim || !dealerId || !dealerName || !price || !images || !features || !details ) {
+  if (
+    !year ||
+    !make ||
+    !model ||
+    !trim ||
+    !dealerId ||
+    !dealerName ||
+    !price ||
+    !images ||
+    !features ||
+    !details
+  ) {
     res.status(404).send("Error: Invalid vehicle data!");
   }
 
@@ -107,9 +168,7 @@ router.put("/:vin", (req, res) => {
   if (!activeVehicle) {
     res
       .status(404)
-      .send(
-        `Error: Vehicle with vin number:${vin} doesn't exist in database!`
-      );
+      .send(`Error: Vehicle with vin number:${vin} doesn't exist in database!`);
   }
 
   if (activeVehicle) {

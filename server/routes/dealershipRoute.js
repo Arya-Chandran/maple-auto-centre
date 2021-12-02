@@ -54,7 +54,7 @@ router.get("/:dealerId", (req, res) => {
 });
 
 // add new dealership
-router.post("/add-dealer", (req, res) => {
+router.post("/", (req, res) => {
   if (!req.body) {
     res.status(400).send("Error: missing dealership data!");
   }
@@ -114,7 +114,7 @@ router.put("/:dealerId", (req, res) => {
      
   }
   console.log("active2:", activeDealership);
-  
+
   const updatedactiveDealership = parseDealershipData.map((dealership) => {
       if (dealership.Id === dealerId) {
           dealership = activeDealership;
