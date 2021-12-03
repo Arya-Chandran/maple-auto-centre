@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import  { Button } from "reactstrap";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 import ImageUploader from "react-images-upload";
 
 const host = "http://localhost:8080";
 
-const onSubmit = (props, dealerList, values) => {
-  console.log("values", values);
-  console.log("props", props);
+const onSubmit = (history, dealerList, values) => {
+  console.log("values", history, values);
 
   const {
     year,
@@ -49,7 +49,7 @@ const onSubmit = (props, dealerList, values) => {
       headers: { "Content-Type": "multipart/form-data" },
     })
     .then((response) => {
-      props.history.push("/", {});
+      history.push("/", {});
     });
 };
 
@@ -71,7 +71,7 @@ const validationSchema = Yup.object({
   }),
 });
 
-function AddVehicle(props) {
+function AddVehicle({ vehicle = {}, isEdit = false, history}) {
   const [dealerList, setDealer] = useState([]);
 
    console.log("dealerList", dealerList);
@@ -80,7 +80,7 @@ function AddVehicle(props) {
      getDropdownList("dealership");
   }, []);
 
-  const initialValues = {
+  const initialValues = isEdit ? vehicle :{
     year: "",
     make: "",
     model: "",
@@ -89,7 +89,7 @@ function AddVehicle(props) {
     dealerName: "",
     price: "",
     images: [],
-    features: [""],
+    features: [],
     details: {
       engine: "",
       driveTrain: "",
@@ -115,7 +115,7 @@ function AddVehicle(props) {
       enableReinitialize={true}
       validationSchema={validationSchema}
       onSubmit={(values) => {
-        onSubmit(props, dealerList, values);
+        onSubmit(history, dealerList, values);
       }}
     >
       {({ values }) => (
@@ -189,7 +189,7 @@ function AddVehicle(props) {
             render={({ field, form: { setFieldValue, touched, errors } }) => (
               <div>
                 <ImageUploader
-                  withIcon={true}
+                  // withIcon={true}
                   buttonText="Choose images"
                   onChange={(picture) => setFieldValue("images", picture)}
                   imgExtension={[".jpg", ".gif", ".png", ".gif"]}
@@ -317,7 +317,7 @@ function AddVehicle(props) {
           />
           <ErrorMessage name="details.interior" />
 
-          <button type="submit">Submit</button>
+          <Button color="primary">Submit</Button>
         </Form>
       )}
     </Formik>

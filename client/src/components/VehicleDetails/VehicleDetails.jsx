@@ -9,10 +9,10 @@ const host = "http://localhost:8080";
 
 function VehicleDetails(props) {
   const [vehicle, setVehicle] = useState({});
-  
+ 
   useEffect(() => {
-    console.log(props)
-    const {vin} = props.match.params;
+    console.log(props);
+    const { vin } = props.match.params;
     getCurrentVehicle(vin);
     console.log("vehicle", vehicle);
   }, []);
@@ -25,7 +25,7 @@ function VehicleDetails(props) {
       })
       .catch((error) => console.log(error));
   };
-  
+
   console.log(vehicle);
   return (
     <div>
@@ -37,10 +37,10 @@ function VehicleDetails(props) {
           <p>Adjusted price</p>
           <h4>Features</h4>
           <Features features={vehicle.features} />
-           <h4>More details</h4>
-          <Details details={vehicle.details}/>
+          <h4>More details</h4>
+          <Details details={vehicle.details} />
           <h4>Dealership Details</h4>
-          <DealershipDetails dealerId={vehicle.dealerId}/>
+          <DealershipDetails vehicle={vehicle} />
         </div>
       )}
     </div>

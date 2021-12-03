@@ -212,4 +212,29 @@ router.put("/:vin", (req, res) => {
   );
 });
 
+
+router.delete("/:vin", (req, res) => {
+  const requestedVIN = req.params.vin;
+  const foundvehicle = parseInventoryData.findIndex((vehicle) => {
+    if (vehicle.vin === requestedVIN) {
+      return vehicle.vin;
+    }
+  });
+  console.log("foundvehicle", foundvehicle)
+  parseInventoryData.splice(foundvehicle, 1);
+  fs.writeFile(
+      inventoryDataFile,
+      JSON.stringify(parseInventoryData),
+      (err) => {
+          if (err) {
+              console.log(err);
+          }
+      }
+  );
+  res.json(parseInventoryData);
+});
+
+
+
+
 module.exports = router;

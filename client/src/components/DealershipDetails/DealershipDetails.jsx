@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ContactForm from "../ContactForm";
 
 const host = "http://localhost:8080";
 
-function DealershipDetails(props) {
-  const { dealerId } = props;
+function DealershipDetails({vehicle}) {
+  const { dealerId } = vehicle;
   console.log("dealerid", dealerId);
   const [dealership, setDealership] = useState({});
+  const [modal, setModal] = useState(false);
+
+  // Toggle for Modal
+  const toggleModal = () => {
+    setModal(!modal);
+  }
 
   useEffect(() => {
     getCurrentDealership(dealerId);
@@ -37,6 +44,13 @@ function DealershipDetails(props) {
           <p>{dealership.emailId}</p>
         </div>
       )}
+      <button  onClick={toggleModal}>Contact Dealer</button>
+      <ContactForm 
+          onClose={toggleModal} 
+          vehicle={vehicle}
+          dealerEmail={dealership.emailId}
+          isOpen={modal} 
+        />
     </div>
   );
 }

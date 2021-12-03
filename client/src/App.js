@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import InventoryPage from "./pages/InventoryPage";
 import VehiclePage from "./pages/VehiclePage";
