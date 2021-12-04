@@ -1,14 +1,13 @@
 import React from "react";
-//import Features from './Feature.scss';
+import './Features.scss';
 
 function Features({ features }) {
- //console.log(features);
  
   return (
-    <div>
-      <p>Features</p>
+    <div className= "features">
+      <h2 className="features__heading">Features</h2>
       {features.map((feature, index) => (
-        <li key={index}>{feature}</li>
+        <li className="features__item" key={index}>{feature}</li>
       ))}
     </div>
   );

@@ -1,0 +1,133 @@
+@use "../../styles/partials/call-to-actions" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/form-fields" as *;
+@use "../../styles/partials/layout-grid" as *;
+@use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/resets" as *;
+
+.vehicleCard {
+  width: 100%;
+  padding: pxToRem(16);
+  display: flex;
+  flex-direction: column;
+
+  @include tablet-breakpoint {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  @include desktop-breakpoint {
+    margin: 0 auto;
+    max-width: $max-content-width;
+  }
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 2px 5px rgba(4, 11, 39, 0.1);
+    border-radius: pxToRem(3);
+    text-align: left;
+    background-color: $white;
+    margin-bottom: 16px;
+    padding: 16px;
+
+    @include tablet-breakpoint {
+      width: 200px;
+      flex: 0 0 30%;
+    
+    }
+
+    @include desktop-breakpoint {
+      margin: 0 auto;
+      max-width: $max-content-width;
+    }
+  }
+
+  &__heading {
+    @include mobile-h2;
+    color: $light-blue;
+    margin: 0;
+    padding-bottom: 16px;
+
+    @include tablet-breakpoint {
+      @include tablet-h2;
+      color: $light-blue;
+    }
+
+    @include desktop-breakpoint {
+    }
+  }
+
+  &__image {
+    width: 100%;
+    // width: 288px;
+    // height: 10rem;
+    // border-radius: 5%;
+    object-fit: cover;
+  }
+
+  &__main {
+    padding-top: 16px;
+  }
+  &__row {
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 4px;
+  }
+
+  &__year {
+    @include regular-style(pxToRem(24), pxToRem(22));
+    padding-right: 8px;
+    margin: 0;
+  }
+
+  &__make {
+    margin: 0;
+    @include regular-style(pxToRem(24), pxToRem(22));
+  }
+
+  &__model {
+    margin: 0;
+    padding-right: 8px;
+    @include bold-style(pxToRem(24), pxToRem(22), $light-blue);
+  }
+
+  &__trim {
+    @include regular-style(pxToRem(24), pxToRem(22), $light-blue);
+    padding-bottom: 8px;
+    margin: 0;
+  }
+
+  &__title {
+    @include mobile-h3;
+    margin: 0;
+  }
+
+  &__price {
+    margin: 0;
+    @include mobile-h3;
+  }
+
+  &__vin {
+    margin: 0;
+    @include mobile-p2;
+  }
+
+  &__name {
+    margin: 0;
+    @include mobile-p2;
+    padding-bottom: 16px;
+  }
+
+  &__view {
+    width: 100%;
+    background-color: $black;
+  }
+  &__btnWrapper {
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+}

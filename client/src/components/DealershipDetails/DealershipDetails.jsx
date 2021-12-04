@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ContactForm from "../ContactForm";
+import './DealershipDetails.scss';
+import { Button} from "reactstrap";
 
 const host = "http://localhost:8080";
 
@@ -32,19 +34,18 @@ function DealershipDetails({vehicle}) {
   };
 
   return (
-    <div>
+    <div className="dealer">
       {Object.keys(dealership).length !== 0 && (
-        <div>
-          <p>Dealership</p>
-          <p>{dealership.dealerName}</p>
-          <p>Address</p>
-          <p>{dealership.dealerAddress}</p>
-          <p>Contact Information</p>
-          <p>{dealership.dealerPhoneNumber}</p>
-          <p>{dealership.emailId}</p>
+        <div className="dealer__info">
+          <p className="dealer__name">{dealership.dealerName}</p>
+          {/* <p>Address</p> */}
+          <p className="dealer__address">{dealership.dealerAddress}</p>
+          {/* <p>Contact Information</p> */}
+          <p className="dealer__contact">{dealership.dealerPhoneNumber}</p>
+          <p className="dealer__contact">{dealership.emailId}</p>
         </div>
       )}
-      <button  onClick={toggleModal}>Contact Dealer</button>
+      <Button onClick={toggleModal}>Contact Dealer</Button>
       <ContactForm 
           onClose={toggleModal} 
           vehicle={vehicle}

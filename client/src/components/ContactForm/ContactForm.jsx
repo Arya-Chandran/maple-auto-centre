@@ -63,6 +63,7 @@ function ContactForm({ isOpen, vehicle, onClose, dealerEmail }) {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
+            console.log(values)
             handleContactDealer(vehicle, values, resetForm);
           }}
         >
@@ -119,7 +120,7 @@ function ContactForm({ isOpen, vehicle, onClose, dealerEmail }) {
                 <ErrorMessage name="email" />
               </ModalBody>
               <ModalFooter>
-                <Button color="primary">Submit</Button>{" "}
+                <Button type="submit" color="primary">Submit</Button>{" "}
                 <Button onClick={onClose}>Cancel</Button>
               </ModalFooter>
             </Form>
@@ -129,42 +130,5 @@ function ContactForm({ isOpen, vehicle, onClose, dealerEmail }) {
     </>
   );
 }
-
-// function ContactForm(props) {
-//   return (
-//     <Formik
-//       initialValues={initialValues}
-//       validationSchema={validationSchema}
-//       onSubmit={() => onSubmit()}
-//     >
-//       <Form>
-//               <label htmlFor="">First name</label>
-//               <Field className="" type="text" id="firstName" name="firstName"/>
-//               <ErrorMessage name ='firstName'/>
-
-//               <label htmlFor="">Last Name</label>
-//               <Field className="" type="text" id="lastName" name="lastName" />
-//               <ErrorMessage name ='lastName'/>
-
-//               <label htmlFor="">Street Address</label>
-//               <Field className="" type="text" id="address" name="address" />
-//               <ErrorMessage name ='address'/>
-
-//               <label htmlFor="">Postal Code</label>
-//               <Field className="" type="text" id="postalCode" name="tpostalCoderim" />
-//               <ErrorMessage name ='postalCode'/>
-
-//               <label htmlFor="">Phone Number</label>
-//               <Field className="" type="text" id="phoneNumber" name="phoneNumber" />
-//               <ErrorMessage name ='phoneNumber'/>
-
-//               <label htmlFor="">Email</label>
-//               <Field className="" type="text" id="email" name="email" />
-//               <ErrorMessage name ='email'/>
-
-//       </Form>
-//     </Formik>
-//   );
-// }
 
 export default ContactForm;

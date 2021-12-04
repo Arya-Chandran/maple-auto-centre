@@ -4,12 +4,22 @@ import Features from "../Features";
 import Details from "../Details";
 import { Link } from "react-router-dom";
 import DealershipDetails from "../DealershipDetails";
+import "./VehicleDetails.scss";
+import PaymentCalculation from "../Modals/PaymentCalculation";
 
 const host = "http://localhost:8080";
 
 function VehicleDetails(props) {
   const [vehicle, setVehicle] = useState({});
- 
+  const [modal, setModal] = useState(false);
+
+  // Toggle for Modal
+  const toggleModal = () => setModal(!modal);
+
+  const openModal = () => {
+    toggleModal();
+  };
+
   useEffect(() => {
     console.log(props);
     const { vin } = props.match.params;
@@ -28,21 +38,41 @@ function VehicleDetails(props) {
 
   console.log(vehicle);
   return (
-    <div>
+    <div className="details">
       {Object.keys(vehicle).length !== 0 && (
-        <div>
-          <img src={`${host}/${vehicle.images[0]}`} alt="Images" />
-          <p></p>
-          <p>{vehicle.make}</p>
-          <p>Adjusted price</p>
-          <h4>Features</h4>
-          <Features features={vehicle.features} />
-          <h4>More details</h4>
-          <Details details={vehicle.details} />
-          <h4>Dealership Details</h4>
+        <div className="details__wrapper">
+          <div></div>
+          <div className="details__main">
+            <p className="details__year">{vehicle.year}</p>
+            <div className="details__row">
+              <p className="details__make">{vehicle.make}</p>
+              <p className="details__model">{vehicle.model}</p>
+            </div>
+            <p className="details__trim">{vehicle.trim}</p>
+            <p className="details__vin">VIN {vehicle.vin}</p>
+          </div>
+          <img
+            className="details__image"
+            src={`${host}/${vehicle.images[0]}`}
+            alt="Images"
+          />
+          <p className="details__title">Adjusted price</p>
+          <p className="details__price">${vehicle.price}</p>
+          <button onClick={() => openModal(vehicle)}>
+            Calculate
+          </button>
+          <div className="details__section">
+            <Features features={vehicle.features} />
+            <Details details={vehicle.details} />
+          </div>
           <DealershipDetails vehicle={vehicle} />
         </div>
       )}
+      <PaymentCalculation
+        onClose={toggleModal}
+        vehicle={vehicle}
+        isOpen={modal}
+      />
     </div>
   );
 }

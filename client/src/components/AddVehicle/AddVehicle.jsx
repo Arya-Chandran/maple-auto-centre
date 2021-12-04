@@ -209,6 +209,7 @@ function AddVehicle({ vehicle = {}, isEdit = false, history}) {
               <label htmlFor="">Dealership Name</label>
               <Field
                 className=""
+                component="select"
                 as="select"
                 id="dealerName"
                 name="dealerName"
@@ -238,7 +239,7 @@ function AddVehicle({ vehicle = {}, isEdit = false, history}) {
             placeholder=""
           >
             {(fieldArrayProps) => {
-              //   console.log('fieldArrayProps', fieldArrayProps)
+              console.log('fieldArrayProps', fieldArrayProps)
               const { push, remove, form } = fieldArrayProps;
               const { values } = form;
               const { features } = values;

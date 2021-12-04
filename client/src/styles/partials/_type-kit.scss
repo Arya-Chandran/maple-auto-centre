@@ -17,7 +17,7 @@ $semi-bold: 600;
 
 /* templates */
 
-@mixin regular-style($size, $height, $color: $instock-black) {
+@mixin regular-style($size, $height, $color: $black) {
     font-family: $montserrat;
     font-weight: $regular;
     font-size: $size;
@@ -25,7 +25,7 @@ $semi-bold: 600;
     color: $color;
 }
 
-@mixin bold-style($size, $height, $color: $instock-black) {
+@mixin bold-style($size, $height, $color: $black) {
     font-family: $montserrat;
     font-weight: $semi-bold;
     font-size: $size;
@@ -66,19 +66,19 @@ $semi-bold: 600;
 /* table header */
 
 @mixin mobile-h4 {
-    @include bold-style(pxToRem(11), pxToRem(16), $slate);
+    @include bold-style(pxToRem(11), pxToRem(16), $black);
     text-transform: uppercase;
 }
 
 @mixin tablet-h4 {
-    @include bold-style(pxToRem(12), pxToRem(18), $slate);
+    @include bold-style(pxToRem(12), pxToRem(18), $black);
     text-transform: uppercase;
 }
 
 /* body large */
 
 @mixin mobile-p1 {
-    @include regular-style(pxToRem(15), pxToRem(26));
+    @include regular-style(pxToRem(15), pxToRem(20));
 }
 
 @mixin tablet-p1 {

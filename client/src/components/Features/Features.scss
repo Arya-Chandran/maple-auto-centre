@@ -1,0 +1,51 @@
+@use "../../styles/partials/call-to-actions" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/form-fields" as *;
+@use "../../styles/partials/layout-grid" as *;
+@use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/resets" as *;
+
+.features {
+  width: 100%;
+  padding:pxToRem(16) 0;
+  border-top: 1px solid $base-color;
+ 
+
+  @include tablet-breakpoint {
+    border-bottom: 1px solid $base-color;
+  }
+
+  @include desktop-breakpoint {
+  }
+  
+
+
+  &__heading {
+    @include mobile-h2;
+    color: $light-blue;
+    margin:0;
+    padding-bottom:16px;
+
+    @include tablet-breakpoint {
+      @include tablet-h2;
+      color: $light-blue;
+    }
+
+    @include desktop-breakpoint {
+    }
+  }
+
+  &__item {
+    @include mobile-p2;
+    list-style-type:none;
+    
+
+    @include tablet-breakpoint {
+      @include tablet-p1;
+      padding-bottom:8px;
+    }
+
+    @include desktop-breakpoint {
+    }
+  }
+}
