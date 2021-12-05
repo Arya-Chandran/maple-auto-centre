@@ -1,33 +1,59 @@
 [
+    {
+        "year": "2021",
+        "make": "Ford1",
+        "model": "Bronco",
+        "trim": "Sport",
+        "vin": "3FMCR9B69MRA657152",
+        "dealerName": "Markville Ford Lincoln2",
+        "dealerId": "12345",
+        "price": "37694",
+        "images": ["/images/vehicle.webp"],
+        "features": [
+          "Lane Assist",
+          "Heated Seats",
+          "Blind Spot Monitor",
+          "Automatic LED Headlights",
+          "2.0L Turbo Engine",
+          "Adaptive Cruise Control"
+        ],
+        "details": {
+          "engine": "1.5L EcoBoost® Engine with Auto Start-Stop Technology",
+          "driveTrain": "Standard 4x4",
+          "transmission": "8-Speed Automatic Transmission",
+          "interior": "Cactus Grey",
+          "exterior": "Ebony"
+        }
+      },
+      {
+        "year": "2021",
+        "make": "Ford2",
+        "model": "Bronco",
+        "trim": "Sport",
+        "vin": "3FMCR9B69MRA657153",
+        "dealerName": "Markville Ford Lincoln",
+        "dealerId": "12345",
+        "price": "37694",
+        "images": ["/images/vehicle.webp"],
+        "features": [
+          "Lane Assist",
+          "Heated Seats",
+          "Blind Spot Monitor",
+          "Automatic LED Headlights",
+          "2.0L Turbo Engine",
+          "Adaptive Cruise Control"
+        ],
+        "details": {
+          "engine": "1.5L EcoBoost® Engine with Auto Start-Stop Technology",
+          "driveTrain": "Standard 4x4",
+          "transmission": "8-Speed Automatic Transmission",
+          "interior": "Cactus Grey",
+          "exterior": "Ebony"
+        }
+      },
   {
     "year": "2021",
-    "make": "Ford1",
-    "model": "Bronco",
-    "trim": "Sport",
-    "vin": "3FMCR9B69MRA657100",
-    "dealerId": "3922h243-16cd-4z45-ab97-c79f698ibac1",
-    "dealerName": "Markville Ford Lincoln",
-    "price": "37694",
-    "images": ["/images/vehicle.webp"],
-    "features": [
-      "Lane Assist",
-      "Heated Seats",
-      "Blind Spot Monitor",
-      "Automatic LED Headlights",
-      "2.0L Turbo Engine",
-      "Adaptive Cruise Control"
-    ],
-    "details": {
-      "engine": "1.5L EcoBoost® Engine with Auto Start-Stop Technology",
-      "driveTrain": "Standard 4x4",
-      "transmission": "8-Speed Automatic Transmission",
-      "interior": "Cactusww Grey",
-      "exterior": "Ebony"
-    }
-  },
-  {
-    "year": "2021",
-    "make": "Ford2",
+    "make": "Ford3",
     "model": "Bronco",
     "trim": "Sport",
     "vin": "3FMCR9B69MRA657152",
@@ -53,7 +79,7 @@
   },
   {
     "year": "2021",
-    "make": "Ford3",
+    "make": "Ford4",
     "model": "Bronco",
     "trim": "Sport",
     "vin": "3FMCR9B69MRA657153",
@@ -79,7 +105,7 @@
   },
   {
     "year": "2021",
-    "make": "Ford4",
+    "make": "Ford5",
     "model": "Bronco",
     "trim": "Sport",
     "vin": "3FMCR9B69MRA6571",
@@ -105,33 +131,7 @@
   },
   {
     "year": "2021",
-    "make": "Ford1",
-    "model": "Bronco",
-    "trim": "Sport",
-    "vin": "3FMCR9B69MRA657100",
-    "dealerId": "3922h243-16cd-4z45-ab97-c79f698ibac1",
-    "dealerName": "Markville Ford Lincoln",
-    "price": "37694",
-    "images": ["/images/vehicle.webp"],
-    "features": [
-      "Lane Assist",
-      "Heated Seats",
-      "Blind Spot Monitor",
-      "Automatic LED Headlights",
-      "2.0L Turbo Engine",
-      "Adaptive Cruise Control"
-    ],
-    "details": {
-      "engine": "1.5L EcoBoost® Engine with Auto Start-Stop Technology",
-      "driveTrain": "Standard 4x4",
-      "transmission": "8-Speed Automatic Transmission",
-      "interior": "Cactusww Grey",
-      "exterior": "Ebony"
-    }
-  },
-  {
-    "year": "2021",
-    "make": "Ford2",
+    "make": "Ford",
     "model": "Bronco",
     "trim": "Sport",
     "vin": "3FMCR9B69MRA657152",

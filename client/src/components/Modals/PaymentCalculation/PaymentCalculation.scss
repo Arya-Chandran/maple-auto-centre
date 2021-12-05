@@ -1,0 +1,72 @@
+@use "../../../styles/partials/call-to-actions" as *;
+@use "../../../styles/partials/colors" as *;
+@use "../../../styles/partials/form-fields" as *;
+@use "../../../styles/partials/layout-grid" as *;
+@use "../../../styles/partials/type-kit" as *;
+@use "../../../styles/partials/resets" as *;
+
+
+.calculate {
+  &__close {
+    color: $white;
+    background-color: $red;
+  }
+
+  &__heading {
+    @include mobile-h2;
+    color: $dark-blue;
+
+    @include tablet-breakpoint {
+        @include tablet-h2;
+    }
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__section{
+     padding-bottom:16px;
+  }
+
+  &__label {
+    @include mobile-p2;
+    
+   
+    @include tablet-breakpoint {
+      @include tablet-p2;
+      padding-right:16px;
+    }
+  }
+
+  &__field {
+    @include mobile-p2;
+     width:100%;;
+
+    @include tablet-breakpoint {
+      @include tablet-p2;
+    }
+  }
+
+  &__row{
+      display:flex;
+  }
+
+  &__radioBtn{
+    @include mobile-p2;
+    padding-right:16px;
+
+    @include tablet-breakpoint {
+      @include tablet-p2;
+    }
+}
+
+&__result{
+    @include mobile-p2;
+   
+    @include tablet-breakpoint {
+      @include tablet-p2;
+    } 
+}
+}

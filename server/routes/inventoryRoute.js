@@ -139,7 +139,11 @@ router.put("/:vin", (req, res) => {
     price,
     images,
     features,
-    details,
+    engine,
+    driveTrain,
+    transmission,
+    interior,
+    exterior,
   } = req.body;
   console.log("vehicle.req.body:", req.body);
   console.log("vehicle.req.files:", req.body);
@@ -154,7 +158,11 @@ router.put("/:vin", (req, res) => {
     !price ||
     !images ||
     !features ||
-    !details
+    !engine ||
+    !driveTrain ||
+    !transmission ||
+    !interior ||
+    !exterior
   ) {
     res.status(404).send("Error: Invalid vehicle data!");
   }
@@ -180,12 +188,12 @@ router.put("/:vin", (req, res) => {
     activeVehicle.dealerId = dealerId;
     activeVehicle.price = price;
     activeVehicle.images = images;
-    activeVehicle.features = features;
-    activeVehicle.details.engine = details.engine;
-    activeVehicle.details.driveTrain = details.driveTrain;
-    activeVehicle.details.transmission = details.transmission;
-    activeVehicle.details.interior = details.interior;
-    activeVehicle.details.exterior = details.exterior;
+    activeVehicle.features = JSON.parse(features);
+    activeVehicle.details.engine = engine;
+    activeVehicle.details.driveTrain = driveTrain;
+    activeVehicle.details.transmission = transmission;
+    activeVehicle.details.interior = interior;
+    activeVehicle.details.exterior = exterior;
   }
   console.log("active2:", activeVehicle);
 

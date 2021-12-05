@@ -17,7 +17,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact component={InventoryPage} />
             <Route path="/vehicle/:vin" exact component={VehiclePage} />
-            <Route path="/inventory/"  component={AddVehicle} />
+            <Route path="/inventory/add"  component={AddVehicle} />
             <Route path="/vehicle/edit/:vin/"  component={EditVehicleDetails} />
             <Route path="/form/" exact component={ContactForm} />
           </Switch>

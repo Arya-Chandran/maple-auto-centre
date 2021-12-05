@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import  { Button } from "reactstrap";
+import { Button } from "reactstrap";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 import ImageUploader from "react-images-upload";
+import "./AddVehicle.scss";
 
 const host = "http://localhost:8080";
 
@@ -71,33 +72,35 @@ const validationSchema = Yup.object({
   }),
 });
 
-function AddVehicle({ vehicle = {}, isEdit = false, history}) {
+function AddVehicle({ vehicle = {}, isEdit = false, history }) {
   const [dealerList, setDealer] = useState([]);
 
-   console.log("dealerList", dealerList);
+  console.log("dealerList", dealerList);
 
   useEffect(() => {
-     getDropdownList("dealership");
+    getDropdownList("dealership");
   }, []);
 
-  const initialValues = isEdit ? vehicle :{
-    year: "",
-    make: "",
-    model: "",
-    trim: "",
-    vin: "",
-    dealerName: "",
-    price: "",
-    images: [],
-    features: [],
-    details: {
-      engine: "",
-      driveTrain: "",
-      transmission: "",
-      interior: "",
-      exterior: "",
-    },
-  };
+  const initialValues = isEdit
+    ? vehicle
+    : {
+        year: "",
+        make: "",
+        model: "",
+        trim: "",
+        vin: "",
+        dealerName: "",
+        price: "",
+        images: [],
+        features: [""],
+        details: {
+          engine: "",
+          driveTrain: "",
+          transmission: "",
+          interior: "",
+          exterior: "",
+        },
+      };
 
   const getDropdownList = (property) => {
     axios
@@ -119,206 +122,262 @@ function AddVehicle({ vehicle = {}, isEdit = false, history}) {
       }}
     >
       {({ values }) => (
-        <Form>
-          <h2>Car Details</h2>
+        <Form className="vehicleDetails">
+          <div className="vehicleDetails__wrapper">
+            <h1 className="vehicleDetails__heading">Add New Car</h1>
+            <div className="vehicleDetails__container">
+              <div className="vehicleDetails__subContainer">
+                <h2 className="vehicleDetails__subHeading">Basic Details</h2>
+                {/* <div className="vehicleDetails__column"> */}
+                  <label className="vehicleDetails__label" htmlFor="">
+                    Year
+                  </label>
+                  <Field
+                    className="vehicleDetails__field"
+                    type="text"
+                    id="year"
+                    name="year"
+                    placeholder="Year"
+                  />
+                  <ErrorMessage name="year" />
 
-          <label htmlFor="">Year</label>
-          <Field
-            className=""
-            type="text"
-            id="year"
-            name="year"
-            placeholder="Year"
-          />
-          <ErrorMessage name="year" />
+                  <label className="vehicleDetails__label" htmlFor="">
+                    Make
+                  </label>
+                  <Field
+                    className="vehicleDetails__field"
+                    type="text"
+                    id="make"
+                    name="make"
+                    placeholder="Make"
+                  />
+                  <ErrorMessage name="make" />
 
-          <label htmlFor="">Make</label>
-          <Field
-            className=""
-            type="text"
-            id="make"
-            name="make"
-            placeholder="Make"
-          />
-          <ErrorMessage name="make" />
+                  <label className="vehicleDetails__label" htmlFor="">
+                    Model
+                  </label>
+                  <Field
+                    className="vehicleDetails__field"
+                    type="text"
+                    id="model"
+                    name="model"
+                    placeholder="Model"
+                  />
+                  <ErrorMessage name="model" />
 
-          <label htmlFor="">Model</label>
-          <Field
-            className=""
-            type="text"
-            id="model"
-            name="model"
-            placeholder="Model"
-          />
-          <ErrorMessage name="model" />
+                  <label className="vehicleDetails__label" htmlFor="">
+                    Trim
+                  </label>
+                  <Field
+                    className="vehicleDetails__field"
+                    type="text"
+                    id="trim"
+                    name="trim"
+                    placeholder="Trim"
+                  />
+                  <ErrorMessage name="trim" />
 
-          <label htmlFor="">Trim</label>
-          <Field
-            className=""
-            type="text"
-            id="trim"
-            name="trim"
-            placeholder="Trim"
-          />
-          <ErrorMessage name="trim" />
+                  <label className="vehicleDetails__label" htmlFor="">
+                    VIN
+                  </label>
+                  <Field
+                    className="vehicleDetails__field"
+                    type="text"
+                    id="vin"
+                    name="vin"
+                    placeholder="vin"
+                  />
+                  <ErrorMessage name="vin" />
 
-          <label htmlFor="">VIN</label>
-          <Field
-            className=""
-            type="text"
-            id="vin"
-            name="vin"
-            placeholder="Price"
-          />
-          <ErrorMessage name="vin" />
-
-          <label htmlFor="">Price</label>
-          <Field
-            className=""
-            type="text"
-            id="price"
-            name="price"
-            placeholder="Price"
-          />
-          <ErrorMessage name="price" />
-
-          <Field
-            id="images"
-            name="images"
-            type="file"
-            render={({ field, form: { setFieldValue, touched, errors } }) => (
-              <div>
-                <ImageUploader
-                  // withIcon={true}
-                  buttonText="Choose images"
-                  onChange={(picture) => setFieldValue("images", picture)}
-                  imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-                  maxFileSize={5242880}
-                />
-                {values.images.length > 0
-                  ? `${values.images.length} images selected`
-                  : "Please select image"}
-                {touched[field.name] && errors[field.name] && (
-                  <div className="error">{errors[field.name]}</div>
-                )}
-              </div>
-            )}
-          />
-          {dealerList.length > 0 && (
-            <>
-              <label htmlFor="">Dealership Name</label>
-              <Field
-                className=""
-                component="select"
-                as="select"
-                id="dealerName"
-                name="dealerName"
-                placeholder="Dealership List"
-              >
-                {dealerList.map(({ dealerId, dealerName }) => {
-                  console.log("getting dealer", dealerName);
-                  return (
-                    <option key={dealerId} value={dealerName}>
-                      {dealerName}
-                    </option>
-                  );
-                })}
-              </Field>
-              <ErrorMessage name="dealerName" />
-            </>
-          )}
-
-          <h2>Features</h2>
-
-          <label htmlFor="">Features</label>
-          <FieldArray
-            className=""
-            type="text"
-            id="features"
-            name="features"
-            placeholder=""
-          >
-            {(fieldArrayProps) => {
-              console.log('fieldArrayProps', fieldArrayProps)
-              const { push, remove, form } = fieldArrayProps;
-              const { values } = form;
-              const { features } = values;
-              return (
-                <div>
-                  {features.map((feature, index) => (
-                    <div key={index}>
-                      <Field name={`features[${index}]`} />
-                      <button type="button" onClick={() => push(feature)}>
-                        {" "}
-                        +{" "}
-                      </button>
-                      {index > 0 && (
-                        <button type="button" onClick={() => remove(index)}>
-                          {" "}
-                          -{" "}
-                        </button>
+                  <label className="vehicleDetails__label" htmlFor="">
+                    Price
+                  </label>
+                  <Field
+                    className="vehicleDetails__field"
+                    type="text"
+                    id="price"
+                    name="price"
+                    placeholder="Price"
+                  />
+                  <ErrorMessage name="price" />
+                  <div className="vehicleDetails__image">
+                    {/* <h2 className="vehicleDetails__subHeading">Image </h2> */}
+                    <Field
+                      id="images"
+                      name="images"
+                      type="file"
+                      render={({
+                        field,
+                        form: { setFieldValue, touched, errors },
+                      }) => (
+                        <div>
+                          <label className="vehicleDetails__label" htmlFor="">
+                            Select Images
+                          </label>
+                          <ImageUploader
+                            withIcon={false}
+                            buttonText="Choose images"
+                            onChange={(picture) =>
+                              setFieldValue("images", picture)
+                            }
+                            imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                            maxFileSize={5242880}
+                          />
+                          {values.images.length > 0
+                            ? `${values.images.length} image selected`
+                            : ""}
+                          {touched[field.name] && errors[field.name] && (
+                            <div className="error">{errors[field.name]}</div>
+                          )}
+                        </div>
                       )}
-                    </div>
-                  ))}
+                    />
+                  </div>
+                
+                  {dealerList.length > 0 && (
+                    <>
+                      <label className="vehicleDetails__label" htmlFor="">
+                        Dealership Name
+                      </label>
+                      <Field
+                        className="vehicleDetails__field"
+                        as="select"
+                        id="dealerName"
+                        name="dealerName"
+                        placeholder="Dealership List"
+                      >
+                        {dealerList.map(({ dealerId, dealerName }) => {
+                          console.log("getting dealer", dealerName);
+                          return (
+                            <option key={dealerId} value={dealerName}>
+                              {dealerName}
+                            </option>
+                          );
+                        })}
+                      </Field>
+                      <ErrorMessage name="dealerName" />
+                    </>
+                  )}
                 </div>
-              );
-            }}
-          </FieldArray>
-          <ErrorMessage name="features" />
+                <div className="vehicleDetails__subContainer">
+                 
 
-          <h2> Additional Details</h2>
+                  <h2 className="vehicleDetails__subHeading">Specifications</h2>
+                  <label className="vehicleDetails__label" htmlFor="">
+                    Engine
+                  </label>
+                  <Field
+                    className="vehicleDetails__field"
+                    type="text"
+                    id="engine"
+                    name="details.engine"
+                    placeholder="Engine"
+                  />
+                  <ErrorMessage name="details.engine" />
 
-          <label htmlFor="">Engine</label>
-          <Field
-            className=""
-            type="text"
-            id="engine"
-            name="details.engine"
-            placeholder="Engine"
-          />
-          <ErrorMessage name="details.engine" />
+                  <label className="vehicleDetails__label" htmlFor="">
+                    DriveTrain
+                  </label>
+                  <Field
+                    className="vehicleDetails__field"
+                    type="text"
+                    id="driveTrain"
+                    name="details.driveTrain"
+                    placeholder="DriveTrain"
+                  />
+                  <ErrorMessage name="details.driveTrain" />
 
-          <label htmlFor="">DriveTrain</label>
-          <Field
-            className=""
-            type="text"
-            id="driveTrain"
-            name="details.driveTrain"
-            placeholder="DriveTrain"
-          />
-          <ErrorMessage name="details.driveTrain" />
+                  <label className="vehicleDetails__label" htmlFor="">
+                    Transmission
+                  </label>
+                  <Field
+                    className="vehicleDetails__field"
+                    type="text"
+                    id="transmission"
+                    name="details.transmission"
+                    placeholder="Transmission"
+                  />
+                  <ErrorMessage name="details.transmission" />
 
-          <label htmlFor="">Transmission</label>
-          <Field
-            className=""
-            type="text"
-            id="transmission"
-            name="details.transmission"
-            placeholder="Transmission"
-          />
-          <ErrorMessage name="details.transmission" />
+                  <label className="vehicleDetails__label" htmlFor="">
+                    Exterior
+                  </label>
+                  <Field
+                    className="vehicleDetails__field"
+                    type="text"
+                    id="exterior"
+                    name="details.exterior"
+                    placeholder="Exterior color"
+                  />
+                  <ErrorMessage name="details.exterior" />
 
-          <label htmlFor="">Exterior</label>
-          <Field
-            className=""
-            type="text"
-            id="exterior"
-            name="details.exterior"
-            placeholder="Exterior color"
-          />
-          <ErrorMessage name="details.exterior" />
+                  <label className="vehicleDetails__label" htmlFor="">
+                    Interior
+                  </label>
+                  <Field
+                    className="vehicleDetails__field"
+                    type="text"
+                    id="interior"
+                    name="details.interior"
+                    placeholder="Interior color"
+                  />
+                  <ErrorMessage name="details.interior" />
 
-          <label htmlFor="">Interior</label>
-          <Field
-            className=""
-            type="text"
-            id="interior"
-            name="details.interior"
-            placeholder="Interior color"
-          />
-          <ErrorMessage name="details.interior" />
-
-          <Button color="primary">Submit</Button>
+                  <h2 className="vehicleDetails__subHeading">Features</h2>
+                  <FieldArray
+                    className="vehicleDetails__field"
+                    type="text"
+                    id="features"
+                    name="features"
+                    placeholder=""
+                  >
+                    {(fieldArrayProps) => {
+                      console.log("fieldArrayProps", fieldArrayProps);
+                      const { push, remove, form } = fieldArrayProps;
+                      const { values } = form;
+                      const { features } = values;
+                      return (
+                        <div>
+                          {features.map((feature, index) => (
+                            <div key={index}>
+                              <Field
+                                className="vehicleDetails__field"
+                                name={`features[${index}]`}
+                              />
+                              <button
+                                className="vehicleDetails__field"
+                                type="button"
+                                onClick={() => push("")}
+                              >
+                                {" "}
+                                +{" "}
+                              </button>
+                              {index > 0 && (
+                                <button
+                                  className="vehicleDetails__field"
+                                  type="button"
+                                  onClick={() => remove(index)}
+                                >
+                                  {" "}
+                                  -{" "}
+                                </button>
+                              )}
+                              <ErrorMessage name="features" />
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    }}
+                  </FieldArray>
+                  <ErrorMessage name="features" />
+                </div>
+              </div>
+            </div>
+            <div className="vehicleDetails__btnWrapper">
+              <Button className="vehicleDetails__btn" color="primary">
+                Submit
+              </Button>
+            </div>
         </Form>
       )}
     </Formik>

@@ -2,8 +2,8 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { Button, Modal, ModalFooter, ModalHeader, ModalBody
-} from "reactstrap";
+import { Button, Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
+import "./ContactForm.scss";
 
 const host = "http://localhost:8080";
 
@@ -63,64 +63,106 @@ function ContactForm({ isOpen, vehicle, onClose, dealerEmail }) {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
-            console.log(values)
+            console.log(values);
             handleContactDealer(vehicle, values, resetForm);
           }}
         >
           {() => (
-            <Form>
+            <Form className="form">
               <ModalHeader
                 close={
-                  <button className="close" onClick={onClose}>
+                  <button className="form__close" onClick={onClose}>
                     ×
                   </button>
                 }
                 toggle={onClose}
               >
-                Contact Dealer
+                <h2 className="form__heading">Contact Dealer</h2>
               </ModalHeader>
               <ModalBody>
-                <label htmlFor="">First name</label>
-                <Field
-                  className=""
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                />
-                <ErrorMessage name="firstName" />
+                <div className="form__column">
+                  
+                    <label className="form__label" htmlFor="">
+                      First name
+                    </label>
+                    <Field
+                      className="form__field"
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                    />
+                    <ErrorMessage className="form__error" name="firstName" />
+                  
+                  
+                    <label className="form__label" htmlFor="">
+                      Last Name
+                    </label>
+                    <Field
+                      className="form__field"
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                    />
+                    <ErrorMessage name="lastName" />
+               
 
-                <label htmlFor="">Last Name</label>
-                <Field className="" type="text" id="lastName" name="lastName" />
-                <ErrorMessage name="lastName" />
+                
+                    <label className="form__label" htmlFor="">
+                      Street Address
+                    </label>
+                    <Field
+                      className="form__field"
+                      type="text"
+                      id="address"
+                      name="address"
+                    />
+                    <ErrorMessage name="address" />
+                
 
-                <label htmlFor="">Street Address</label>
-                <Field className="" type="text" id="address" name="address" />
-                <ErrorMessage name="address" />
+                  
+                    <label className="form__label" htmlFor="">
+                      Postal Code
+                    </label>
+                    <Field
+                      className="form__field"
+                      type="text"
+                      id="postalCode"
+                      name="postalCode"
+                    />
+                    <ErrorMessage name="postalCode" />
+                
 
-                <label htmlFor="">Postal Code</label>
-                <Field
-                  className=""
-                  type="text"
-                  id="postalCode"
-                  name="postalCode"
-                />
-                <ErrorMessage name="postalCode" />
+                 
+                    <label className="form__label" htmlFor="">
+                      Phone Number
+                    </label>
+                    <Field
+                      className="form__field"
+                      type="text"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                    />
+                    <ErrorMessage name="phoneNumber" />
+                
 
-                <label htmlFor="">Phone Number</label>
-                <Field
-                  className=""
-                  type="text"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                />
-                <ErrorMessage name="phoneNumber" />
-
-                <label htmlFor="">Email</label>
-                <Field className="" type="text" id="email" name="email" />
-                <ErrorMessage name="email" />
+                  
+                    <label className="form__label" htmlFor="">
+                      Email
+                    </label>
+                    <Field
+                      className="form__field"
+                      type="text"
+                      id="email"
+                      name="email"
+                    />
+                    <ErrorMessage name="email" />
+                
+                </div>
               </ModalBody>
               <ModalFooter>
-                <Button type="submit" color="primary">Submit</Button>{" "}
+                <Button type="submit" color="primary">
+                  Submit
+                </Button>{" "}
                 <Button onClick={onClose}>Cancel</Button>
               </ModalFooter>
             </Form>

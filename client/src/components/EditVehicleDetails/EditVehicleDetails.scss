@@ -1,0 +1,161 @@
+@use "../../styles/partials/call-to-actions" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/form-fields" as *;
+@use "../../styles/partials/layout-grid" as *;
+@use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/resets" as *;
+
+
+
+.vehicleDetails {
+    width: 100%;
+    padding:  pxToRem(16);
+    // background-color:black ;
+    // color:white;
+    // display: flex;
+    // flex-direction: column;
+   
+    @include tablet-breakpoint {
+        padding:  pxToRem(32);
+    }
+  
+    @include desktop-breakpoint {
+        // margin: 0 auto;
+        // max-width: $max-content-width;
+    }
+  
+    &__close {
+      color: $white;
+      background-color: $red;
+    }
+    
+  &__wrapper {
+    width: 100%;
+    text-align: left;
+    padding:16px 0;
+   
+
+    @include tablet-breakpoint {
+     // max-width:50%;
+     
+    }
+
+    @include desktop-breakpoint {
+      //  width:30%; 
+        margin: 0 auto;
+        max-width: $max-content-width;
+    }
+  }
+
+
+  &__container{
+    display:flex;
+    flex-direction: column;
+    // align-items:left;
+    @include tablet-breakpoint {
+        flex-direction: row;
+        justify-content:space-between;
+     
+    }
+  }
+  
+  &__subContainer{
+    display:flex;
+    flex-direction: column;
+    @include tablet-breakpoint {
+      width:48%;
+     
+    }
+  }
+    &__heading {
+        @include bold-style(pxToRem(24), pxToRem(32), $dark-blue );
+        margin:0;
+        padding-bottom:8px;
+    
+        @include tablet-breakpoint {
+            @include bold-style(pxToRem(36), pxToRem(44), $dark-blue );
+            padding-bottom:32px;
+        }
+    
+        @include desktop-breakpoint {
+        }
+      }
+
+    &__subHeading{
+        @include bold-style(pxToRem(14), pxToRem(22), $dark-blue );
+        margin:0;
+        padding:8px 0;
+    
+        @include tablet-breakpoint {
+            @include bold-style(pxToRem(24), pxToRem(24), $dark-blue );
+            padding:16px 0;
+        }
+    
+        @include desktop-breakpoint {
+        }  
+    }
+
+    // &__column {
+    //   display: flex;
+    //   flex-direction: column;
+    //   text-align:left;
+    // }
+  
+    &__label {
+       @include bold-style(pxToRem(12), pxToRem(18));
+       padding-top:8px;
+     
+       @include tablet-breakpoint {
+        @include bold-style(pxToRem(14), pxToRem(22));
+      }
+    }
+  
+    &__field {
+        @include regular-style(pxToRem(12), pxToRem(18));
+     
+        @include tablet-breakpoint {
+         @include regular-style(pxToRem(14), pxToRem(22));
+       }
+    }
+
+    &__image{
+        width:100%;
+        @include regular-style(pxToRem(12), pxToRem(18));
+     
+        @include tablet-breakpoint {
+         @include regular-style(pxToRem(14), pxToRem(22));
+       }
+    }
+    
+    // &__feature{
+    //     display:flex;
+    // }
+    // &__plusbtnWrapper{
+    //     padding: 0 8px;
+       
+        
+    // }
+    // &__plusbtn{
+       
+    // }
+
+    &__btnWrapper{
+        padding-top:16px;
+       
+        
+    }
+    &__btn{
+        background-color:$black;
+        width:100%;
+        align-items: right;
+
+        @include tablet-breakpoint {
+            width:40%;
+          }
+          @include tablet-breakpoint {
+            width:30%;
+          }
+    }
+  }
+
+

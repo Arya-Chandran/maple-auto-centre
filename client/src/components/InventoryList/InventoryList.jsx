@@ -58,7 +58,7 @@ function InventoryList(props) {
 
   return (
     <div>
-      <Link to="/inventory/">
+      <Link to="/inventory/add">
         <Button> Add Vehicle</Button>
       </Link>
 
