@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button } from "reactstrap";
+import { Button, Input } from "reactstrap";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
-import ImageUploader from "react-images-upload";
 import "./EditVehicleDetails.scss";
 
 const host = "http://localhost:8080";
+
+// const FILE_SIZE = 160 * 1024;
+const SUPPORTED_FORMATS = [
+  "image/jpg",
+  "image/jpeg",
+  "image/gif",
+  "image/png"
+];
 
 const onSubmit = (history, dealerList, values) => {
   console.log("values", history, values);
@@ -34,7 +41,8 @@ const onSubmit = (history, dealerList, values) => {
   formData.append("model", model);
   formData.append("trim", trim);
   formData.append("vin", vin);
-  formData.append("images", images[0]);
+  if(images) 
+    formData.append("images", images);
   formData.append("dealerId", dealerId);
   formData.append("dealerName", dealerName);
   formData.append("price", price);
@@ -61,6 +69,17 @@ const validationSchema = Yup.object({
   trim: Yup.string().required("Required"),
   vin: Yup.string().required("Required"),
   dealerName: Yup.string().required("Required"),
+  // images: Yup.mixed()
+  // .test(
+  //   "fileSize",
+  //   "File too large",
+  //   value => value && value.size >= FILE_SIZE
+  // )
+  // .test(
+  //   "fileFormat",
+  //   "Unsupported Format",
+  //   value => value && SUPPORTED_FORMATS.includes(value.type)
+  // ),
   price: Yup.number().required("Required"),
   features: Yup.array().required("Required"),
   details: Yup.object({
@@ -99,7 +118,7 @@ function EditVehicleDetails(props) {
       vin: vehicle ? vehicle.vin : "",
       dealerName:vehicle ? vehicle.dealerName : "",
       price: vehicle ? vehicle.price : "",
-      images: vehicle ? vehicle.images : [],
+      images: null,
       features: vehicle ? vehicle.features : [""],
       details: {
         engine:  vehicle ? vehicle.details.engine : "",
@@ -231,20 +250,11 @@ function EditVehicleDetails(props) {
                     }) => (
                       <div>
                         <label className="vehicleDetails__label" htmlFor="">
-                          Select Images
+                          Update Image
                         </label>
-                        <ImageUploader
-                          withIcon={false}
-                          buttonText="Choose images"
-                          onChange={(picture) =>
-                            setFieldValue("images", picture)
-                          }
-                          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-                          maxFileSize={5242880}
-                        />
-                        {values.images.length > 0
-                          ? `${values.images.length} image selected`
-                          : ""}
+                        <Input type="file" name="images" id="images" onChange={((event) => {
+                           setFieldValue("images",  event.currentTarget.files[0]);
+                         })}/>
                         {touched[field.name] && errors[field.name] && (
                           <div className="error">{errors[field.name]}</div>
                         )}

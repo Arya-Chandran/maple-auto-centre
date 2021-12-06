@@ -31,34 +31,33 @@ router.get("/:vin", (req, res) => {
   res.json(foundvehicle);
 });
 
- /* return an array of options for dropdown */
+/* return an array of options for dropdown */
 router.get("/dropdown/:property", (req, res) => {
   const { property } = req.params;
 
   const propertyOptions = parseInventoryData
-      .map((vehicle) => {
+    .map((vehicle) => {
+      if (property === "dealership") {
+        const { dealerId, dealerName } = vehicle;
+        return { dealerId, dealerName };
+      }
+      return vehicle[property];
+    })
+    .filter(
+      (item, index, array) =>
+        array.findIndex((t) => {
           if (property === "dealership") {
-              const { dealerId, dealerName } = vehicle;
-              return {  dealerId, dealerName };
+            return t.dealerId === item.dealerId;
           }
-          return vehicle[property];
-      })
-      .filter(
-          (item, index, array) =>
-              array.findIndex((t) => {
-                  if (property === "dealership") {
-                      return t.dealerId === item.dealerId;
-                  }
-                  return t === item;
-              }) == index
-      );
+          return t === item;
+        }) == index
+    );
 
   res.json(propertyOptions);
-}); 
+});
 
 // add new vehicle
 router.post("/", (req, res) => {
-
   if (!req.body || !req.files || Object.keys(req.files).length === 0) {
     res.status(400).send("Error: missing vehicle data!");
   }
@@ -119,13 +118,16 @@ router.post("/", (req, res) => {
           res.status(500).send("Image upload failed");
         } else {
           res.status(201).send("File uploaded");
-        }  
+        }
       });
-    });
+    }
+  );
 });
 
 // edit vehicle details
 router.put("/:vin", (req, res) => {
+  let imageFile;
+  let imageName;
   const { vin } = req.params;
   console.log("vin:", req.params.vin);
   const {
@@ -156,7 +158,6 @@ router.put("/:vin", (req, res) => {
     !dealerId ||
     !dealerName ||
     !price ||
-    !images ||
     !features ||
     !engine ||
     !driveTrain ||
@@ -180,6 +181,10 @@ router.put("/:vin", (req, res) => {
   }
 
   if (activeVehicle) {
+    if (req.files && Object.keys(req.files).length !== 0) {
+      imageFile = req.files.images;
+      imageName = imageFile.name;
+    }
     activeVehicle.vin = Vin;
     activeVehicle.make = make;
     activeVehicle.model = model;
@@ -187,7 +192,9 @@ router.put("/:vin", (req, res) => {
     activeVehicle.dealerName = dealerName;
     activeVehicle.dealerId = dealerId;
     activeVehicle.price = price;
-    activeVehicle.images = images;
+    if (imageFile && imageName) {
+      activeVehicle.images = [`/images/${imageName}`];
+    }
     activeVehicle.features = JSON.parse(features);
     activeVehicle.details.engine = engine;
     activeVehicle.details.driveTrain = driveTrain;
@@ -212,14 +219,23 @@ router.put("/:vin", (req, res) => {
         res.status(404).send("Error: data updation failed!");
         return;
       }
-      res.status(200).send({
-        message: "Vehicle data updated successfully",
-        updatedData: activeVehicle,
-      });
+      if (imageFile) {
+        imageFile.mv(uploadPath + imageFile.name, function (err) {
+          if (err) {
+            res.status(500).send("Image upload failed");
+          } else {
+            res.status(201).send("Vehicle data updated successfully");
+          }
+        });
+      } else {
+        res.status(200).send({
+          message: "Vehicle data updated successfully",
+          updatedData: activeVehicle,
+        });
+      }
     }
   );
 });
-
 
 router.delete("/:vin", (req, res) => {
   const requestedVIN = req.params.vin;
@@ -228,21 +244,14 @@ router.delete("/:vin", (req, res) => {
       return vehicle.vin;
     }
   });
-  console.log("foundvehicle", foundvehicle)
+  console.log("foundvehicle", foundvehicle);
   parseInventoryData.splice(foundvehicle, 1);
-  fs.writeFile(
-      inventoryDataFile,
-      JSON.stringify(parseInventoryData),
-      (err) => {
-          if (err) {
-              console.log(err);
-          }
-      }
-  );
+  fs.writeFile(inventoryDataFile, JSON.stringify(parseInventoryData), (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
   res.json(parseInventoryData);
 });
-
-
-
 
 module.exports = router;

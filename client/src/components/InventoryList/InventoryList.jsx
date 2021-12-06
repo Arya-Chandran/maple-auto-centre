@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
+import { BiEditAlt } from "react-icons/bi";
 import "./InventoryList.scss";
 import DeleteModal from "../Modals/DeleteModal/DeleteModal";
 // import icon from "../../assets/icons/delete_outline-24px.svg";
@@ -13,7 +14,17 @@ const host = "http://localhost:8080";
 function InventoryList(props) {
   const [inventory, setInventory] = useState([]);
   const [modal, setModal] = useState(false);
+  const [count, setCount] = useState(0);
+  const [isAdmin, setAdmin] = useState(false);
   const [deleteVehicle, setDelete] = useState({});
+  console.log(props)
+  useEffect(() => {
+    const admin = sessionStorage.getItem("isAdmin");
+    setAdmin(admin);
+  }, []);
+
+  // const isAdmin= sessionStorage.getItem("isAdmin");
+  console.log("admin", isAdmin)
 
   // Toggle for Modal
   const toggleModal = () => setModal(!modal);
@@ -36,7 +47,9 @@ function InventoryList(props) {
     axios
       .get(`${host}/inventory`)
       .then((response) => {
-        setInventory(response.data);
+        const inventory = response.data;
+        setInventory(inventory);
+        setCount(inventory.length)
       })
       .catch((error) => {
         console.log(error);
@@ -58,10 +71,12 @@ function InventoryList(props) {
 
   return (
     <div>
+      <h1>Inventory List</h1>
+      {count && <h3>{count} vehicles found.</h3>}
+      {isAdmin && ( 
       <Link to="/inventory/add">
         <Button> Add Vehicle</Button>
-      </Link>
-
+      </Link>)}
       <div className="vehicleCard">
         {inventory &&
           inventory.map((vehicle) => (
@@ -87,9 +102,11 @@ function InventoryList(props) {
                 <Link to={`/vehicle/${vehicle.vin}`}>
                   <Button className="vehicleCard__view"> View Details</Button>
                 </Link>
+                {isAdmin &&( 
                 <div className="vehicleCard__btnWrapper">
                   <Link to={`/vehicle/edit/${vehicle.vin}`}>
-                    <img src={editSrc} alt="edit icon" />
+                    {/* <img src={editSrc} alt="edit icon" /> */}
+                    <BiEditAlt />
                   </Link>
                   <img
                     src={delSrc}
@@ -97,7 +114,7 @@ function InventoryList(props) {
                     alt="delete icon"
                   />
                   {/* <button onClick={() => openModal(vehicle)}>Delete</button> */}
-                </div>
+                </div>)}
               </div>
             </div>
           ))}
