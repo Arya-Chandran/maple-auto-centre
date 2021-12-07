@@ -52,8 +52,8 @@ app.use("/contactdealer", contactDealerRoute);
 
 // register endpoint
 app.post("/register", (req, res) => {
-  const { username, name, password } = req.body;
-  const newUser = { username, name, password };
+  const { username, name, password, confirmPassword } = req.body;
+  const newUser = { username, name, password, confirmPassword};
 
   const foundUser = users.find((user) => user.username === newUser.username);
   if (foundUser) {

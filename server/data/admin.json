@@ -1,21 +1,46 @@
 [
-  { "username": "test", "name": "test user", "password": "test" },
-  { "username": "admin", "name": "admin user", "password": "admin" },
-  { "username": "arya", "name": "test arya", "password": "arya" },
-  { "username": "", "name": "", "password": "" },
-  { "username": "qq", "name": "qq", "password": "qq" },
-  { "username": "zz", "name": "zz", "password": "zz" },
-  { "username": "fsf", "name": "sfff", "password": "ssff" },
-  { "username": "ttt", "name": "ttt", "password": "ttt" },
-  { "username": "xx", "name": "xx", "password": "xx" },
-  { "username": "ss", "name": "ss", "password": "ss" },
-  { "username": "bb", "name": "bb", "password": "bb" },
-  { "username": "cc", "name": "cc", "password": "ccc" },
-  { "username": "mm", "name": "mm", "password": "mm" },
-  { "username": "aryaqq", "name": "test arya", "password": "arya" },
-  { "username": "sss", "name": "sss", "password": "sss" },
-  { "username": "mma", "name": "mm", "password": "mm" },
-  { "username": "dd", "name": "dd", "password": "dd" },
-  { "username": "gg", "name": "gg", "password": "gg" },
-  { "username": "ggg", "name": "gg", "password": "gg" }
+  {
+    "username": "test1",
+    "name": "test user",
+    "password": "test1",
+    "confirmPassword": "test1"
+  },
+  {
+    "username": "admin",
+    "name": "admin user",
+    "password": "admin",
+    "confirmPassword": ""
+  },
+  {
+    "username": "arya",
+    "name": "test arya",
+    "password": "arya",
+    "confirmPassword": ""
+  },
+  { "username": "", "name": "", "password": "", "confirmPassword": "" },
+  { "username": "mm", "name": "mm", "password": "mm", "confirmPassword": "" },
+  {
+    "username": "mmn",
+    "name": "mmn",
+    "password": "mmn",
+    "confirmPassword": ""
+  },
+  {
+    "username": "ps@gmail.com",
+    "name": "ps",
+    "password": "qqqqqqq",
+    "confirmPassword": "qqqqqqq"
+  },
+  {
+    "username": "arya@gmail.com",
+    "name": "arya",
+    "password": "arya1234",
+    "confirmPassword": "arya1234"
+  },
+  {
+    "username": "aryachandran86@gmail.com",
+    "name": "arya",
+    "password": "123456",
+    "confirmPassword": "123456"
+  }
 ]

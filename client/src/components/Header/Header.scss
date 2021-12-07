@@ -1,0 +1,100 @@
+@use "../../styles/partials/call-to-actions" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/form-fields" as *;
+@use "../../styles/partials/layout-grid" as *;
+@use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/resets" as *;
+
+.header {
+  width: 100%;
+  @include tablet-breakpoint {
+  }
+  @include desktop-breakpoint {
+  }
+
+  &__wrapper {
+    width: 100%;
+    padding: pxToRem(16);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-bottom: 1px solid $dark-blue;
+    // align-items: center;
+
+    @include tablet-breakpoint {
+      padding:pxToRem(32) pxToRem(32) 0;
+      flex-direction: row;
+      justify-content: space-between;
+      text-align:center;
+      border-bottom: 1.5px solid $dark-blue;
+    }
+
+    @include desktop-breakpoint {
+      margin: 0 auto;
+      max-width: $max-content-width;
+    }
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include tablet-breakpoint {
+      flex-direction: row;
+    }
+    @include desktop-breakpoint {
+    }
+  }
+
+  &__image {
+    width: 100px;
+    height: 80px;
+    align-items: center;
+  }
+  &__title {
+    color: $dark-blue;
+    @include bold-style(pxToRem(24), pxToRem(32), $dark-blue);
+
+    @include tablet-breakpoint {
+      width: 60%;
+      align-items: left;
+      // padding: 0  pxToRem(32);
+    }
+    @include desktop-breakpoint {
+    }
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    @include tablet-breakpoint {
+    }
+    @include desktop-breakpoint {
+    }
+  }
+
+  &__icon {
+    width: 30px;
+    height: 30px;
+    color:$dark-blue;
+  }
+
+  &__name {
+    // color: $dark-blue;
+    padding-left: 4px;
+  }
+
+  &__btnWrapper{
+    @include tablet-breakpoint {
+        padding-left:16px;
+    }
+    @include desktop-breakpoint {
+    }
+  }
+
+  &__btn {
+    border-radius: 25px;
+    background-color:$dark-blue;
+  }
+}

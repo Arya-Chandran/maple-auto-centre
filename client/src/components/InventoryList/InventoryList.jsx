@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import { BiEditAlt } from "react-icons/bi";
+import { AiFillFolderAdd } from "react-icons/ai";
+import { MdDelete } from "react-icons/md";
 import "./InventoryList.scss";
 import DeleteModal from "../Modals/DeleteModal/DeleteModal";
 // import icon from "../../assets/icons/delete_outline-24px.svg";
@@ -17,14 +19,14 @@ function InventoryList(props) {
   const [count, setCount] = useState(0);
   const [isAdmin, setAdmin] = useState(false);
   const [deleteVehicle, setDelete] = useState({});
-  console.log(props)
+  console.log(props);
   useEffect(() => {
     const admin = sessionStorage.getItem("isAdmin");
     setAdmin(admin);
   }, []);
 
   // const isAdmin= sessionStorage.getItem("isAdmin");
-  console.log("admin", isAdmin)
+  console.log("admin", isAdmin);
 
   // Toggle for Modal
   const toggleModal = () => setModal(!modal);
@@ -49,7 +51,7 @@ function InventoryList(props) {
       .then((response) => {
         const inventory = response.data;
         setInventory(inventory);
-        setCount(inventory.length)
+        setCount(inventory.length);
       })
       .catch((error) => {
         console.log(error);
@@ -71,12 +73,22 @@ function InventoryList(props) {
 
   return (
     <div>
-      <h1>Inventory List</h1>
-      {count && <h3>{count} vehicles found.</h3>}
-      {isAdmin && ( 
-      <Link to="/inventory/add">
-        <Button> Add Vehicle</Button>
-      </Link>)}
+      <div className="stockDetails">
+        <div>
+          <h1 className="stockDetails__heading">Inventory List</h1>
+          {count && (
+            <h3 className="stockDetails__count">{count} vehicles found</h3>
+          )}
+        </div>
+        <div className="stockDetails__imageWrapper">
+          {isAdmin && (
+            <Link to="/inventory/add">
+              <AiFillFolderAdd className="stockDetails__image" />
+              {/* <Button> Add Vehicle</Button> */}
+            </Link>
+          )}
+        </div>
+      </div>
       <div className="vehicleCard">
         {inventory &&
           inventory.map((vehicle) => (
@@ -97,24 +109,26 @@ function InventoryList(props) {
                 </div>
                 <p className="vehicleCard__title">Selling Price</p>
                 <p className="vehicleCard__price">${vehicle.price}</p>
-                <p className="vehicleCard__vin">VIN: {vehicle.vin}</p>
+                <p className="vehicleCard__vin"><span className="vehicleCard__vin--highlight">VIN: </span>{vehicle.vin}</p>
                 <p className="vehicleCard__name">{vehicle.dealerName}</p>
                 <Link to={`/vehicle/${vehicle.vin}`}>
                   <Button className="vehicleCard__view"> View Details</Button>
                 </Link>
-                {isAdmin &&( 
-                <div className="vehicleCard__btnWrapper">
-                  <Link to={`/vehicle/edit/${vehicle.vin}`}>
-                    {/* <img src={editSrc} alt="edit icon" /> */}
-                    <BiEditAlt />
-                  </Link>
-                  <img
-                    src={delSrc}
-                    onClick={() => openModal(vehicle)}
-                    alt="delete icon"
-                  />
-                  {/* <button onClick={() => openModal(vehicle)}>Delete</button> */}
-                </div>)}
+                {isAdmin && (
+                  <div className="vehicleCard__btnWrapper">
+                    <Link to={`/vehicle/edit/${vehicle.vin}`}>
+                      {/* <img src={editSrc} alt="edit icon" /> */}
+                      <BiEditAlt className="vehicleCard__icons" />
+                    </Link>
+                    {/* <img
+                      src={delSrc}
+                      onClick={() => openModal(vehicle)}
+                      alt="delete icon"
+                    /> */}
+                    <MdDelete  className="vehicleCard__icons"   onClick={() => openModal(vehicle)}/>
+                    {/* <button onClick={() => openModal(vehicle)}>Delete</button> */}
+                  </div>
+                )}
               </div>
             </div>
           ))}

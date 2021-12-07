@@ -73,7 +73,7 @@
         padding-bottom:8px;
     
         @include tablet-breakpoint {
-            @include bold-style(pxToRem(36), pxToRem(44), $dark-blue );
+            @include bold-style(pxToRem(32), pxToRem(40), $dark-blue );
             padding-bottom:32px;
         }
     
@@ -102,7 +102,7 @@
     // }
   
     &__label {
-       @include bold-style(pxToRem(12), pxToRem(18));
+       @include bold-style(pxToRem(12), pxToRem(20));
        padding-top:8px;
      
        @include tablet-breakpoint {
@@ -111,11 +111,22 @@
     }
   
     &__field {
-        @include regular-style(pxToRem(12), pxToRem(18));
+        @include regular-style(pxToRem(11), pxToRem(18));
      
         @include tablet-breakpoint {
-         @include regular-style(pxToRem(14), pxToRem(22));
+         @include regular-style(pxToRem(13), pxToRem(20));
        }
+    }
+
+    &__error {
+      color: $red;
+      font-size: pxToRem(11);
+      line-height: pxToRem(18);
+  
+      @include tablet-breakpoint {
+        font-size: pxToRem(13);
+        line-height: pxToRem(20);
+      }
     }
 
     &__image{
@@ -144,18 +155,18 @@
        
         
     }
-    &__btn{
-        background-color:$black;
-        width:100%;
-        align-items: right;
+    // &__btn{
+    //     background-color:$black;
+    //     width:100%;
+    //     align-items: right;
 
-        @include tablet-breakpoint {
-            width:40%;
-          }
-          @include tablet-breakpoint {
-            width:30%;
-          }
-    }
+    //     @include tablet-breakpoint {
+    //         width:40%;
+    //       }
+    //       @include tablet-breakpoint {
+    //         width:30%;
+    //       }
+    // }
   }
 
 

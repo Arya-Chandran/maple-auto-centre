@@ -3,6 +3,9 @@ import axios from "axios";
 import ContactForm from "../ContactForm";
 import './DealershipDetails.scss';
 import { Button} from "reactstrap";
+import { FcBusinessContact } from "react-icons/fc";
+import { IoMdContacts } from "react-icons/io";
+
 
 const host = "http://localhost:8080";
 
@@ -45,7 +48,9 @@ function DealershipDetails({vehicle}) {
           <p className="dealer__contact">{dealership.emailId}</p>
         </div>
       )}
-      <Button onClick={toggleModal}>Contact Dealer</Button>
+      <IoMdContacts onClick={toggleModal} className="dealer__icon"/>
+      <p>Contact Dealer</p>
+      {/* <Button onClick={toggleModal}>Contact Dealer</Button> */}
       <ContactForm 
           onClose={toggleModal} 
           vehicle={vehicle}

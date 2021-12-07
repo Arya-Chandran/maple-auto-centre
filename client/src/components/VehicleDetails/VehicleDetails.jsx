@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import DealershipDetails from "../DealershipDetails";
 import "./VehicleDetails.scss";
 import PaymentCalculation from "../Modals/PaymentCalculation";
+import PricingSummary from "../PricingSummary";
+import { BsFillCalculatorFill } from "react-icons/bs";
 
 const host = "http://localhost:8080";
 const APR = [
@@ -51,19 +53,18 @@ function VehicleDetails(props) {
   };
 
   useEffect(() => {
-    console.log("propss" ,props);
+    console.log("propss", props);
     const { vin } = props.match.params;
     getCurrentVehicle(vin);
     console.log("vehicle", vehicle);
   }, []);
 
   useEffect(() => {
-    if(vehicle) {
-      const {price} = vehicle;
+    if (vehicle) {
+      const { price } = vehicle;
       handleCalculation(initialValues, price);
     }
   }, [vehicle]);
-
 
   const getCurrentVehicle = (vin) => {
     axios
@@ -75,7 +76,7 @@ function VehicleDetails(props) {
   };
 
   const getPaymentCount = (term, frequency) => {
-    switch(frequency) {
+    switch (frequency) {
       case "Monthly":
         return term;
       case "Bi-weekly":
@@ -83,7 +84,7 @@ function VehicleDetails(props) {
       case "Weekly":
         return term * 4;
     }
-  }
+  };
 
   const handleCalculation = (values, price) => {
     const { downPayment, term, frequency } = values;
@@ -93,7 +94,7 @@ function VehicleDetails(props) {
     const rate = selectedAPR.rate;
     const principal = parseFloat(amount);
     const interest = parseFloat(rate) / 100 / 12;
-    const numPayments = getPaymentCount(Number(term), frequency) ;
+    const numPayments = getPaymentCount(Number(term), frequency);
     // compute the monthly payment figure
     const x = Math.pow(1 + interest, numPayments); //Math.pow computes powers
     const payment = (principal * x * interest) / (x - 1);
@@ -110,7 +111,7 @@ function VehicleDetails(props) {
       term,
       payment,
       downPayment,
-      frequency
+      frequency,
     });
   };
 
@@ -127,29 +128,27 @@ function VehicleDetails(props) {
               <p className="details__model">{vehicle.model}</p>
             </div>
             <p className="details__trim">{vehicle.trim}</p>
-            <p className="details__vin">VIN {vehicle.vin}</p>
+            {/* <p className="details__vin">VIN {vehicle.vin}</p> */}
           </div>
-          <img
-            className="details__image"
-            src={`${host}/${vehicle.images[0]}`}
-            alt="Images"
-          />
-          <p className="details__title">Adjusted price</p>
-          <p className="details__price">${vehicle.price}</p>
-          {showPayment && (
-                    <div className="calculate__result">
-                      Payment: ${payment.payment}
-                      ${payment.amount}
-                      ${payment.fees}
-                      ${payment.term}
-                      ${payment.payment}
-                      ${payment.frequency}
-                      ${payment.downPayment}
-                    </div>
-                  )}
-          <button onClick={() => openModal(vehicle)}>
-            Calculate
-          </button>
+          <p className="details__vin">VIN {vehicle.vin}</p>
+          <div className="details__topSection">
+            <div className="details__imageWrapper">
+              <img
+                className="details__image"
+                src={`${host}/${vehicle.images[0]}`}
+                alt="Images"
+              />
+            </div>
+            <div className="details__pricingWrapper">
+              <p className="details__title">Adjusted price</p>
+              <p className="details__price">${vehicle.price}</p>
+              <BsFillCalculatorFill onClick={() => openModal(vehicle)} />
+              {showPayment && (
+                <PricingSummary payment={payment} />
+              )}
+            </div>
+          </div>
+
           <div className="details__section">
             <Features features={vehicle.features} />
             <Details details={vehicle.details} />

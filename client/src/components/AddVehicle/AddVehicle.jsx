@@ -67,15 +67,12 @@ const validationSchema = Yup.object({
   make: Yup.string().required("Required"),
   model: Yup.string().required("Required"),
   trim: Yup.string().required("Required"),
-  vin: Yup.string().required("Required"),
+  vin: Yup.string().required("Required")
+  .min(16, "Must be 16 characters")
+  .max(16, "Must be 16 characters"),
   dealerName: Yup.string().required("Required"),
   images: Yup.mixed()
   .required("A file is required")
-  // .test(
-  //   "fileSize",
-  //   "File too large",
-  //   value => value && value.size >= FILE_SIZE
-  // )
   .test(
     "fileFormat",
     "Unsupported Format",
@@ -160,7 +157,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   name="year"
                   placeholder="Year"
                 />
-                <ErrorMessage name="year" />
+                <div className="vehicleDetails__error">
+                <ErrorMessage name="year" /></div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Make
@@ -172,7 +170,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   name="make"
                   placeholder="Make"
                 />
-                <ErrorMessage name="make" />
+                <div className="vehicleDetails__error">
+                <ErrorMessage name="make" /></div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Model
@@ -184,7 +183,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   name="model"
                   placeholder="Model"
                 />
-                <ErrorMessage name="model" />
+                <div className="vehicleDetails__error">
+                <ErrorMessage name="model" /></div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Trim
@@ -196,7 +196,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   name="trim"
                   placeholder="Trim"
                 />
-                <ErrorMessage name="trim" />
+                <div className="vehicleDetails__error">
+                <ErrorMessage name="trim" /></div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   VIN
@@ -208,7 +209,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   name="vin"
                   placeholder="vin"
                 />
-                <ErrorMessage name="vin" />
+                <div className="vehicleDetails__error">
+                <ErrorMessage name="vin" /></div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Price
@@ -220,7 +222,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   name="price"
                   placeholder="Price"
                 />
-                <ErrorMessage name="price" />
+                <div className="vehicleDetails__error">
+                <ErrorMessage name="price" /></div>
                 <div className="vehicleDetails__image">
                   {/* <h2 className="vehicleDetails__subHeading">Image </h2> */}
                   <Field
@@ -235,12 +238,14 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                         <label className="vehicleDetails__label" htmlFor="">
                           Select Images
                         </label>
-                         <Input type="file" name="images" id="images" onChange={((event) => {
+                         <Input  className="vehicleDetails__field" type="file" name="images" id="images" onChange={((event) => {
                            setFieldValue("images",  event.currentTarget.files[0]);
                          })}/>
-                        {touched[field.name] && errors[field.name] && (
+                         <div className="vehicleDetails__error">
+                <ErrorMessage name="images" /></div>
+                        {/* {touched[field.name] && errors[field.name] && (
                           <div className="error">{errors[field.name]}</div>
-                        )}
+                        )} */}
                       </div>
                     )}
                   />
@@ -270,7 +275,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                         );
                       })}
                     </Field>
-                    <ErrorMessage name="dealerName" />
+                    <div className="vehicleDetails__error">
+                    <ErrorMessage name="dealerName" /></div>
                   </>
                 )}
               </div>
@@ -286,7 +292,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   name="details.engine"
                   placeholder="Engine"
                 />
-                <ErrorMessage name="details.engine" />
+                <div className="vehicleDetails__error">
+                <ErrorMessage name="details.engine" /></div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   DriveTrain
@@ -298,7 +305,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   name="details.driveTrain"
                   placeholder="DriveTrain"
                 />
-                <ErrorMessage name="details.driveTrain" />
+                <div className="vehicleDetails__error">
+                <ErrorMessage name="details.driveTrain" /></div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Transmission
@@ -310,7 +318,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   name="details.transmission"
                   placeholder="Transmission"
                 />
-                <ErrorMessage name="details.transmission" />
+                <div className="vehicleDetails__error">
+                <ErrorMessage name="details.transmission" /></div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Exterior
@@ -322,7 +331,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   name="details.exterior"
                   placeholder="Exterior color"
                 />
-                <ErrorMessage name="details.exterior" />
+                <div className="vehicleDetails__error">
+                <ErrorMessage name="details.exterior" /></div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Interior
@@ -334,8 +344,9 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   name="details.interior"
                   placeholder="Interior color"
                 />
+                <div className="vehicleDetails__error">
                 <ErrorMessage name="details.interior" />
-
+                </div>
                 <h2 className="vehicleDetails__subHeading">Features</h2>
                 <FieldArray
                   className="vehicleDetails__field"
@@ -375,14 +386,18 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                                 -{" "}
                               </button>
                             )}
+                            <div className="vehicleDetails__error">
                             <ErrorMessage name="features" />
+                            </div>
                           </div>
                         ))}
                       </div>
                     );
                   }}
                 </FieldArray>
+                <div className="vehicleDetails__error">
                 <ErrorMessage name="features" />
+                </div>
               </div>
             </div>
           </div>
@@ -393,6 +408,13 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
               color="primary"
             >
               Submit
+            </Button>
+            <Button
+            
+              className="vehicleDetails__btn"
+             
+            >
+              Cancel
             </Button>
           </div>
         </Form>

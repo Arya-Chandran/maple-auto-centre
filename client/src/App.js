@@ -10,7 +10,7 @@ import AddVehicle from "./components/AddVehicle";
 import ContactForm from "./components/ContactForm";
 import Register from "./components/Modals/Register";
 import Login from "./components/Login";
-import Header from "./components/Header/Header";
+import Header from "./components/Header";
 
 const PrivateRoute = (props) => {
   return props.isLoggedIn ? <Route {...props} /> : <Redirect to="/login" />;
