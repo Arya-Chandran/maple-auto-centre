@@ -8,12 +8,6 @@
 .footer {
   width: 100%;
 
-  @include tablet-breakpoint {
-  }
-  @include desktop-breakpoint {
-  }
-
-
   &__wrapper {
     width: 100%;
     padding: pxToRem(16);
@@ -43,29 +37,24 @@
     align-items: center;
 
     @include tablet-breakpoint {
-
       flex-direction: row;
-    }
-    @include desktop-breakpoint {
     }
   }
 
-  &__container1{
+  &__container1 {
     display: flex;
     flex-direction: column;
   }
 
-  &__title{
-    @include bold-style(pxToRem(18), pxToRem(22), $dark-blue );
-    padding-bottom:8px;
-    margin:0;
+  &__title {
+    @include bold-style(pxToRem(18), pxToRem(22), $dark-blue);
+    padding-bottom: pxToRem(8);
+    margin: 0;
+    
     @include tablet-breakpoint {
-        @include bold-style(pxToRem(20), pxToRem(24), $dark-blue );
-        
+      @include bold-style(pxToRem(20), pxToRem(24), $dark-blue);
     }
   }
-
-  
 
   &__imageWrapper {
     display: flex;
@@ -73,24 +62,18 @@
   }
 
   &__image {
-    // padding: 0.625rem 0.625rem 0.625rem 0;
-    padding:10px;
+    padding: pxToRem(10);
     width: auto;
-    height: 2.5rem;
-    // margin-right: 1.25rem;
-  }
-
-  &__container1{
-   
+    height: pxToRem(40);
   }
 
   &__content {
     @include regular-style(pxToRem(11), pxToRem(18));
-    margin:0;
-    padding-top:8px;
+    margin: 0;
+    padding-top: pxToRem(8);
+
     @include tablet-breakpoint {
-        @include regular-style(pxToRem(13), pxToRem(20));
+      @include regular-style(pxToRem(13), pxToRem(20));
     }
-  
   }
 }

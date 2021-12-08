@@ -9,11 +9,6 @@
   width: 100%;
   padding: pxToRem(16);
   background-color: $black;
-  @include tablet-breakpoint {
-  }
-
-  @include desktop-breakpoint {
-  }
 
   &__heading {
     @include bold-style(pxToRem(20), pxToRem(28), $white);
@@ -22,17 +17,6 @@
 
     @include tablet-breakpoint {
       @include bold-style(pxToRem(24), pxToRem(32), $white);
-    }
-
-    @include desktop-breakpoint {
-    }
-  }
-
-  &__wrapper {
-    @include tablet-breakpoint {
-    }
-
-    @include desktop-breakpoint {
     }
   }
 
@@ -55,7 +39,6 @@
 
     @include tablet-breakpoint {
       @include regular-style(pxToRem(14), pxToRem(22), $white);
-  
     }
   }
 }

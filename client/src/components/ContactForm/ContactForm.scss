@@ -23,17 +23,11 @@
     display: flex;
     flex-direction: column;
     padding-bottom: pxToRem(4);
-    
+
     @include tablet-breakpoint {
       padding-bottom: pxToRem(8);
     }
   }
-
-
-  // &__column {
-  //   display: flex;
-  //   flex-direction: column;
-  // }
 
   &__label {
     @include regular-style(pxToRem(11), pxToRem(18));
@@ -51,7 +45,6 @@
     }
   }
 
-  
   &__error {
     color: $red;
     font-size: pxToRem(11);

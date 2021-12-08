@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     padding-bottom: pxToRem(4);
-    
+
     @include tablet-breakpoint {
       padding-bottom: pxToRem(8);
     }
@@ -25,7 +25,7 @@
     @include bold-style(pxToRem(24), pxToRem(32), $dark-blue);
 
     @include tablet-breakpoint {
-      @include bold-style(pxToRem(32), pxToRem(40), $dark-blue);
+      @include bold-style(pxToRem(30), pxToRem(32), $dark-blue);
     }
   }
 

@@ -5,197 +5,153 @@
 @use "../../styles/partials/type-kit" as *;
 @use "../../styles/partials/resets" as *;
 
-
-
 .vehicleDetails {
-    width: 100%;
-    padding:  pxToRem(16);
-    // background-color:black ;
-    // color:white;
-    // display: flex;
-    // flex-direction: column;
-   
-    @include tablet-breakpoint {
-        padding:  pxToRem(32);
-    }
-  
-    @include desktop-breakpoint {
-        // margin: 0 auto;
-        // max-width: $max-content-width;
-    }
-  
-    &__close {
-      color: $white;
-      background-color: $red;
-    }
-    
+  width: 100%;
+  padding: pxToRem(16);
+
+  @include tablet-breakpoint {
+    padding: pxToRem(32);
+  }
+
+  &__close {
+    color: $white;
+    background-color: $red;
+  }
+
   &__wrapper {
     width: 100%;
     text-align: left;
-    padding:16px 0 0;
-   
-
-    @include tablet-breakpoint {
-      padding:32px 0 0;
-    }
 
     @include desktop-breakpoint {
-      //  width:30%; 
-        margin: 0 auto;
-        max-width: $max-content-width;
+      margin: 0 auto;
+      max-width: $max-content-width;
     }
   }
 
+  &__arrowWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: pxToRem(16);
 
-  &__container{
-    display:flex;
-    flex-direction: column;
-    // align-items:left;
     @include tablet-breakpoint {
-        flex-direction: row;
-        justify-content:space-between;
-     
+      justify-content: flex-start;
     }
   }
-  
-  &__subContainer{
-    display:flex;
-    flex-direction: column;
+
+  &__arrow {
+    width: pxToRem(20);
+    height: pxToRem(20);
+    color: $dark-blue;
+    margin: 0;
+
     @include tablet-breakpoint {
-      width:48%;
-     
+      width: pxToRem(30);
+      height: pxToRem(30);
     }
   }
-    &__heading {
-        @include bold-style(pxToRem(24), pxToRem(32), $dark-blue );
-        margin:0;
-        padding-bottom:8px;
-    
-        @include tablet-breakpoint {
-            @include bold-style(pxToRem(32), pxToRem(40), $dark-blue );
-            padding-bottom:32px;
-        }
-    
-        @include desktop-breakpoint {
-        }
-      }
 
-    &__subHeading{
-        @include bold-style(pxToRem(14), pxToRem(22), $dark-blue );
-        margin:0;
-        padding:8px 0;
-    
-        @include tablet-breakpoint {
-            @include bold-style(pxToRem(24), pxToRem(24), $dark-blue );
-            padding:16px 0;
-        }
-    
-        @include desktop-breakpoint {
-        }  
+  &__arrowContent {
+    margin: 0;
+    padding: 0 pxToRem(16);
+    @include regular-style(pxToRem(12), pxToRem(18));
+
+    @include tablet-breakpoint {
+      @include regular-style(pxToRem(14), pxToRem(22));
     }
-
-    // &__column {
-    //   display: flex;
-    //   flex-direction: column;
-    //   text-align:left;
-    // }
-  
-    &__label {
-       @include bold-style(pxToRem(12), pxToRem(20));
-       padding-top:8px;
-     
-       @include tablet-breakpoint {
-        @include bold-style(pxToRem(14), pxToRem(22));
-      }
-    }
-  
-    &__field {
-        @include regular-style(pxToRem(11), pxToRem(18));
-     
-        @include tablet-breakpoint {
-         @include regular-style(pxToRem(13), pxToRem(20));
-       }
-    }
-
-    &__error {
-      color: $red;
-      font-size: pxToRem(11);
-      line-height: pxToRem(18);
-  
-      @include tablet-breakpoint {
-        font-size: pxToRem(13);
-        line-height: pxToRem(20);
-      }
-    }
-
-    &__image{
-        width:100%;
-        @include regular-style(pxToRem(12), pxToRem(18));
-     
-        @include tablet-breakpoint {
-         @include regular-style(pxToRem(14), pxToRem(22));
-       }
-    }
-    
-    // &__feature{
-    //     display:flex;
-    // }
-    // &__plusbtnWrapper{
-    //     padding: 0 8px;
-       
-        
-    // }
-    // &__plusbtn{
-       
-    // }
-
-    // &__btnWrapper{
-    //     padding-top:16px;
-       
-        
-    // }
-    // &__btn{
-    //     background-color:$black;
-    //     width:100%;
-    //     align-items: right;
-
-    //     @include tablet-breakpoint {
-    //         width:40%;
-    //       }
-    //       @include tablet-breakpoint {
-    //         width:30%;
-    //       }
-    // }
-
-    
-    &__btnWrapper{
-      padding-top:16px;
-      width:100%;
-      // align-items: right;
-      @include tablet-breakpoint {
-        // align-items: flex-end;
-        padding-top:32px;
-        width:40%;
-      }
-      @include tablet-breakpoint {
-        width:10%;
-        //  margin:0 auto;
-      }
-     
-      
-  }
-  &__btn{
-      background-color:$dark-blue;
-      width:100%;
-      // align-items: right;
-
-      @include tablet-breakpoint {
-      
-        }
-        @include tablet-breakpoint {
-         
-        }
-  }
   }
 
+  &__container {
+    display: flex;
+    flex-direction: column;
 
+    @include tablet-breakpoint {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__subContainer {
+    display: flex;
+    flex-direction: column;
+
+    @include tablet-breakpoint {
+      width: 48%;
+    }
+  }
+  &__heading {
+    @include bold-style(pxToRem(24), pxToRem(32), $dark-blue);
+    margin: 0;
+    padding-bottom: pxToRem(8);
+
+    @include tablet-breakpoint {
+      @include bold-style(pxToRem(32), pxToRem(40), $dark-blue);
+      padding-bottom: pxToRem(16);
+    }
+  }
+
+  &__subHeading {
+    @include bold-style(pxToRem(14), pxToRem(22), $dark-blue);
+    margin: 0;
+    padding: pxToRem(8) 0;
+
+    @include tablet-breakpoint {
+      @include bold-style(pxToRem(24), pxToRem(24), $dark-blue);
+      padding: pxToRem(16) 0;
+    }
+  }
+
+  &__label {
+    @include bold-style(pxToRem(12), pxToRem(20));
+    padding-top: pxToRem(8);
+
+    @include tablet-breakpoint {
+      @include bold-style(pxToRem(14), pxToRem(22));
+    }
+  }
+
+  &__field {
+    @include regular-style(pxToRem(11), pxToRem(18));
+
+    @include tablet-breakpoint {
+      @include regular-style(pxToRem(13), pxToRem(20));
+    }
+  }
+
+  &__error {
+    color: $red;
+    font-size: pxToRem(11);
+    line-height: pxToRem(18);
+
+    @include tablet-breakpoint {
+      font-size: pxToRem(13);
+      line-height: pxToRem(20);
+    }
+  }
+
+  &__image {
+    width: 100%;
+    @include regular-style(pxToRem(12), pxToRem(18));
+
+    @include tablet-breakpoint {
+      @include regular-style(pxToRem(14), pxToRem(22));
+    }
+  }
+
+  &__btnWrapper {
+    padding-top: pxToRem(16);
+    width: 100%;
+
+    @include tablet-breakpoint {
+      padding-top: pxToRem(32);
+      width: 40%;
+    }
+    @include tablet-breakpoint {
+      width: 10%;
+    }
+  }
+  &__btn {
+    background-color: $dark-blue;
+    width: 100%;
+  }
+}

@@ -166,7 +166,7 @@ function Register({ isOpen, onClose }) {
                 <Button type="submit" color="primary">
                   Submit
                 </Button>
-              )}{" "}
+              )}
               {!isCreated && <Button onClick={()=>{onClose(); setError(null)}}>Cancel</Button>}
             </ModalFooter>
           </Form>

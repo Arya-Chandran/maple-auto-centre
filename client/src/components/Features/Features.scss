@@ -7,18 +7,12 @@
 
 .features {
   width: 100%;
-  padding:pxToRem(16) 0;
+  padding: pxToRem(16) 0;
   border-top: 1px solid $base-color;
- 
 
   @include tablet-breakpoint {
     border-bottom: 1px solid $base-color;
   }
-
-  @include desktop-breakpoint {
-  }
-  
-
 
   &__heading {
     @include bold-style(pxToRem(20), pxToRem(28), $light-blue);
@@ -26,26 +20,18 @@
     padding-bottom: pxToRem(16);
 
     @include tablet-breakpoint {
-      @include bold-style(pxToRem(24), pxToRem(32),  $light-blue);
-    }
-
-    @include desktop-breakpoint {
+      @include bold-style(pxToRem(24), pxToRem(32), $light-blue);
     }
   }
 
   &__item {
-   
-    list-style-type:none;
-    padding-bottom:4px;
+    list-style-type: none;
+    padding-bottom: pxToRem(4);
     @include regular-style(pxToRem(14), pxToRem(20));
-
 
     @include tablet-breakpoint {
       @include regular-style(pxToRem(14), pxToRem(22));
-      padding-bottom:8px;
-    }
-
-    @include desktop-breakpoint {
+      padding-bottom: pxToRem(8);
     }
   }
 }

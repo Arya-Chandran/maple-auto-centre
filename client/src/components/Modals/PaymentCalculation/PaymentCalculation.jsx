@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -13,7 +13,6 @@ const APR = [
   { term: 96, rate: 2.99 },
 ];
 
-
 const validationSchema = Yup.object({
   downpayment: Yup.number().required("Required"),
   frequency: Yup.string().required("Required"),
@@ -26,14 +25,19 @@ const fees = 2000;
 const HST = 12;
 
 const getInterest = (amount, term, rate) => {
-  console.log(amount, term, rate);
   return (
     (amount * (rate / 12) * Math.pow(1 + rate / 12, term)) /
     (Math.pow(1 + rate / 12, term) - 1)
   );
 };
 
-function PaymentCalculation({ isOpen, vehicle, onClose, initialValues, handleCalculation }) {
+function PaymentCalculation({
+  isOpen,
+  vehicle,
+  onClose,
+  initialValues,
+  handleCalculation,
+}) {
   const { make, model, trim, vin, price } = vehicle;
 
   return (
@@ -41,22 +45,17 @@ function PaymentCalculation({ isOpen, vehicle, onClose, initialValues, handleCal
       <Modal isOpen={isOpen} toggle={onClose}>
         <Formik
           initialValues={initialValues}
-          //   validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting }) => {
             handleCalculation(values, price);
             setSubmitting(false);
-            console.log(values);
+
             onClose();
           }}
         >
           {({ isSubmitting }) => (
             <Form className="calculate">
               <ModalHeader
-                close={
-                  <button className="calculate__close">
-                    ×
-                  </button>
-                }
+                close={<button className="calculate__close">×</button>}
                 toggle={onClose}
               >
                 <h2 className="calculate__heading"> Payment Calculation</h2>
@@ -73,8 +72,8 @@ function PaymentCalculation({ isOpen, vehicle, onClose, initialValues, handleCal
                       id="downPayment"
                       name="downPayment"
                     />
-                     <div className="calculate__error">
-                    <ErrorMessage name="downPayment" />
+                    <div className="calculate__error">
+                      <ErrorMessage name="downPayment" />
                     </div>
                   </div>
                   <div className="calculate__section">
@@ -89,7 +88,6 @@ function PaymentCalculation({ isOpen, vehicle, onClose, initialValues, handleCal
                       name="term"
                       placeholder="Select APR"
                     >
-
                       {APR.map((termOption) => {
                         const { term, rate } = termOption;
                         return (
@@ -117,7 +115,7 @@ function PaymentCalculation({ isOpen, vehicle, onClose, initialValues, handleCal
                             return (
                               <React.Fragment key={option}>
                                 <input
-                                  //   className="calculate__radioBtn"
+                  
                                   type="radio"
                                   id={option}
                                   {...field}

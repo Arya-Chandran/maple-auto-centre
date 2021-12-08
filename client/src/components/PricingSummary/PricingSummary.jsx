@@ -3,10 +3,10 @@ import "./PricingSummary.scss";
 
 function PricingSummary({ payment }) {
   console.log(payment);
-  const {price,amount, fees, term, frequency, downPayment } = payment;
+  const { price, amount, fees, term, frequency, downPayment } = payment;
 
   return (
-    <div  className="pricing">
+    <div className="pricing">
       <p className="pricing__heading">Pricing Summary</p>
       <div className="pricing__wrapper">
         <div className="pricing__row">
@@ -35,12 +35,11 @@ function PricingSummary({ payment }) {
         </div>
       </div>
       <div className="pricing__row">
-          <p className="pricing__title">Payment Amount</p>
-          <p className="pricing__content">${payment.payment}</p>
-        </div>
+        <p className="pricing__title">Payment Amount</p>
+        <p className="pricing__content">${payment.payment}</p>
+      </div>
     </div>
   );
 }
 
 export default PricingSummary;
-

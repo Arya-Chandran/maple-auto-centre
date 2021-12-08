@@ -1,0 +1,24 @@
+@use "../../../styles/partials/call-to-actions" as *;
+@use "../../../styles/partials/colors" as *;
+@use "../../../styles/partials/form-fields" as *;
+@use "../../../styles/partials/layout-grid" as *;
+@use "../../../styles/partials/type-kit" as *;
+@use "../../../styles/partials/resets" as *;
+
+
+.deleteHeading{
+    @include bold-style(pxToRem(24), pxToRem(32), $dark-blue);
+
+    @include tablet-breakpoint {
+      @include bold-style(pxToRem(30), pxToRem(32), $dark-blue);
+    }
+}
+
+
+.deleteContent{
+    @include regular-style(pxToRem(11), pxToRem(18));
+
+    @include tablet-breakpoint {
+      @include regular-style(pxToRem(13), pxToRem(20));
+    }  
+}

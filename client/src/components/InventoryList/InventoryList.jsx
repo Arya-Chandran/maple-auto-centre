@@ -7,14 +7,11 @@ import { AiFillFolderAdd } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import "./InventoryList.scss";
 import DeleteModal from "../Modals/DeleteModal/DeleteModal";
-// import icon from "../../assets/icons/delete_outline-24px.svg";
-import delSrc from "../../assets/icons/trash.png";
-import editSrc from "../../assets/icons/edit.png";
+
 
 const host = "http://localhost:8080";
 
 function InventoryList(props) {
-  console.log("Inventorylist props", props);
   const [inventory, setInventory] = useState([]);
   const [modal, setModal] = useState(false);
   const [count, setCount] = useState(0);
@@ -25,9 +22,6 @@ function InventoryList(props) {
   const [editTooltip, setEditTooltip] = useState(false);
   const [deleteTooltip, setDeleteTooltip] = useState(false);
 
-  // const isAdmin= sessionStorage.getItem("isAdmin");
-  console.log("admin", isAdmin);
-
   // Toggle for Modal
   const toggleModal = () => setModal(!modal);
 
@@ -37,7 +31,6 @@ function InventoryList(props) {
   };
 
   const handleDelete = (vin) => {
-    console.log(vin);
     deleteInventory(vin);
   };
 
@@ -46,11 +39,9 @@ function InventoryList(props) {
   }, []);
 
   useEffect(() => {
-    console.log("Inventory props", props.profileData);
     if (profileData) {
       const { isAdmin } = profileData;
       setAdmin(isAdmin);
-      console.log("profileData", profileData);
     }
   }, [profileData]);
 
@@ -92,18 +83,21 @@ function InventoryList(props) {
         <div className="stockDetails__imageWrapper">
           {isAdmin && (
             <Link to="/inventory/add">
-              <AiFillFolderAdd id="add" className="stockDetails__image" {...props} />
+              <AiFillFolderAdd
+                id="add"
+                className="stockDetails__image"
+                {...props}
+              />
               <Tooltip
-            placement="right"
-            isOpen={addTooltip}
-            target="add"
-            toggle={() => {
-              setAddTooltip(!addTooltip);
-            }}
-          >
-            Add vehicle
-          </Tooltip>
-              {/* <Button> Add Vehicle</Button> */}
+                placement="right"
+                isOpen={addTooltip}
+                target="add"
+                toggle={() => {
+                  setAddTooltip(!addTooltip);
+                }}
+              >
+                Add vehicle
+              </Tooltip>
             </Link>
           )}
         </div>
@@ -139,8 +133,11 @@ function InventoryList(props) {
                 {isAdmin && (
                   <div className="vehicleCard__btnWrapper">
                     <Link to={`/vehicle/edit/${vehicle.vin}`}>
-                      {/* <img src={editSrc} alt="edit icon" /> */}
-                      <BiEditAlt id="edit" className="vehicleCard__icons" />
+                      <BiEditAlt
+                        id="edit"
+                        className="vehicleCard__icons"
+                        {...props}
+                      />
                       {/* <Tooltip
             placement="right"
             isOpen={editTooltip}
@@ -152,16 +149,13 @@ function InventoryList(props) {
             Edit vehicle
           </Tooltip> */}
                     </Link>
-                    {/* <img
-                      src={delSrc}
-                      onClick={() => openModal(vehicle)}
-                      alt="delete icon"
-                    /> */}
-                    <MdDelete id="delete"
+
+                    <MdDelete
+                      id="delete"
                       className="vehicleCard__icons"
                       onClick={() => openModal(vehicle)}
                     />
-                        {/* <Tooltip
+                    {/* <Tooltip
             placement="right"
             isOpen={deleteTooltip}
             target="delete"
@@ -171,7 +165,6 @@ function InventoryList(props) {
           >
             Remove vehicle
           </Tooltip> */}
-                    {/* <button onClick={() => openModal(vehicle)}>Delete</button> */}
                   </div>
                 )}
               </div>

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Features from "../Features";
 import Details from "../Details";
-import { Button, Tooltip } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Tooltip } from "reactstrap";
 import DealershipDetails from "../DealershipDetails";
 import "./VehicleDetails.scss";
 import PaymentCalculation from "../Modals/PaymentCalculation";
@@ -34,7 +33,6 @@ const fees = 2000;
 const HST = 12;
 
 const getInterest = (amount, term, rate) => {
-  console.log(amount, term, rate);
   return (
     (amount * (rate / 12) * Math.pow(1 + rate / 12, term)) /
     (Math.pow(1 + rate / 12, term) - 1)
@@ -47,10 +45,7 @@ function VehicleDetails(props) {
   const [showPayment, setShow] = useState(false);
   const [payment, setPayment] = useState(null);
   const [isTooltip, setTooltip] = useState(false);
-  
 
-
-  // Toggle for Modal
   const toggleModal = () => setModal(!modal);
 
   const openModal = () => {
@@ -58,10 +53,8 @@ function VehicleDetails(props) {
   };
 
   useEffect(() => {
-    console.log("propss", props);
     const { vin } = props.match.params;
     getCurrentVehicle(vin);
-    console.log("vehicle", vehicle);
   }, []);
 
   useEffect(() => {
@@ -98,7 +91,7 @@ function VehicleDetails(props) {
 
   const handleCalculation = (values, price) => {
     const { downPayment, term, frequency } = values;
-    console.log(values, price);
+
     const amount = price - downPayment + fees;
     const selectedAPR = APR.find((option) => option.term == term);
     const rate = selectedAPR.rate;
@@ -109,9 +102,6 @@ function VehicleDetails(props) {
     // compute the monthly payment figure
     const x = Math.pow(1 + interest, numPayments); //Math.pow computes powers
     const payment = (principal * x * interest) / (x - 1);
-    // const total = amount + interest;
-    // const payment = total/term;
-    console.log(price, amount, rate, interest, numPayments, payment);
 
     setShow(true);
     setPayment({
@@ -126,28 +116,28 @@ function VehicleDetails(props) {
     });
   };
 
-  console.log(vehicle);
   return (
     <div className="details">
       {Object.keys(vehicle).length !== 0 && (
         <div className="details__wrapper">
-          
           <div className="details__arrowWrapper">
-          <IoMdArrowRoundBack className="details__arrow" onClick={(e) => goback(e)}/>
-          <p  className="details__arrowContent">Back to previous page</p>
+            <IoMdArrowRoundBack
+              className="details__arrow"
+              onClick={(e) => goback(e)}
+            />
+            <p className="details__arrowContent">Back to previous page</p>
           </div>
           <div className="details__main">
-            
             <p className="details__year">{vehicle.year}</p>
             <div className="details__row">
               <p className="details__make">{vehicle.make}</p>
               <p className="details__model">{vehicle.model}</p>
             </div>
             <p className="details__trim">{vehicle.trim}</p>
-            {/* <p className="details__vin">VIN {vehicle.vin}</p> */}
           </div>
-          <p className="details__vin"> <span className="details__vin--highlight">
-          VIN: </span> {vehicle.vin}</p>
+          <p className="details__vin">
+            <span className="details__vin--highlight">VIN: </span> {vehicle.vin}
+          </p>
           <div className="details__topSection">
             <div className="details__imageWrapper">
               <img
@@ -159,21 +149,22 @@ function VehicleDetails(props) {
             <div className="details__pricingWrapper">
               <p className="details__title">Selling price</p>
               <p className="details__price">${vehicle.price}</p>
-              <BsFillCalculatorFill id="paymentCalculation" onClick={() => openModal(vehicle)} />
+              <BsFillCalculatorFill
+                id="paymentCalculation"
+                onClick={() => openModal(vehicle)}
+              />
               <Tooltip
-            placement="right"
-            isOpen={isTooltip}
-            target="paymentCalculation"
-            toggle={() => {
-              setTooltip(!isTooltip);
-            }}
-          >
-            Payment Calculation
-          </Tooltip>
+                placement="right"
+                isOpen={isTooltip}
+                target="paymentCalculation"
+                toggle={() => {
+                  setTooltip(!isTooltip);
+                }}
+              >
+                Payment Calculation
+              </Tooltip>
 
-              {showPayment && (
-                <PricingSummary payment={payment} />
-              )}
+              {showPayment && <PricingSummary payment={payment} />}
             </div>
           </div>
 

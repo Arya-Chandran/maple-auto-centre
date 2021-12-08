@@ -17,7 +17,7 @@
     @include bold-style(pxToRem(24), pxToRem(32), $dark-blue);
 
     @include tablet-breakpoint {
-      @include bold-style(pxToRem(32), pxToRem(40), $dark-blue);
+      @include bold-style(pxToRem(30), pxToRem(32), $dark-blue);
     }
   }
 
@@ -34,10 +34,6 @@
       padding-bottom: pxToRem(8);
     }
   }
-
-  // &__section{
-  //    padding-bottom:16px;
-  // }
 
   &__label {
     @include regular-style(pxToRem(12), pxToRem(20));

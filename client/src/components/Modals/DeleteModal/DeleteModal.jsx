@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
+import "./DeleteModal.scss"
 
 
 
@@ -16,10 +17,11 @@ function DeleteModal({ isOpen, vehicle, onClose, handleDelete }) {
             }
             toggle={onClose}
           >
-            Confirm Delete?
+          <h2 className="deleteHeading">Confirm Delete?</h2>  
           </ModalHeader>
           <ModalBody>
-            Do you want to remove {make} {model} {trim} from inventory?
+            <p  className="deleteContent">Do you want to remove {make} {model} {trim} from inventory?</p>
+     
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={() => handleDelete(vin)}>

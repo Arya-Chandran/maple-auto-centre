@@ -7,15 +7,15 @@
 
 .login {
   width: 100%;
-  height:100%;
+  height: 100%;
   padding: pxToRem(16);
-  // // background-color:  #fafafa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   @include tablet-breakpoint {
-    padding:pxToRem(32);
-  }
-
-  @include desktop-breakpoint {
+    padding: pxToRem(32);
+    justify-content: space-between;
   }
 
   &__wrapper {
@@ -35,17 +35,16 @@
   }
 
   &__leftContainerr {
-  width: 100%;
-   align-items: center;
-    
-  @include tablet-breakpoint {
-    width: 50%;
-    // align-items: left;
-  }
+    width: 100%;
+    align-items: center;
 
-  @include desktop-breakpoint {
-    width: 75%;
-  }
+    @include tablet-breakpoint {
+      width: 50%;
+    }
+
+    @include desktop-breakpoint {
+      width: 75%;
+    }
   }
 
   &__image {
@@ -55,39 +54,35 @@
     @include tablet-breakpoint {
       width: 250px;
       height: 150px;
-
-    }
-
-    @include desktop-breakpoint {
     }
   }
 
   &__heading {
-   margin:0;
-   padding:16px 0;
-   @include bold-style(pxToRem(24), pxToRem(32), $dark-blue);
+    margin: 0;
+    padding: pxToRem(16) 0;
+    
+    @include bold-style(pxToRem(24), pxToRem(32), $dark-blue);
 
     @include tablet-breakpoint {
-     padding:0 32px;
-      @include bold-style(pxToRem(32), pxToRem(40), $dark-blue);
       width:70%;
+      margin:0 auto;
+      @include bold-style(pxToRem(32), pxToRem(40), $dark-blue);
     }
 
-    &--light{
-      // width:100%;
+    &--light {
       font-weight: 400;
     }
   }
 
   &__rightContainer {
     width: 100%;
-    padding:16px;
+    padding: pxToRem(16);
     text-align: left;
     box-shadow: 0px 2px 5px rgba(4, 11, 39, 0.1);
     border-radius: pxToRem(3);
 
     @include tablet-breakpoint {
-      width:50%;
+      width: 50%;
     }
 
     @include desktop-breakpoint {
@@ -103,12 +98,7 @@
     display: flex;
     flex-direction: column;
     padding-bottom: pxToRem(16);
-    
-    @include tablet-breakpoint {
-      // padding-bottom: pxToRem(32);
-    }
   }
-
 
   &__label {
     @include regular-style(pxToRem(12), pxToRem(20));
@@ -138,15 +128,15 @@
   }
 
   &__btnWrapper {
-     padding-top:16px;
+    padding-top: pxToRem(16);
   }
 
   &__btn {
     width: 100%;
-    background-color:$green;
-    border:none;
-    &:hover{
-      background-color:$darkgreen;
+    background-color: $green;
+    border: none;
+    &:hover {
+      background-color: $darkgreen;
     }
   }
 }

@@ -60,7 +60,7 @@ router.post("/", (req, res) => {
   }
   const { dealerId, dealerName, dealerAddress, dealerPhoneNumber, emailId } =
     req.body;
-  console.log(req.body);
+
   const newDealership = {
     id: uuidv4(),
     dealerId,
@@ -85,23 +85,27 @@ router.post("/", (req, res) => {
 // edit dealership data
 router.put("/:dealerId", (req, res) => {
   const { dealerId } = req.params;
-  console.log("id:",req.params.dealerId);
-  const {dealerId :Id, dealerName, dealerAddress, dealerPhoneNumber, emailId } = req.body;
-  console.log("body:",req.body);
+  const {
+    dealerId: Id,
+    dealerName,
+    dealerAddress,
+    dealerPhoneNumber,
+    emailId,
+  } = req.body;
 
   if (!dealerName || !dealerAddress || !dealerPhoneNumber || !emailId) {
-      res.status(404).send("Error: Invalid dealership data!");
+    res.status(404).send("Error: Invalid dealership data!");
   }
 
   const activeDealership = parseDealershipData.find(
-      (dealership) => dealership.dealerId === dealerId
+    (dealership) => dealership.dealerId === dealerId
   );
 
-  console.log("active:", activeDealership);
-
   if (!activeDealership) {
-      res.status(404).send(
-          `Error: Dealership with dealership id:${dealerId} doesn't exist in database!`
+    res
+      .status(404)
+      .send(
+        `Error: Dealership with dealership id:${dealerId} doesn't exist in database!`
       );
   }
 
@@ -111,32 +115,29 @@ router.put("/:dealerId", (req, res) => {
     activeDealership.dealerAddress = dealerAddress;
     activeDealership.dealerPhoneNumber = dealerPhoneNumber;
     activeDealership.emailId = emailId;
-     
   }
-  console.log("active2:", activeDealership);
 
   const updatedactiveDealership = parseDealershipData.map((dealership) => {
-      if (dealership.Id === dealerId) {
-          dealership = activeDealership;
-      }
-      return dealership;
+    if (dealership.Id === dealerId) {
+      dealership = activeDealership;
+    }
+    return dealership;
   });
 
   fs.writeFile(
     dealershipDataFile,
-      JSON.stringify(updatedactiveDealership),
-      (error) => {
-          if (error) {
-              res.status(404).send("Error: data updation failed!");
-              return;
-          }
-          res.status(200).send({
-              message: "Dealership data updated successfully",
-              updatedData: activeDealership,
-          });
+    JSON.stringify(updatedactiveDealership),
+    (error) => {
+      if (error) {
+        res.status(404).send("Error: data updation failed!");
+        return;
       }
+      res.status(200).send({
+        message: "Dealership data updated successfully",
+        updatedData: activeDealership,
+      });
+    }
   );
 });
-
 
 module.exports = router;

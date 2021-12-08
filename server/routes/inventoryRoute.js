@@ -78,8 +78,6 @@ router.post("/", (req, res) => {
     interior,
     exterior,
   } = req.body;
-  console.log("vehicle.req.body:", req.body);
-  console.log("vehicle.req.files:", req.files);
 
   const imageFile = req.files.images;
   const imageName = imageFile.name;
@@ -129,7 +127,7 @@ router.put("/:vin", (req, res) => {
   let imageFile;
   let imageName;
   const { vin } = req.params;
-  console.log("vin:", req.params.vin);
+
   const {
     vin: Vin,
     year,
@@ -147,8 +145,6 @@ router.put("/:vin", (req, res) => {
     interior,
     exterior,
   } = req.body;
-  console.log("vehicle.req.body:", req.body);
-  console.log("vehicle.req.files:", req.body);
 
   if (
     !year ||
@@ -171,8 +167,6 @@ router.put("/:vin", (req, res) => {
   const activeVehicle = parseInventoryData.find(
     (vehicle) => vehicle.vin === vin
   );
-
-  console.log("active:", activeVehicle);
 
   if (!activeVehicle) {
     res
@@ -202,7 +196,6 @@ router.put("/:vin", (req, res) => {
     activeVehicle.details.interior = interior;
     activeVehicle.details.exterior = exterior;
   }
-  console.log("active2:", activeVehicle);
 
   const updatedactiveVehicle = parseInventoryData.map((vehicle) => {
     if (vehicle.vin === vin) {
@@ -237,6 +230,7 @@ router.put("/:vin", (req, res) => {
   );
 });
 
+//delete vehicle details
 router.delete("/:vin", (req, res) => {
   const requestedVIN = req.params.vin;
   const foundvehicle = parseInventoryData.findIndex((vehicle) => {
@@ -244,7 +238,7 @@ router.delete("/:vin", (req, res) => {
       return vehicle.vin;
     }
   });
-  console.log("foundvehicle", foundvehicle);
+
   parseInventoryData.splice(foundvehicle, 1);
   fs.writeFile(inventoryDataFile, JSON.stringify(parseInventoryData), (err) => {
     if (err) {

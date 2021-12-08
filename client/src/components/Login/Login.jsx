@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { Button, Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
+import { Button } from "reactstrap";
 import "./Login.scss";
 import Register from "../Modals/Register";
 import logo from "../../assets/icons/logo.png";
@@ -25,25 +25,22 @@ function Login(props) {
   const [errorMessage, setError] = useState(null);
   const [modal, setModal] = useState(false);
   const { isLoggedIn, setLoggedIn, history, fetchProfile } = props;
-  console.log(props);
 
   const toggleModal = () => {
-    console.log("toggle");
     setModal(!modal);
   };
 
   useEffect(() => {
     if (isLoggedIn) {
-      console.log("Calling useffect");
       history.push("/inventory");
     }
   }, []);
 
   const handleSubmit = (values, setLoggedIn, resetForm) => {
     const { username, password } = values;
-    // endpoint is at http://localhost:8080/login
+
     axios
-      .post("http://localhost:8080/login", {
+      .post(`${host}/login`, {
         username: username,
         password: password,
       })
@@ -73,7 +70,6 @@ function Login(props) {
         <div className="login__leftContainer">
           <img className="login__image" src={logo} alt="logo" />
           <h1 className="login__heading">
-            {" "}
             <span className="login__heading--light"> Welcome to </span>{" "}
             Maple-Auto Centre
           </h1>
@@ -83,12 +79,10 @@ function Login(props) {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={(values, { resetForm }) => {
-              console.log(values);
               handleSubmit(values, setLoggedIn, resetForm);
             }}
           >
             <Form className="login__form">
-        
               <div className="login__section">
                 <label className="login__label" htmlFor="">
                   Username
@@ -119,18 +113,22 @@ function Login(props) {
                   <ErrorMessage className="" name="password" />
                 </div>
               </div>
-              <div className="login__section login__btnWrapper" >
-              <Button color="primary" type="submit">
-                Login
-              </Button>
+              <div className="login__section login__btnWrapper">
+                <Button color="primary" type="submit">
+                  Login
+                </Button>
               </div>
             </Form>
           </Formik>
           {errorMessage && <p className="login__error">{errorMessage}</p>}
-          <div className="login__btnWrapper" >
-          <Button className="login__btn" color="primary" onClick={toggleModal}>
-            Register
-          </Button>
+          <div className="login__btnWrapper">
+            <Button
+              className="login__btn"
+              color="primary"
+              onClick={toggleModal}
+            >
+              Register
+            </Button>
           </div>
           <Register onClose={toggleModal} isOpen={modal} />
         </div>

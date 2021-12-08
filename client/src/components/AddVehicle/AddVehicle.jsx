@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button,  Input } from "reactstrap";
+import { Button, Input } from "reactstrap";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 import "./AddVehicle.scss";
@@ -9,8 +9,6 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 const host = "http://localhost:8080";
 
 const onSubmit = (history, dealerList, values) => {
-  console.log("values", history, values);
-
   const {
     year,
     make,
@@ -47,7 +45,7 @@ const onSubmit = (history, dealerList, values) => {
   formData.append("exterior", details.exterior);
 
   axios
-    .post(`http://localhost:8080/inventory`, formData, {
+    .post(`${host}/inventory`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     })
     .then((response) => {
@@ -55,30 +53,25 @@ const onSubmit = (history, dealerList, values) => {
     });
 };
 
-// const FILE_SIZE = 160 * 1024;
-const SUPPORTED_FORMATS = [
-  "image/jpg",
-  "image/jpeg",
-  "image/gif",
-  "image/png"
-];
+const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
 
 const validationSchema = Yup.object({
   year: Yup.date().required("Required"),
   make: Yup.string().required("Required"),
   model: Yup.string().required("Required"),
   trim: Yup.string().required("Required"),
-  vin: Yup.string().required("Required")
-  .min(16, "Must be 17 characters")
-  .max(16, "Must be 17 characters"),
+  vin: Yup.string()
+    .required("Required")
+    .min(16, "Must be 17 characters")
+    .max(16, "Must be 17 characters"),
   dealerName: Yup.string().required("Required"),
   images: Yup.mixed()
-  .required("A file is required")
-  .test(
-    "fileFormat",
-    "Unsupported Format",
-    value => value && SUPPORTED_FORMATS.includes(value.type)
-  ),
+    .required("Required")
+    .test(
+      "fileFormat",
+      "Unsupported Format",
+      (value) => value && SUPPORTED_FORMATS.includes(value.type)
+    ),
   price: Yup.number().required("Required"),
   features: Yup.array().required("Required"),
   details: Yup.object({
@@ -90,13 +83,8 @@ const validationSchema = Yup.object({
   }),
 });
 
-
-
-
 function AddVehicle({ vehicle = {}, isEdit = false, history }) {
   const [dealerList, setDealer] = useState([]);
-
-  console.log("dealerList", dealerList);
 
   useEffect(() => {
     getDropdownList("dealership");
@@ -110,7 +98,6 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
         model: "",
         trim: "",
         vin: "",
-        // dealerName: dealerList.length > 0 ? dealerList[0].dealerName : "",
         dealerName: "",
         price: "",
         images: null,
@@ -128,16 +115,14 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
     axios
       .get(`http://localhost:8080/inventory/dropdown/${property}`)
       .then((response) => {
-        console.log("response", response.data);
         setDealer(response.data);
       })
       .catch((error) => console.log(error));
   };
   const goback = (e) => {
-  console.log("add vehicles props", history);
-  e.preventDefault();
-  history.push("/", {});
-};
+    e.preventDefault();
+    history.push("/", {});
+  };
 
   return (
     <Formik
@@ -151,15 +136,20 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
       {({ values }) => (
         <Form className="vehicleDetails">
           <div className="vehicleDetails__wrapper">
-          <div className="vehicleDetails__arrowWrapper">
-          <IoMdArrowRoundBack className="vehicleDetails__arrow" onClick={(e) => goback(e)}/>
-          <p  className="vehicleDetails__arrowContent">Back to previous page</p>
-          </div>
+            <div className="vehicleDetails__arrowWrapper">
+              <IoMdArrowRoundBack
+                className="vehicleDetails__arrow"
+                onClick={(e) => goback(e)}
+              />
+              <p className="vehicleDetails__arrowContent">
+                Back to previous page
+              </p>
+            </div>
             <h1 className="vehicleDetails__heading">Add New Car</h1>
             <div className="vehicleDetails__container">
               <div className="vehicleDetails__subContainer">
                 <h2 className="vehicleDetails__subHeading">Basic Details</h2>
-                {/* <div className="vehicleDetails__column"> */}
+
                 <label className="vehicleDetails__label" htmlFor="">
                   Year
                 </label>
@@ -171,7 +161,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   placeholder="Year"
                 />
                 <div className="vehicleDetails__error">
-                <ErrorMessage name="year" /></div>
+                  <ErrorMessage name="year" />
+                </div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Make
@@ -184,7 +175,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   placeholder="Make"
                 />
                 <div className="vehicleDetails__error">
-                <ErrorMessage name="make" /></div>
+                  <ErrorMessage name="make" />
+                </div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Model
@@ -197,7 +189,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   placeholder="Model"
                 />
                 <div className="vehicleDetails__error">
-                <ErrorMessage name="model" /></div>
+                  <ErrorMessage name="model" />
+                </div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Trim
@@ -210,7 +203,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   placeholder="Trim"
                 />
                 <div className="vehicleDetails__error">
-                <ErrorMessage name="trim" /></div>
+                  <ErrorMessage name="trim" />
+                </div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   VIN
@@ -223,7 +217,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   placeholder="vin"
                 />
                 <div className="vehicleDetails__error">
-                <ErrorMessage name="vin" /></div>
+                  <ErrorMessage name="vin" />
+                </div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Price
@@ -236,9 +231,9 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   placeholder="Price"
                 />
                 <div className="vehicleDetails__error">
-                <ErrorMessage name="price" /></div>
+                  <ErrorMessage name="price" />
+                </div>
                 <div className="vehicleDetails__image">
-                  {/* <h2 className="vehicleDetails__subHeading">Image </h2> */}
                   <Field
                     id="images"
                     name="images"
@@ -251,14 +246,21 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                         <label className="vehicleDetails__label" htmlFor="">
                           Select Images
                         </label>
-                         <Input  className="vehicleDetails__field" type="file" name="images" id="images" onChange={((event) => {
-                           setFieldValue("images",  event.currentTarget.files[0]);
-                         })}/>
-                         <div className="vehicleDetails__error">
-                <ErrorMessage name="images" /></div>
-                        {/* {touched[field.name] && errors[field.name] && (
-                          <div className="error">{errors[field.name]}</div>
-                        )} */}
+                        <Input
+                          className="vehicleDetails__field"
+                          type="file"
+                          name="images"
+                          id="images"
+                          onChange={(event) => {
+                            setFieldValue(
+                              "images",
+                              event.currentTarget.files[0]
+                            );
+                          }}
+                        />
+                        <div className="vehicleDetails__error">
+                          <ErrorMessage name="images" />
+                        </div>
                       </div>
                     )}
                   />
@@ -289,7 +291,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                       })}
                     </Field>
                     <div className="vehicleDetails__error">
-                    <ErrorMessage name="dealerName" /></div>
+                      <ErrorMessage name="dealerName" />
+                    </div>
                   </>
                 )}
               </div>
@@ -306,7 +309,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   placeholder="Engine"
                 />
                 <div className="vehicleDetails__error">
-                <ErrorMessage name="details.engine" /></div>
+                  <ErrorMessage name="details.engine" />
+                </div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   DriveTrain
@@ -319,7 +323,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   placeholder="DriveTrain"
                 />
                 <div className="vehicleDetails__error">
-                <ErrorMessage name="details.driveTrain" /></div>
+                  <ErrorMessage name="details.driveTrain" />
+                </div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Transmission
@@ -332,7 +337,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   placeholder="Transmission"
                 />
                 <div className="vehicleDetails__error">
-                <ErrorMessage name="details.transmission" /></div>
+                  <ErrorMessage name="details.transmission" />
+                </div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Exterior
@@ -345,7 +351,8 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   placeholder="Exterior color"
                 />
                 <div className="vehicleDetails__error">
-                <ErrorMessage name="details.exterior" /></div>
+                  <ErrorMessage name="details.exterior" />
+                </div>
 
                 <label className="vehicleDetails__label" htmlFor="">
                   Interior
@@ -358,7 +365,7 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   placeholder="Interior color"
                 />
                 <div className="vehicleDetails__error">
-                <ErrorMessage name="details.interior" />
+                  <ErrorMessage name="details.interior" />
                 </div>
                 <h2 className="vehicleDetails__subHeading">Features</h2>
                 <FieldArray
@@ -369,7 +376,6 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   placeholder=""
                 >
                   {(fieldArrayProps) => {
-                    console.log("fieldArrayProps", fieldArrayProps);
                     const { push, remove, form } = fieldArrayProps;
                     const { values } = form;
                     const { features } = values;
@@ -400,7 +406,7 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                               </button>
                             )}
                             <div className="vehicleDetails__error">
-                            <ErrorMessage name="features" />
+                              <ErrorMessage name="features" />
                             </div>
                           </div>
                         ))}
@@ -409,21 +415,19 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                   }}
                 </FieldArray>
                 <div className="vehicleDetails__error">
-                <ErrorMessage name="features" />
+                  <ErrorMessage name="features" />
                 </div>
               </div>
             </div>
             <div className="vehicleDetails__btnWrapper">
-            <Button
-              type="submit"
-              className="vehicleDetails__btn"
-              color="primary"
-            >
-              Submit
-            </Button>
-          </div>
-    
-
+              <Button
+                type="submit"
+                className="vehicleDetails__btn"
+                color="primary"
+              >
+                Submit
+              </Button>
+            </div>
           </div>
         </Form>
       )}

@@ -5,66 +5,40 @@
 @use "../../styles/partials/type-kit" as *;
 @use "../../styles/partials/resets" as *;
 
-
 .pricing {
-    width: 100%;
-    // padding:  pxToRem(16);
-    // background-color: $white;
+  width: 100%;
+
+  &__heading {
+    @include bold-style(pxToRem(20), pxToRem(28), $light-blue);
+
+    margin: 0;
+    padding: pxToRem(16) 0;
+
     @include tablet-breakpoint {
-        // width:50%;
+      @include bold-style(pxToRem(24), pxToRem(32), $light-blue);
     }
-  
-    @include desktop-breakpoint {
-    }
-  
-    &__heading {
-        @include bold-style(pxToRem(20), pxToRem(28), $light-blue);
-     
-      margin:0;
-      padding:16px 0;
-  
-      @include tablet-breakpoint {
-        @include bold-style(pxToRem(24), pxToRem(32),  $light-blue);
-        
-      }
-  
-      @include desktop-breakpoint {
-      }
-    }
-  
-    &__wrapper {
-  
-      @include tablet-breakpoint {
-      }
-  
-      @include desktop-breakpoint {
-      }
-    }
-    
-    &__row{
-        display:flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin:0;
+  }
 
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+  }
+
+  &__title {
+    @include bold-style(pxToRem(14), pxToRem(20));
+
+    @include tablet-breakpoint {
+      @include bold-style(pxToRem(15), pxToRem(22));
     }
+  }
+  &__content {
+    width: 40%;
+    @include regular-style(pxToRem(14), pxToRem(20));
 
-    &__title{
-        @include bold-style(pxToRem(14), pxToRem(20));
-
-        @include tablet-breakpoint {
-          @include bold-style(pxToRem(15), pxToRem(22));
-        }
-
+    @include tablet-breakpoint {
+      @include regular-style(pxToRem(14), pxToRem(22));
     }
-    &__content{
-        width:40%;
-        @include regular-style(pxToRem(14), pxToRem(20));
-
-        @include tablet-breakpoint {
-          @include regular-style(pxToRem(14), pxToRem(22));
-      
-        }
-
-    }
+  }
 }

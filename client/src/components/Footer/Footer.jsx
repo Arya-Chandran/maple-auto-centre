@@ -2,7 +2,6 @@ import React from "react";
 import facebook from "../../assets/icons/icon-facebook.png";
 import instagram from "../../assets/icons/icon-instagram.png";
 import twitter from "../../assets/icons/icon-twitter.png";
-
 import "./Footer.scss";
 
 function Footer(props) {

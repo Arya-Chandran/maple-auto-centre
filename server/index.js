@@ -50,14 +50,16 @@ app.use("/dealership", dealershipRoute);
 app.use("/inventory", inventoryRoute);
 app.use("/contactdealer", contactDealerRoute);
 
-// register endpoint
+// Register endpoint
 app.post("/register", (req, res) => {
   const { username, name, password, confirmPassword } = req.body;
-  const newUser = { username, name, password, confirmPassword};
+  const newUser = { username, name, password, confirmPassword };
 
   const foundUser = users.find((user) => user.username === newUser.username);
   if (foundUser) {
-   return res.status(400).json({message:"This user already exist. Please try new username!"});
+    return res
+      .status(400)
+      .json({ message: "This user already exist. Please try new username!" });
   } else {
     users.push(newUser);
     fs.writeFile(adminDataFile, JSON.stringify(users), (error) => {
@@ -70,31 +72,9 @@ app.post("/register", (req, res) => {
   }
 });
 
-// logout endpoint
-app.get("/logout", authorize, (req, res) => {
-  if (!req.headers.authorization) {
-    return res.status(401).json({ message: "No token found" });
-  }
-  const authTokenArray = req.headers.authorization.split(" ");
-  if (
-    authTokenArray[0].toLowerCase() !== "bearer" &&
-    authTokenArray.length !== 2
-  ) {
-    return res.status(401).json({ message: "Invalid token" });
-  }
 
 
-  jwt.destroy(authTokenArray[1], (err, decoded) => {
-    if (err) {
-      return res
-        .status(401)
-        .json({ message: "Logout failed" });
-    }
-    res.status(200).json({message: "Logout success"});
-  });
-});
-
-// login endpoint
+// Login endpoint
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
   const foundUser = users.find((user) => user.username === username);
@@ -128,15 +108,30 @@ app.get("/profile", authorize, (req, res) => {
   const isAdmin = adminUsers.includes(username);
   res.json({
     tokenInfo: req.payload,
-    isAdmin
+    isAdmin,
   });
 });
 
-// app.get("/isAdmin", authorize, (req, res) => {
-//   const { username } = req.body;
-//   const isAdmin = adminUsers.includes(username);
-//   return res.status(200).json({ isAdmin });
-// });
+// Logout endpoint
+app.get("/logout", authorize, (req, res) => {
+  if (!req.headers.authorization) {
+    return res.status(401).json({ message: "No token found" });
+  }
+  const authTokenArray = req.headers.authorization.split(" ");
+  if (
+    authTokenArray[0].toLowerCase() !== "bearer" &&
+    authTokenArray.length !== 2
+  ) {
+    return res.status(401).json({ message: "Invalid token" });
+  }
+
+  jwt.destroy(authTokenArray[1], (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: "Logout failed" });
+    }
+    res.status(200).json({ message: "Logout success" });
+  });
+});
 
 app.listen(PORT, function () {
   console.log(`Listening on http://localhost:${PORT}`);
