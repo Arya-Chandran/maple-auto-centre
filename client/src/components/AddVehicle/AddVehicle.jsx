@@ -4,6 +4,7 @@ import { Button,  Input } from "reactstrap";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 import "./AddVehicle.scss";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const host = "http://localhost:8080";
 
@@ -68,8 +69,8 @@ const validationSchema = Yup.object({
   model: Yup.string().required("Required"),
   trim: Yup.string().required("Required"),
   vin: Yup.string().required("Required")
-  .min(16, "Must be 16 characters")
-  .max(16, "Must be 16 characters"),
+  .min(16, "Must be 17 characters")
+  .max(16, "Must be 17 characters"),
   dealerName: Yup.string().required("Required"),
   images: Yup.mixed()
   .required("A file is required")
@@ -88,6 +89,9 @@ const validationSchema = Yup.object({
     exterior: Yup.string().required("Required"),
   }),
 });
+
+
+
 
 function AddVehicle({ vehicle = {}, isEdit = false, history }) {
   const [dealerList, setDealer] = useState([]);
@@ -129,6 +133,11 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
       })
       .catch((error) => console.log(error));
   };
+  const goback = (e) => {
+  console.log("add vehicles props", history);
+  e.preventDefault();
+  history.push("/", {});
+};
 
   return (
     <Formik
@@ -142,6 +151,10 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
       {({ values }) => (
         <Form className="vehicleDetails">
           <div className="vehicleDetails__wrapper">
+          <div className="vehicleDetails__arrowWrapper">
+          <IoMdArrowRoundBack className="vehicleDetails__arrow" onClick={(e) => goback(e)}/>
+          <p  className="vehicleDetails__arrowContent">Back to previous page</p>
+          </div>
             <h1 className="vehicleDetails__heading">Add New Car</h1>
             <div className="vehicleDetails__container">
               <div className="vehicleDetails__subContainer">
@@ -400,8 +413,7 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="vehicleDetails__btnWrapper">
+            <div className="vehicleDetails__btnWrapper">
             <Button
               type="submit"
               className="vehicleDetails__btn"
@@ -409,13 +421,9 @@ function AddVehicle({ vehicle = {}, isEdit = false, history }) {
             >
               Submit
             </Button>
-            <Button
-            
-              className="vehicleDetails__btn"
-             
-            >
-              Cancel
-            </Button>
+          </div>
+    
+
           </div>
         </Form>
       )}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
+import { Button, Tooltip } from "reactstrap";
 import { BiEditAlt } from "react-icons/bi";
 import { AiFillFolderAdd } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
@@ -14,16 +14,16 @@ import editSrc from "../../assets/icons/edit.png";
 const host = "http://localhost:8080";
 
 function InventoryList(props) {
+  console.log("Inventorylist props", props);
   const [inventory, setInventory] = useState([]);
   const [modal, setModal] = useState(false);
   const [count, setCount] = useState(0);
   const [isAdmin, setAdmin] = useState(false);
   const [deleteVehicle, setDelete] = useState({});
-  console.log(props);
-  useEffect(() => {
-    const admin = sessionStorage.getItem("isAdmin");
-    setAdmin(admin);
-  }, []);
+  const { profileData } = props;
+  const [addTooltip, setAddTooltip] = useState(false);
+  const [editTooltip, setEditTooltip] = useState(false);
+  const [deleteTooltip, setDeleteTooltip] = useState(false);
 
   // const isAdmin= sessionStorage.getItem("isAdmin");
   console.log("admin", isAdmin);
@@ -44,6 +44,15 @@ function InventoryList(props) {
   useEffect(() => {
     getInventory();
   }, []);
+
+  useEffect(() => {
+    console.log("Inventory props", props.profileData);
+    if (profileData) {
+      const { isAdmin } = profileData;
+      setAdmin(isAdmin);
+      console.log("profileData", profileData);
+    }
+  }, [profileData]);
 
   const getInventory = () => {
     axios
@@ -83,7 +92,17 @@ function InventoryList(props) {
         <div className="stockDetails__imageWrapper">
           {isAdmin && (
             <Link to="/inventory/add">
-              <AiFillFolderAdd className="stockDetails__image" />
+              <AiFillFolderAdd id="add" className="stockDetails__image" {...props} />
+              <Tooltip
+            placement="right"
+            isOpen={addTooltip}
+            target="add"
+            toggle={() => {
+              setAddTooltip(!addTooltip);
+            }}
+          >
+            Add vehicle
+          </Tooltip>
               {/* <Button> Add Vehicle</Button> */}
             </Link>
           )}
@@ -109,7 +128,10 @@ function InventoryList(props) {
                 </div>
                 <p className="vehicleCard__title">Selling Price</p>
                 <p className="vehicleCard__price">${vehicle.price}</p>
-                <p className="vehicleCard__vin"><span className="vehicleCard__vin--highlight">VIN: </span>{vehicle.vin}</p>
+                <p className="vehicleCard__vin">
+                  <span className="vehicleCard__vin--highlight">VIN: </span>
+                  {vehicle.vin}
+                </p>
                 <p className="vehicleCard__name">{vehicle.dealerName}</p>
                 <Link to={`/vehicle/${vehicle.vin}`}>
                   <Button className="vehicleCard__view"> View Details</Button>
@@ -118,14 +140,37 @@ function InventoryList(props) {
                   <div className="vehicleCard__btnWrapper">
                     <Link to={`/vehicle/edit/${vehicle.vin}`}>
                       {/* <img src={editSrc} alt="edit icon" /> */}
-                      <BiEditAlt className="vehicleCard__icons" />
+                      <BiEditAlt id="edit" className="vehicleCard__icons" />
+                      {/* <Tooltip
+            placement="right"
+            isOpen={editTooltip}
+            target="edit"
+            toggle={() => {
+              setEditTooltip(!editTooltip);
+            }}
+          >
+            Edit vehicle
+          </Tooltip> */}
                     </Link>
                     {/* <img
                       src={delSrc}
                       onClick={() => openModal(vehicle)}
                       alt="delete icon"
                     /> */}
-                    <MdDelete  className="vehicleCard__icons"   onClick={() => openModal(vehicle)}/>
+                    <MdDelete id="delete"
+                      className="vehicleCard__icons"
+                      onClick={() => openModal(vehicle)}
+                    />
+                        {/* <Tooltip
+            placement="right"
+            isOpen={deleteTooltip}
+            target="delete"
+            toggle={() => {
+              setDeleteTooltip(!deleteTooltip);
+            }}
+          >
+            Remove vehicle
+          </Tooltip> */}
                     {/* <button onClick={() => openModal(vehicle)}>Delete</button> */}
                   </div>
                 )}

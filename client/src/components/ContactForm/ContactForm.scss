@@ -7,29 +7,39 @@
 
 .form {
   &__close {
-    color: $white;
-    background-color: $red;
+    color: $black;
+    border-color: $light-grey;
   }
 
   &__heading {
-    @include mobile-h2;
-    color: $dark-blue;
+    @include bold-style(pxToRem(24), pxToRem(32), $dark-blue);
 
     @include tablet-breakpoint {
-        @include tablet-h2;
+      @include bold-style(pxToRem(32), pxToRem(40), $dark-blue);
     }
   }
 
-  &__column {
+  &__section {
     display: flex;
     flex-direction: column;
+    padding-bottom: pxToRem(4);
+    
+    @include tablet-breakpoint {
+      padding-bottom: pxToRem(8);
+    }
   }
 
+
+  // &__column {
+  //   display: flex;
+  //   flex-direction: column;
+  // }
+
   &__label {
-    @include mobile-p2;
-   
+    @include regular-style(pxToRem(11), pxToRem(18));
+
     @include tablet-breakpoint {
-      @include tablet-p2;
+      @include regular-style(pxToRem(13), pxToRem(20));
     }
   }
 
@@ -38,6 +48,18 @@
 
     @include tablet-breakpoint {
       @include tablet-p2;
+    }
+  }
+
+  
+  &__error {
+    color: $red;
+    font-size: pxToRem(11);
+    line-height: pxToRem(18);
+
+    @include tablet-breakpoint {
+      font-size: pxToRem(13);
+      line-height: pxToRem(20);
     }
   }
 }

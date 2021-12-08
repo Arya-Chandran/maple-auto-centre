@@ -1,37 +1,47 @@
 [
   {
-    "dealerId": "3922h243-16cd-4z45-ab97-c79f698ibac1",
-    "dealerName":"Markville Ford Lincoln2",
-    "dealerAddress": "8210 Kennedy Road Unionville, ON L3R5X3",
-    "dealerPhoneNumber": "+1 (646) 123-1234",
-    "emailId": "aryachandran86@gmail.com"
+    "dealerId": "3922h243-16cd-4z45-ab97",
+    "dealerName":"Southlake Honda",
+    "dealerAddress": " 502 Oxford Street, London, ON N6H 1S9",
+    "dealerPhoneNumber": "+1 (519) 416-8943",
+    "emailId": "southlake@gmail.com"
   },
   {
-    "dealerId": "12345",
-    "dealerName": "Markville Ford Lincoln2",
-    "dealerAddress": "8210 Kennedy Road Unionville, ON L3R5X3",
-    "dealerPhoneNumber": "+1 (646) 123-1234",
-    "emailId": "aryachandran86@gmail.com"
+    "dealerId": "3925y243-16cd-4z45-ab34",
+    "dealerName": "Rexway Hyundai",
+    "dealerAddress": "2390 Service Road, Hamilton, ON L8E 5C5",
+    "dealerPhoneNumber": "+1 (905) 132-4579",
+    "emailId": "rexway@gmail.com"
   },
   {
-    "dealerId": "3922h243-16cd-4z45-ab97-c79f698ibac3",
-    "dealerName": "Markville Ford Lincoln3",
-    "dealerAddress": "8210 Kennedy Road Unionville, ON L3R5X3",
-    "dealerPhoneNumber": "+1 (646) 123-1234",
-    "emailId": "aryachandran86@gmail.com"
+    "dealerId": "3922k243-17cd-4z45-al92",
+    "dealerName": "Parkview Ford",
+    "dealerAddress": "3185 Kingsway Drive, Kitchener, ON N2C 1X1",
+    "dealerPhoneNumber": "+1 (226) 834-1103",
+    "emailId": "parkview@gmail.com"
   },
   {
-    "dealerId": "3922h243-16cd-4z45-ab97-c79f698ibac4",
-    "dealerName": "Markville Ford Lincoln4",
-    "dealerAddress": "8210 Kennedy Road Unionville, ON L3R5X3",
-    "dealerPhoneNumber": "+1 (646) 123-1234",
-    "emailId": "aryachandran86@gmail.com"
+    "dealerId": "3992h243-18cd-4z45-ah96",
+    "dealerName": " Westgate Honda",
+    "dealerAddress": "1973 Sandhurst Circle, Markham, ON M1V 1V2",
+    "dealerPhoneNumber": "+1 (289) 135-8920",
+    "emailId": "westgate@gmail.com"
   },
   {
-    "dealerId": "3922h243-16cd-4z45-ab97-c79f698ibac5",
-    "dealerName": "Markville Ford Lincoln5",
-    "dealerAddress": "8210 Kennedy Road Unionville, ON L3R5X3",
-    "dealerPhoneNumber": "+1 (646) 123-1234",
-    "emailId": "aryachandran86@gmail.com"
+    "dealerId": "3992r243-18cd-4t45-ah98",
+    "dealerName": " Donvalley Ford",
+    "dealerAddress": "2245 Milner Avenue, Scarborough, ON M1B 3C3",
+    "dealerPhoneNumber": "+1 (416) 135-8920",
+    "emailId": "donvalley@gmail.com"
+  },
+  {
+    "dealerId": "3992r243-ac45-4t45-ah91",
+    "dealerName": " Autopark Hyundai",
+    "dealerAddress": "1973 Sandhurst Circle, Brampton, ON M1V 1V2",
+    "dealerPhoneNumber": "+1 (647) 775-9020",
+    "emailId": "autopark@gmail.com"
   }
 ]
+
+
+

@@ -32,12 +32,11 @@
   &__wrapper {
     width: 100%;
     text-align: left;
-    padding:16px 0;
+    padding:16px 0 0;
    
 
     @include tablet-breakpoint {
-     // max-width:50%;
-     
+      padding:32px 0 0;
     }
 
     @include desktop-breakpoint {
@@ -150,11 +149,11 @@
        
     // }
 
-    &__btnWrapper{
-        padding-top:16px;
+    // &__btnWrapper{
+    //     padding-top:16px;
        
         
-    }
+    // }
     // &__btn{
     //     background-color:$black;
     //     width:100%;
@@ -167,6 +166,36 @@
     //         width:30%;
     //       }
     // }
+
+    
+    &__btnWrapper{
+      padding-top:16px;
+      width:100%;
+      // align-items: right;
+      @include tablet-breakpoint {
+        // align-items: flex-end;
+        padding-top:32px;
+        width:40%;
+      }
+      @include tablet-breakpoint {
+        width:10%;
+        //  margin:0 auto;
+      }
+     
+      
+  }
+  &__btn{
+      background-color:$dark-blue;
+      width:100%;
+      // align-items: right;
+
+      @include tablet-breakpoint {
+      
+        }
+        @include tablet-breakpoint {
+         
+        }
+  }
   }
 
 

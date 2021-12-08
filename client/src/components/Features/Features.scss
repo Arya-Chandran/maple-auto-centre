@@ -21,14 +21,12 @@
 
 
   &__heading {
-    @include mobile-h2;
-    color: $light-blue;
-    margin:0;
-    padding-bottom:16px;
+    @include bold-style(pxToRem(20), pxToRem(28), $light-blue);
+    margin: 0;
+    padding-bottom: pxToRem(16);
 
     @include tablet-breakpoint {
-      @include tablet-h2;
-      color: $light-blue;
+      @include bold-style(pxToRem(24), pxToRem(32),  $light-blue);
     }
 
     @include desktop-breakpoint {
@@ -36,12 +34,14 @@
   }
 
   &__item {
-    @include mobile-p2;
+   
     list-style-type:none;
-    
+    padding-bottom:4px;
+    @include regular-style(pxToRem(14), pxToRem(20));
+
 
     @include tablet-breakpoint {
-      @include tablet-p1;
+      @include regular-style(pxToRem(14), pxToRem(22));
       padding-bottom:8px;
     }
 

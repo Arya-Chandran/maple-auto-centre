@@ -5,56 +5,57 @@
 @use "../../styles/partials/type-kit" as *;
 @use "../../styles/partials/resets" as *;
 
-
 .info {
-    width: 100%;
-    padding:  pxToRem(16);
-    background-color: $black;
+  width: 100%;
+  padding: pxToRem(16);
+  background-color: $black;
+  @include tablet-breakpoint {
+  }
+
+  @include desktop-breakpoint {
+  }
+
+  &__heading {
+    @include bold-style(pxToRem(20), pxToRem(28), $white);
+    margin: 0;
+    padding-bottom: pxToRem(16);
+
     @include tablet-breakpoint {
+      @include bold-style(pxToRem(24), pxToRem(32), $white);
     }
-  
+
     @include desktop-breakpoint {
     }
-  
-    &__heading {
-      @include mobile-h2;
-      color: $white;
-      margin:0;
-      padding-bottom:16px;
-  
-      @include tablet-breakpoint {
-        @include tablet-h2;
-        color: $white;
-      }
-  
-      @include desktop-breakpoint {
-      }
-    }
-  
-    &__wrapper {
-  
-      @include tablet-breakpoint {
-      }
-  
-      @include desktop-breakpoint {
-      }
-    }
-    
-    &__row{
-        display:flex;
-        flex-direction: row;
-        justify-content: space-between;
+  }
 
+  &__wrapper {
+    @include tablet-breakpoint {
     }
 
-    &__title{
-       @include bold-style( pxToRem(14), pxToRem(22) ,$white);
-
+    @include desktop-breakpoint {
     }
-    &__content{
-        width:40%;
-        @include mobile-p2;
-        color:$white;;
+  }
 
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__title {
+    @include bold-style(pxToRem(14), pxToRem(20), $white);
+
+    @include tablet-breakpoint {
+      @include bold-style(pxToRem(15), pxToRem(22), $white);
     }
+  }
+  &__content {
+    width: 40%;
+    @include regular-style(pxToRem(14), pxToRem(20), $white);
+
+    @include tablet-breakpoint {
+      @include regular-style(pxToRem(14), pxToRem(22), $white);
+  
+    }
+  }
 }

@@ -16,10 +16,10 @@
   }
 
   &__info {
-    padding: 0 36px  16px;
+    padding: 0 36px 16px;
     @include tablet-breakpoint {
-        padding-bottom: 32px;
-      }
+      padding-bottom: 32px;
+    }
   }
 
   &__name {
@@ -27,10 +27,9 @@
     @include regular-style(pxToRem(24), pxToRem(24), $light-blue);
 
     @include tablet-breakpoint {
-        @include regular-style(pxToRem(32), pxToRem(32), $light-blue);
-     
-      }
-  } 
+      @include regular-style(pxToRem(32), pxToRem(32), $light-blue);
+    }
+  }
 
   &__address {
     margin: 0;
@@ -39,29 +38,28 @@
     color: $light-blue;
 
     @include tablet-breakpoint {
-        @include tablet-p2;
-        color: $light-blue;
-      }
+      @include tablet-p2;
+      color: $light-blue;
+    }
   }
   &__contact {
     margin: 0;
     @include mobile-p2;
 
     @include tablet-breakpoint {
-        @include tablet-p2;
-      }
-  
+      @include tablet-p2;
+    }
   }
 
-  &__icon{
+  &__icon {
     width: 30px;
     height: 30px;
-    color:$dark-blue;
+    color: $dark-blue;
+    // text-align: center;
 
     @include tablet-breakpoint {
       width: 50px;
-    height: 50px;
+      height: 50px;
     }
-
   }
 }

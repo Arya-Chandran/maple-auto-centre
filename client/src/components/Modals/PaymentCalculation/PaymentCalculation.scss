@@ -7,17 +7,17 @@
 
 
 .calculate {
+  
   &__close {
-    color: $white;
-    background-color: $red;
+    color: $black;
+    border-color: $light-grey;
   }
 
   &__heading {
-    @include mobile-h2;
-    color: $dark-blue;
+    @include bold-style(pxToRem(24), pxToRem(32), $dark-blue);
 
     @include tablet-breakpoint {
-        @include tablet-h2;
+      @include bold-style(pxToRem(32), pxToRem(40), $dark-blue);
     }
   }
 
@@ -25,33 +25,41 @@
     display: flex;
     flex-direction: column;
   }
-
-  &__section{
-     padding-bottom:16px;
+  &__section {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: pxToRem(4);
+    
+    @include tablet-breakpoint {
+      padding-bottom: pxToRem(8);
+    }
   }
+
+  // &__section{
+  //    padding-bottom:16px;
+  // }
 
   &__label {
-    @include mobile-p2;
-    
-   
+    @include regular-style(pxToRem(12), pxToRem(20));
+
     @include tablet-breakpoint {
-      @include tablet-p2;
-      padding-right:16px;
+      @include regular-style(pxToRem(14), pxToRem(22));
     }
   }
+
 
   &__field {
-    @include mobile-p2;
-     width:100%;;
+    @include regular-style(pxToRem(11), pxToRem(18));
 
     @include tablet-breakpoint {
-      @include tablet-p2;
+      @include regular-style(pxToRem(13), pxToRem(20));
     }
   }
-
   &__row{
       display:flex;
+     
   }
+
 
   &__radioBtn{
     @include mobile-p2;
@@ -64,7 +72,7 @@
 
 &__result{
     @include mobile-p2;
-   
+  
     @include tablet-breakpoint {
       @include tablet-p2;
     } 

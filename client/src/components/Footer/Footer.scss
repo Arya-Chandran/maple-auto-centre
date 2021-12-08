@@ -5,12 +5,14 @@
 @use "../../styles/partials/type-kit" as *;
 @use "../../styles/partials/resets" as *;
 
-.header {
+.footer {
   width: 100%;
+
   @include tablet-breakpoint {
   }
   @include desktop-breakpoint {
   }
+
 
   &__wrapper {
     width: 100%;
@@ -18,15 +20,15 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    border-bottom: 1px solid $dark-blue;
-    // align-items: center;
+    border-top: 1px solid $dark-blue;
+    align-items: center;
 
     @include tablet-breakpoint {
-      padding:pxToRem(32) pxToRem(32) 0;
-      flex-direction: row;
+      padding: pxToRem(32) pxToRem(32);
+      flex-direction: row-reverse;
       justify-content: space-between;
-      text-align:center;
-      border-bottom: 1.5px solid $dark-blue;
+      text-align: center;
+      border-top: 1.5px solid $dark-blue;
     }
 
     @include desktop-breakpoint {
@@ -35,67 +37,60 @@
     }
   }
 
-  &__left {
+  &__main {
     display: flex;
     flex-direction: column;
     align-items: center;
 
     @include tablet-breakpoint {
+
       flex-direction: row;
     }
     @include desktop-breakpoint {
     }
   }
 
-  &__image {
-    width: 100px;
-    height: 80px;
-    align-items: center;
+  &__container1{
+    display: flex;
+    flex-direction: column;
   }
-  &__title {
-    color: $dark-blue;
-   
-    @include bold-style(pxToRem(24), pxToRem(32), $dark-blue);
 
+  &__title{
+    @include bold-style(pxToRem(18), pxToRem(22), $dark-blue );
+    padding-bottom:8px;
+    margin:0;
     @include tablet-breakpoint {
-      width: 60%;
-      align-items: left;
-      // padding: 0  pxToRem(32);
-    }
-    @include desktop-breakpoint {
+        @include bold-style(pxToRem(20), pxToRem(24), $dark-blue );
+        
     }
   }
 
-  &__nav {
+  
+
+  &__imageWrapper {
     display: flex;
     justify-content: space-between;
+  }
+
+  &__image {
+    // padding: 0.625rem 0.625rem 0.625rem 0;
+    padding:10px;
+    width: auto;
+    height: 2.5rem;
+    // margin-right: 1.25rem;
+  }
+
+  &__container1{
+   
+  }
+
+  &__content {
+    @include regular-style(pxToRem(11), pxToRem(18));
+    margin:0;
+    padding-top:8px;
     @include tablet-breakpoint {
+        @include regular-style(pxToRem(13), pxToRem(20));
     }
-    @include desktop-breakpoint {
-    }
-  }
-
-  &__icon {
-    width: 30px;
-    height: 30px;
-    color:$dark-blue;
-  }
-
-  &__name {
-    // color: $dark-blue;
-    padding-left: 4px;
-  }
-
-  &__btnWrapper{
-    @include tablet-breakpoint {
-        padding-left:16px;
-    }
-    @include desktop-breakpoint {
-    }
-  }
-
-  &__btn {
-    border-radius: 25px;
-    background-color:$dark-blue;
+  
   }
 }

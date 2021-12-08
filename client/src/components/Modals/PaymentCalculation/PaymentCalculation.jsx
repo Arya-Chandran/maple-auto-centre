@@ -59,10 +59,10 @@ function PaymentCalculation({ isOpen, vehicle, onClose, initialValues, handleCal
                 }
                 toggle={onClose}
               >
-                <h2 className="calculate__heading"> Estimate Your Payment</h2>
+                <h2 className="calculate__heading"> Payment Calculation</h2>
               </ModalHeader>
               <ModalBody>
-                <div className="calculate__column">
+                <div className="calculate__wrapper">
                   <div className="calculate__section">
                     <label className="calculate__label" htmlFor="">
                       Down Payment
@@ -73,7 +73,9 @@ function PaymentCalculation({ isOpen, vehicle, onClose, initialValues, handleCal
                       id="downPayment"
                       name="downPayment"
                     />
+                     <div className="calculate__error">
                     <ErrorMessage name="downPayment" />
+                    </div>
                   </div>
                   <div className="calculate__section">
                     <label className="calculate__label" htmlFor="">
@@ -87,6 +89,7 @@ function PaymentCalculation({ isOpen, vehicle, onClose, initialValues, handleCal
                       name="term"
                       placeholder="Select APR"
                     >
+
                       {APR.map((termOption) => {
                         const { term, rate } = termOption;
                         return (

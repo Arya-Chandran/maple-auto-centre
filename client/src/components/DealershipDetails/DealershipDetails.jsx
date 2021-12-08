@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ContactForm from "../ContactForm";
-import './DealershipDetails.scss';
-import { Button} from "reactstrap";
+import "./DealershipDetails.scss";
+import { Button, Tooltip } from "reactstrap";
 import { FcBusinessContact } from "react-icons/fc";
 import { IoMdContacts } from "react-icons/io";
-
+import { HiMail } from "react-icons/hi";
 
 const host = "http://localhost:8080";
 
-function DealershipDetails({vehicle}) {
+function DealershipDetails({ vehicle }) {
   const { dealerId } = vehicle;
   console.log("dealerid", dealerId);
   const [dealership, setDealership] = useState({});
   const [modal, setModal] = useState(false);
+  const [isTooltip, setTooltip] = useState(false);
 
   // Toggle for Modal
   const toggleModal = () => {
     setModal(!modal);
-  }
+  };
 
   useEffect(() => {
     getCurrentDealership(dealerId);
@@ -36,6 +37,8 @@ function DealershipDetails({vehicle}) {
       .catch((error) => console.log(error));
   };
 
+  
+
   return (
     <div className="dealer">
       {Object.keys(dealership).length !== 0 && (
@@ -46,17 +49,32 @@ function DealershipDetails({vehicle}) {
           {/* <p>Contact Information</p> */}
           <p className="dealer__contact">{dealership.dealerPhoneNumber}</p>
           <p className="dealer__contact">{dealership.emailId}</p>
+          <HiMail
+            onClick={toggleModal}
+            id="ContactDealer"
+            className="dealer__icon"
+          />
+          <Tooltip
+            placement="right"
+            isOpen={isTooltip}
+            target="ContactDealer"
+            toggle={() => {
+              setTooltip(!isTooltip);
+            }}
+          >
+            Contact Dealer
+          </Tooltip>
+          {/* <p className="dealer__contact">Contact Dealer</p> */}
         </div>
       )}
-      <IoMdContacts onClick={toggleModal} className="dealer__icon"/>
-      <p>Contact Dealer</p>
+
       {/* <Button onClick={toggleModal}>Contact Dealer</Button> */}
-      <ContactForm 
-          onClose={toggleModal} 
-          vehicle={vehicle}
-          dealerEmail={dealership.emailId}
-          isOpen={modal} 
-        />
+      <ContactForm
+        onClose={toggleModal}
+        vehicle={vehicle}
+        dealerEmail={dealership.emailId}
+        isOpen={modal}
+      />
     </div>
   );
 }

@@ -399,12 +399,13 @@ function EditVehicleDetails(props) {
                 <ErrorMessage name="features" />
               </div>
             </div>
-          </div>
-          <div className="vehicleDetails__btnWrapper">
+            <div className="vehicleDetails__btnWrapper">
             <Button className="vehicleDetails__btn" color="primary">
               Submit
             </Button>
           </div>
+          </div>
+       
         </Form>
       )}
     </Formik>

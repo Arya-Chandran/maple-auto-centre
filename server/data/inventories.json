@@ -1,1 +1,289 @@
-[{"year":"2021","make":"Ford1","model":"Bronco","trim":"Sport","vin":"3FMCR9B69MRA657152","dealerName":"Markville Ford Lincoln2","dealerId":"12345","price":"37694","images":["/images/vehicle.webp"],"features":["Lane Assist","Heated Seats","Blind Spot Monitor","Automatic LED Headlights","2.0L Turbo Engine","Adaptive Cruise Control"],"details":{"engine":"1.5L EcoBoost® Engine with Auto Start-Stop Technology","driveTrain":"Standard 4x4","transmission":"8-Speed Automatic Transmission","interior":"Cactus Grey","exterior":"Ebony"}},{"year":"2021","make":"Ford2","model":"Bronco","trim":"Sport","vin":"3FMCR9B69MRA657153","dealerName":"Markville Ford Lincoln","dealerId":"12345","price":"37694","images":["/images/vehicle.webp"],"features":["Lane Assist","Heated Seats","Blind Spot Monitor","Automatic LED Headlights","2.0L Turbo Engine","Adaptive Cruise Control"],"details":{"engine":"1.5L EcoBoost® Engine with Auto Start-Stop Technology","driveTrain":"Standard 4x4","transmission":"8-Speed Automatic Transmission","interior":"Cactus Grey","exterior":"Ebony"}},{"year":"2021","make":"Ford3","model":"Bronco","trim":"Sport","vin":"3FMCR9B69MRA657152","dealerName":"Markville Ford Lincoln2","dealerId":"12345","price":"37694","images":["/images/vehicle.webp"],"features":["Lane Assist","Heated Seats","Blind Spot Monitor","Automatic LED Headlights","2.0L Turbo Engine","Adaptive Cruise Control"],"details":{"engine":"1.5L EcoBoost® Engine with Auto Start-Stop Technology","driveTrain":"Standard 4x4","transmission":"8-Speed Automatic Transmission","interior":"Cactus Grey","exterior":"Ebony"}},{"year":"2021","make":"Ford4","model":"Bronco","trim":"Sport","vin":"3FMCR9B69MRA657153","dealerName":"Markville Ford Lincoln","dealerId":"12345","price":"37694","images":["/images/vehicle.webp"],"features":["Lane Assist","Heated Seats","Blind Spot Monitor","Automatic LED Headlights","2.0L Turbo Engine","Adaptive Cruise Control"],"details":{"engine":"1.5L EcoBoost® Engine with Auto Start-Stop Technology","driveTrain":"Standard 4x4","transmission":"8-Speed Automatic Transmission","interior":"Cactus Grey","exterior":"Ebony"}},{"year":"2021","make":"Ford5","model":"Bronco","trim":"Sport","vin":"3FMCR9B69MRA6571","dealerName":"Markville Ford Lincoln","dealerId":"12345","price":"37694","images":["/images/vehicle.webp"],"features":["Lane Assist","Heated Seats","Blind Spot Monitor","Automatic LED Headlights","2.0L Turbo Engine","Adaptive Cruise Control"],"details":{"engine":"1.5L EcoBoost® Engine with Auto Start-Stop Technology","driveTrain":"Standard 4x4","transmission":"8-Speed Automatic Transmission","interior":"Cactus Grey","exterior":"Ebony"}},{"year":"2021","make":"Ford","model":"Bronco","trim":"Sport","vin":"3FMCR9B69MRA657152","dealerName":"Markville Ford Lincoln2","dealerId":"12345","price":"37694","images":["/images/vehicle.webp"],"features":["Lane Assist","Heated Seats","Blind Spot Monitor","Automatic LED Headlights","2.0L Turbo Engine","Adaptive Cruise Control"],"details":{"engine":"1.5L EcoBoost® Engine with Auto Start-Stop Technology","driveTrain":"Standard 4x4","transmission":"8-Speed Automatic Transmission","interior":"Cactus Grey","exterior":"Ebony"}},{"id":"92df5a1d-414b-4850-b7a5-a2261c0a70f9","year":"2011","make":"qqaabbccddee","model":"aapp","trim":"ff","vin":"11","dealerId":"12345","dealerName":"Markville Ford Lincoln2","price":"12345","images":["/images/BM7LS2BG2NEH7DWHCHD32IZAGA.jpg"],"features":["aaa"],"details":{"engine":"qq","driveTrain":"qq","transmission":"qq","interior":"cc","exterior":"cc"}},{"id":"6a628d07-9abe-492f-9c34-ec1bcfa9bd19","year":"201","make":"qq","model":"dddddddddd","trim":"www","vin":"www","dealerId":"12345","dealerName":"Markville Ford Lincoln2","price":"1122","images":["/images/bronco.jfif"],"features":["aaa"],"details":{"engine":"ww","driveTrain":"cc","transmission":"aa","interior":"qqs","exterior":"rr"}}]
+[
+  {
+    "year": "2022",
+    "make": "Hyundai",
+    "model": "Sonata",
+    "trim": "1.6T Luxury",
+    "vin": "5NKEL4J21N3H13749",
+    "dealerName": "Rexway Hyundai",
+    "dealerId": "3925y243-16cd-4z45-ab34",
+    "price": 37974,
+    "images": ["/images/image1.png"],
+    "features": [
+      "Gas-Pressurized Shock Absorbers",
+      "Steel Spare Wheel",
+      "Digital Signal Processor",
+      "Collision Mitigation-Front",
+      "Cruise Control-Steering Assist",
+      "Aerial View Camera System"
+    ],
+    "details": {
+      "engine": "4 Cylinder Engine",
+      "driveTrain": "FWD",
+      "transmission": "8 Speed Automatic",
+      "interior": "Black",
+      "exterior": "Red"
+    }
+  },
+  {
+    "year": "2021",
+    "make": "Ford",
+    "model": "Escape",
+    "trim": "SE",
+    "vin": "1FMC9G62MUB133451",
+    "dealerName": "Parkview Ford Lincoln",
+    "dealerId": "3922k243-17cd-4z45-al92",
+    "price": 31594,
+    "images": ["/images/image2.jpg"],
+    "features": [
+      "Reverse Camera System",
+      "Lane Keeping System",
+      "Fordpass Connect",
+      "Exhaust, Dual Tips",
+      "Seats, Heated Front",
+      "Advancetrac W/ Roll Stability Control"
+    ],
+    "details": {
+      "engine": "1.5L EcoBoost® Engine with Auto Start-Stop Technology",
+      "driveTrain": "All-Wheel Drive",
+      "transmission": "8-Speed SelectShift® Automatic Transmission",
+      "interior": "Unique Cloth - Dark Earth Grey",
+      "exterior": "Carbonized Grey"
+    }
+  },
+  {
+    "year": "2022",
+    "make": "Honda",
+    "model": "Civic",
+    "trim": "LX 4dr Sedan",
+    "vin": "2HGFE2F28NH1108919",
+    "dealerName": " Westgate Honda",
+    "dealerId": "3992h243-18cd-4z45-ah96",
+    "price": 26596,
+    "images": ["/images/image3.webp"],
+    "features": [
+      "Adaptive cruise control",
+      "Daytime running lights",
+      "Blind Spot Sensor",
+      "Lane Departure Warning",
+      "Tachometer",
+      "Door reinforcement"
+    ],
+    "details": {
+      "engine": "2.0L 4cyl",
+      "driveTrain": "Front Wheel Drive",
+      "transmission": "Automatic",
+      "interior": "Black",
+      "exterior": "White"
+    }
+  },
+  {
+    "year": "2021",
+    "make": "Ford",
+    "model": "Bronco",
+    "trim": "Sport",
+    "vin": "3FMCKR9B69MRA6571",
+    "dealerName": " Donvalley Ford",
+    "dealerId": "3992r243-18cd-4t45-ah98",
+    "price": "37694",
+    "images": ["/images/image4.jpg"],
+    "features": [
+      "Lane Assist",
+      "Heated Seats",
+      "Blind Spot Monitor",
+      "Automatic LED Headlights",
+      "2.0L Turbo Engine",
+      "Adaptive Cruise Control"
+    ],
+    "details": {
+      "engine": "1.5L EcoBoost® Engine with Auto Start-Stop Technology",
+      "driveTrain": "Standard 4x4",
+      "transmission": "8-Speed Automatic Transmission",
+      "interior": "Cactus Grey",
+      "exterior": "Ebony"
+    }
+  },
+  {
+    "year": "2022",
+    "make": "Honda",
+    "model": "CR-V",
+    "trim": "Sport 4DR AWD",
+    "vin": "2HKRW2H47NH2804409",
+    "dealerName": "Southlake Honda",
+    "dealerId": "3922h243-16cd-4z45-ab97",
+    "price": 39771,
+    "images": ["/images/image5.jpg"],
+    "features": [
+      "Heated steering wheel",
+      "Anti-theft alarm system",
+      "Audio security system",
+      "Remote sunroof/convertible roof operation",
+      "Traction control",
+      "Adaptive Cruise Control"
+    ],
+    "details": {
+      "engine": "1.5L 4cyl",
+      "driveTrain": "All Wheel Drive",
+      "transmission": "Automatic",
+      "interior": "Black",
+      "exterior": "Red"
+    }
+  },
+  {
+    "year": "2022",
+    "make": "Hyundai",
+    "model": "Sonata",
+    "trim": "1.6T Luxury",
+    "vin": "5NPEL4J28NH123578",
+    "dealerName": " Autopark Hyundai",
+    "dealerId": "3992r243-ac45-4t45-ah91",
+    "price": 37974,
+    "images": ["/images/image6.jpeg"],
+    "features": [
+      "Cruise Control-Steering Assist",
+      "Blind-Spot Collision-Avoidance Assist (BCA) Blind Spot",
+      "Rear Child Safety Locks",
+      "Gas-Pressurized Shock Absorbers",
+      "Window Grid Antenna",
+      "Perimeter Alarm"
+    ],
+    "details": {
+      "engine": "4 Cylinder Engine",
+      "driveTrain": "FWD",
+      "transmission": "8 Speed Automatic",
+      "interior": "Black",
+      "exterior": "Black"
+    }
+  },
+  {
+    "year": "2021",
+    "make": "Ford",
+    "model": "Escape",
+    "trim": "SE",
+    "vin": "1FMCU0G65MUA61754",
+    "dealerName": " Donvalley Ford",
+    "dealerId": "3992r243-18cd-4t45-ah98",
+    "price": 29049,
+    "images": ["/images/image7.jpg"],
+    "features": [
+      "Tire Pressure Monitor Sys",
+      "Safety Canopy",
+      "Engine Block Heater",
+      "Lane Keeping System",
+      "Selectable Drive Modes",
+      "Privacy Glass, Rear"
+    ],
+    "details": {
+      "engine": "1.5L EcoBoost® Engine with Auto Start-Stop Technology",
+      "driveTrain": "Front-Wheel Drive",
+      "transmission": "8-Speed SelectShift® Automatic Transmission",
+      "interior": "Unique Cloth - Dark Earth Grey",
+      "exterior": "Carbonized Grey"
+    }
+  },
+
+  {
+    "year": "2022",
+    "make": "Honda",
+    "model": "Civic",
+    "trim": "EX 4dr Sedan",
+    "vin": "2HGFE8F38NH110490",
+    "dealerName": "Southlake Honda",
+    "dealerId": "3922h243-16cd-4z45-ab97",
+    "price": 28896,
+    "images": ["/images/image8.jpg"],
+    "features": [
+      "Retained accessory power",
+      "Lane Departure Warning",
+      "Front wipers - speed sensitive",
+      "Tire Pressure Monitoring System",
+      "smart device integration",
+      "Adaptive cruise control"
+    ],
+    "details": {
+      "engine": "2.0L 4cyl",
+      "driveTrain": "Front Wheel Drive",
+      "transmission": "Automatic",
+      "interior": "Black",
+      "exterior": "Black"
+    }
+  },
+  {
+    "year": "2022",
+    "make": "Honda",
+    "model": "Civic",
+    "trim": "LX 4dr Sedan",
+    "vin": "2HGFE2F22NH800732",
+    "dealerName": " Westgate Honda",
+    "dealerId": "3992h243-18cd-4z45-ah96",
+    "price": 26596,
+    "images": ["/images/image9.jfif"],
+    "features": [
+      "Center console trim",
+      "Four-wheel antilock brakes",
+      "FStability control",
+      "Cruise controls",
+      "Lane Departure Warning",
+      "Blind Spot Sensor"
+    ],
+    "details": {
+      "engine": "2.0L 4cyl",
+      "driveTrain": "Front Wheel Drive",
+      "transmission": "Automatic",
+      "interior": "Black",
+      "exterior": "White"
+    }
+  },
+  {
+    "year": "2022",
+    "make": "Honda",
+    "model": "Civic",
+    "trim": "Sport",
+    "vin": "19XFL1H8XNE400678",
+    "dealerName": " Westgate Honda",
+    "dealerId": "3992h243-18cd-4z45-ah96",
+    "price": 37131,
+    "images": ["/images/image10.jfif"],
+    "features": [
+      "Adaptive cruise control",
+      "Climate controlled",
+      "engine immobilizer",
+      "Blind Spot Sensor",
+      "Lane Departure Warning",
+      "Front wipers - speed sensitive"
+    ],
+    "details": {
+      "engine": "1.5L 4cyl",
+      "driveTrain": "Front Wheel Drive",
+      "transmission": "Automatic",
+      "interior": "Black",
+      "exterior": "Black"
+    }
+  },
+  {
+    "year": "2021",
+    "make": "Ford",
+    "model": "Escape",
+    "trim": "SEL Hybrid",
+    "vin": "1FMCU9CZ1YUB36342",
+    "dealerName": "Parkview Ford",
+    "dealerId": "3922k243-17cd-4z45-al92",
+    "price": 38044,
+    "images": ["/images/image11.png"],
+    "features": [
+      "Ford Co-Pilot360 Assist™",
+      "Illuminated Entry",
+      "Active Grille Shutters",
+      "Intelligent Access",
+      "Reverse Camera System",
+      "SOS Post Crash Alert System"
+    ],
+    "details": {
+      "engine": "2.5L iVCT Atkinson-cycle I-4 Hybrid Engine",
+      "driveTrain": "All-Wheel Drive",
+      "transmission": "eCVT Automatic Transmission",
+      "interior": "ActiveX - Ebony",
+      "exterior": "Agate Black"
+    }
+  }
+]

@@ -11,6 +11,7 @@ import ContactForm from "./components/ContactForm";
 import Register from "./components/Modals/Register";
 import Login from "./components/Login";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const PrivateRoute = (props) => {
   return props.isLoggedIn ? <Route {...props} /> : <Redirect to="/login" />;
@@ -108,13 +109,25 @@ class App extends React.Component {
                   isLoggedIn={this.state.isLoggedIn}
                   path="/"
                   exact
-                  component={InventoryPage}
+                  // component={InventoryPage}
+                  render={(props) => (
+                    <InventoryPage
+                      {...props}
+                      profileData={this.state.profileData}
+                    />
+                  )}
                 />
                 <PrivateRoute
                   isLoggedIn={this.state.isLoggedIn}
                   path="/inventory"
                   exact
-                  component={InventoryPage}
+                  // component={InventoryPage}
+                  render={(props) => (
+                    <InventoryPage
+                      {...props}
+                      profileData={this.state.profileData}
+                    />
+                  )}
                 />
                 <PrivateRoute
                   isLoggedIn={this.state.isLoggedIn}
@@ -139,6 +152,9 @@ class App extends React.Component {
                   component={ContactForm}
                 />
               </Switch>
+              {isLoggedIn && (
+                <Footer/>
+              )}
             </BrowserRouter>
           </>
         )}

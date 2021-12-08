@@ -20,7 +20,7 @@ app.use(fileUpload());
 const adminDataFile = path.join(__dirname, "./data/admin.json");
 const adminData = fs.readFileSync(adminDataFile);
 const users = JSON.parse(adminData);
-const adminUsers = ["admin"];
+const adminUsers = ["admin@gmail.com"];
 
 const authorize = (req, res, next) => {
   if (!req.headers.authorization) {
@@ -124,13 +124,19 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/profile", authorize, (req, res) => {
+  const { username } = req.payload;
+  const isAdmin = adminUsers.includes(username);
   res.json({
     tokenInfo: req.payload,
-    sensitiveInformation: {
-      secret: "secret message",
-    },
+    isAdmin
   });
 });
+
+// app.get("/isAdmin", authorize, (req, res) => {
+//   const { username } = req.body;
+//   const isAdmin = adminUsers.includes(username);
+//   return res.status(200).json({ isAdmin });
+// });
 
 app.listen(PORT, function () {
   console.log(`Listening on http://localhost:${PORT}`);

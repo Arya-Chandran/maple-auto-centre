@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Features from "../Features";
 import Details from "../Details";
+import { Button, Tooltip } from "reactstrap";
 import { Link } from "react-router-dom";
 import DealershipDetails from "../DealershipDetails";
 import "./VehicleDetails.scss";
 import PaymentCalculation from "../Modals/PaymentCalculation";
 import PricingSummary from "../PricingSummary";
 import { BsFillCalculatorFill } from "react-icons/bs";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const host = "http://localhost:8080";
 const APR = [
@@ -44,6 +46,9 @@ function VehicleDetails(props) {
   const [modal, setModal] = useState(false);
   const [showPayment, setShow] = useState(false);
   const [payment, setPayment] = useState(null);
+  const [isTooltip, setTooltip] = useState(false);
+  
+
 
   // Toggle for Modal
   const toggleModal = () => setModal(!modal);
@@ -86,6 +91,11 @@ function VehicleDetails(props) {
     }
   };
 
+  const goback = (e) => {
+    e.preventDefault();
+    props.history.goBack();
+  };
+
   const handleCalculation = (values, price) => {
     const { downPayment, term, frequency } = values;
     console.log(values, price);
@@ -95,6 +105,7 @@ function VehicleDetails(props) {
     const principal = parseFloat(amount);
     const interest = parseFloat(rate) / 100 / 12;
     const numPayments = getPaymentCount(Number(term), frequency);
+
     // compute the monthly payment figure
     const x = Math.pow(1 + interest, numPayments); //Math.pow computes powers
     const payment = (principal * x * interest) / (x - 1);
@@ -120,8 +131,13 @@ function VehicleDetails(props) {
     <div className="details">
       {Object.keys(vehicle).length !== 0 && (
         <div className="details__wrapper">
-          <div></div>
+          
+          <div className="details__arrowWrapper">
+          <IoMdArrowRoundBack className="details__arrow" onClick={(e) => goback(e)}/>
+          <p  className="details__arrowContent">Back to previous page</p>
+          </div>
           <div className="details__main">
+            
             <p className="details__year">{vehicle.year}</p>
             <div className="details__row">
               <p className="details__make">{vehicle.make}</p>
@@ -130,7 +146,8 @@ function VehicleDetails(props) {
             <p className="details__trim">{vehicle.trim}</p>
             {/* <p className="details__vin">VIN {vehicle.vin}</p> */}
           </div>
-          <p className="details__vin">VIN {vehicle.vin}</p>
+          <p className="details__vin"> <span className="details__vin--highlight">
+          VIN: </span> {vehicle.vin}</p>
           <div className="details__topSection">
             <div className="details__imageWrapper">
               <img
@@ -140,9 +157,20 @@ function VehicleDetails(props) {
               />
             </div>
             <div className="details__pricingWrapper">
-              <p className="details__title">Adjusted price</p>
+              <p className="details__title">Selling price</p>
               <p className="details__price">${vehicle.price}</p>
-              <BsFillCalculatorFill onClick={() => openModal(vehicle)} />
+              <BsFillCalculatorFill id="paymentCalculation" onClick={() => openModal(vehicle)} />
+              <Tooltip
+            placement="right"
+            isOpen={isTooltip}
+            target="paymentCalculation"
+            toggle={() => {
+              setTooltip(!isTooltip);
+            }}
+          >
+            Payment Calculation
+          </Tooltip>
+
               {showPayment && (
                 <PricingSummary payment={payment} />
               )}
