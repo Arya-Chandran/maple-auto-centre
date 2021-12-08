@@ -14,17 +14,29 @@ function Footer(props) {
 
             <div className="footer__imageWrapper">
               <div>
-                <img
-                  className="footer__image"
-                  src={instagram}
-                  alt="instagram"
-                />
+                <a href="https://www.instagram.com">
+                  <img
+                    className="footer__image"
+                    src={instagram}
+                    alt="instagram"
+                  />
+                </a>
               </div>
+
               <div>
-                <img className="footer__image" src={facebook} alt="facebook" />
+                <a href="https://www.facebook.com">
+                  <img
+                    className="footer__image"
+                    src={facebook}
+                    alt="facebook"
+                  />
+                </a>
               </div>
+
               <div>
-                <img className="footer__image" src={twitter} alt="twitter" />
+                <a href="https://www.twitter.com">
+                  <img className="footer__image" src={twitter} alt="twitter" />
+                </a>
               </div>
             </div>
           </div>

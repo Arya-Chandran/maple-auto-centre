@@ -8,7 +8,6 @@ import { MdDelete } from "react-icons/md";
 import "./InventoryList.scss";
 import DeleteModal from "../Modals/DeleteModal/DeleteModal";
 
-
 const host = "http://localhost:8080";
 
 function InventoryList(props) {
@@ -106,11 +105,13 @@ function InventoryList(props) {
         {inventory &&
           inventory.map((vehicle) => (
             <div className="vehicleCard__wrapper" key={vehicle.vin}>
+              <Link to={`/vehicle/${vehicle.vin}`}>
               <img
                 className="vehicleCard__image"
                 src={`${host}/${vehicle.images}`}
                 alt="Images"
               />
+              </Link>
               <div className="vehicleCard__main">
                 <div className="vehicleCard__row">
                   <p className="vehicleCard__year">{vehicle.year}</p>
@@ -135,36 +136,16 @@ function InventoryList(props) {
                     <Link to={`/vehicle/edit/${vehicle.vin}`}>
                       <BiEditAlt
                         id="edit"
-                        className="vehicleCard__icons"
+                        className="vehicleCard__icon1"
                         {...props}
                       />
-                      {/* <Tooltip
-            placement="right"
-            isOpen={editTooltip}
-            target="edit"
-            toggle={() => {
-              setEditTooltip(!editTooltip);
-            }}
-          >
-            Edit vehicle
-          </Tooltip> */}
                     </Link>
 
                     <MdDelete
                       id="delete"
-                      className="vehicleCard__icons"
+                      className="vehicleCard__icon2"
                       onClick={() => openModal(vehicle)}
                     />
-                    {/* <Tooltip
-            placement="right"
-            isOpen={deleteTooltip}
-            target="delete"
-            toggle={() => {
-              setDeleteTooltip(!deleteTooltip);
-            }}
-          >
-            Remove vehicle
-          </Tooltip> */}
                   </div>
                 )}
               </div>

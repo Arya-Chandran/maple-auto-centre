@@ -65,7 +65,6 @@ class App extends React.Component {
     this.setState({ isLoggedIn: flag });
     sessionStorage.setItem("isLoggedIn", flag);
     console.log("Login status:", this.state.isLoggedIn);
-    // this.props.history.push("/inventory");
   };
 
   render() {
@@ -109,7 +108,6 @@ class App extends React.Component {
                   isLoggedIn={this.state.isLoggedIn}
                   path="/"
                   exact
-                  // component={InventoryPage}
                   render={(props) => (
                     <InventoryPage
                       {...props}
@@ -121,7 +119,6 @@ class App extends React.Component {
                   isLoggedIn={this.state.isLoggedIn}
                   path="/inventory"
                   exact
-                  // component={InventoryPage}
                   render={(props) => (
                     <InventoryPage
                       {...props}
@@ -152,9 +149,7 @@ class App extends React.Component {
                   component={ContactForm}
                 />
               </Switch>
-              {isLoggedIn && (
-                <Footer/>
-              )}
+              {isLoggedIn && <Footer />}
             </BrowserRouter>
           </>
         )}

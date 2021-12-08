@@ -179,6 +179,7 @@ router.put("/:vin", (req, res) => {
       imageFile = req.files.images;
       imageName = imageFile.name;
     }
+    activeVehicle.year = year;
     activeVehicle.vin = Vin;
     activeVehicle.make = make;
     activeVehicle.model = model;

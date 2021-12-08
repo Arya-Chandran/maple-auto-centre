@@ -57,6 +57,9 @@
       width: pxToRem(40);
       height: pxToRem(40);
     }
+    &:hover {
+      color: $light-blue;
+     }
   }
 }
 
@@ -101,16 +104,17 @@
   }
 
   &__image {
+   
     width: 100%;
-    height: pxToRem(150);
-    object-fit: cover;
+    height: pxToRem(180);
+    object-fit: fit;
 
     @include tablet-breakpoint {
-      height: pxToRem(200);
+      height: pxToRem(220);
     }
 
     @include desktop-breakpoint {
-      height: pxToRem(150);
+      height: pxToRem(250);
     }
   }
 
@@ -220,14 +224,36 @@
     justify-content: space-between;
   }
 
-  &__icons {
+  &__icon1 {
     color: $dark-blue;
     width: pxToRem(30);
     height: pxToRem(30);
+    cursor: pointer;
 
     @include tablet-breakpoint {
       width: pxToRem(35);
       height: pxToRem(35);
+    }
+    &:hover {
+      color: $light-blue;
+     }
+  }
+
+  &__icon2 {
+    color: $dark-blue;
+    width: pxToRem(30);
+    height: pxToRem(30);
+    cursor: pointer;
+
+
+
+    @include tablet-breakpoint {
+      width: pxToRem(35);
+      height: pxToRem(35);
+    }
+
+    &:hover {
+     color: $red;
     }
   }
 }

@@ -70,8 +70,9 @@ function Login(props) {
         <div className="login__leftContainer">
           <img className="login__image" src={logo} alt="logo" />
           <h1 className="login__heading">
-            <span className="login__heading--light"> Welcome to </span>{" "}
-            Maple-Auto Centre
+            <span className="login__heading--light"> Welcome to </span>
+            <br/>
+            <span>Maple-Auto Centre</span>
           </h1>
         </div>
         <div className="login__rightContainer">

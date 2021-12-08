@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# Capstone Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project Title: Maple-Auto Centre
 
-## Available Scripts
+## Project Description
+Maple-Auto Centre is a car dealership website with inventory management. 
 
-In the project directory, you can run:
+Here customers can register and login into the website. Once logged in, they  can view a list of available cars as well as full vehicle information in different dealerships. Customers can also estimate the payment based on downpayment, annual percentage rate and frequency. Based on the user inputs, the website shows a detailed pricing summary. Apart from that, customers can fill out a form to contact the dealer through the dealer email.
 
-### `npm start`
+Additionally, there is an admin account that maintains inventory. The admin can add, edit and delete vehicle from the inventory list.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Functionality
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Register
+
+- Creating a new user.
+- Check for existing customer 
+- Validation to all fields in the register form. Check email format, confirm password. 
+
+
+2. Login
+
+- Registered user can login.
+- Login authentication based on JWT token.
+- Admin has special privileges for the CRUD operations (restricted route).
+      Admin username: admin@gmail.com
+      Password: admin1234
+
+3. Main Page 
+
+- The main page is inventory list.
+- Header component showing logo, company name, user profile name and an option to logout.
+- Mention total number of inventories available.
+- Footer component contains links( to follow on facebook, instagram and twitter)
+
+4. Vehicle Details Page
+
+- Payment calculation and provides a pricing summary based on given inputs.
+- Customer can contact dealer via email.
+
+5. Admin
+- Once logged in as admin, the admin can add, update and delete inventory details.
+
+
+
+### Instructions to run project locally
+
+1. Ensure you `cd` into both the client and server folders and run an npm install to get the appropriate node modules.
+2. On the client side, run `npm start` in the Terminal.
+3. On the server side, run node `npm start` in the Terminal.
+4. Visit the usual `localhost` URL at port `3000` to browse the website(`http://localhost:3000`).
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `build` folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Libraries Used
+Client: 
+1. Formik & Yup - Validation for all forms are done through formik and yup.
+2. Reactstrap 
+     - Used button and model component to create all buttons and model windows.
+     - Used input component to upload an image.
+     - Used tooltip component to display informative text when users hover over.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. React-icons- Used edit, delete and add icon from this library.
+4. Axios - Handle API calls
 
-### `npm run eject`
+Server:
+1. Nodemailer - Used to send an email
+2. JWT - To handle user authentication
+3. express-fileupload - Used to store vehicle images.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Tech used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Front-end: React.js and React hooks
+Back-end: Node.js
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### Additional Comments
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-  Website is responsive for different devices at all required breakpoints.

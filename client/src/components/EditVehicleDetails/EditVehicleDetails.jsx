@@ -55,7 +55,7 @@ const onSubmit = (history, dealerList, values) => {
 };
 
 const validationSchema = Yup.object({
-  year: Yup.date().required("Required"),
+  year: Yup.number().required("Required"),
   make: Yup.string().required("Required"),
   model: Yup.string().required("Required"),
   trim: Yup.string().required("Required"),

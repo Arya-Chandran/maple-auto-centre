@@ -10,5 +10,11 @@
     "name": "Admin",
     "password": "admin1234",
     "confirmPassword": "admin1234"
+  },
+  {
+    "username": "derick@gmail.com",
+    "name": "Derick",
+    "password": "derick1234",
+    "confirmPassword": "derick1234"
   }
 ]
