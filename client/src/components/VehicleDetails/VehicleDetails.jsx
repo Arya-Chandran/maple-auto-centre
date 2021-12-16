@@ -101,7 +101,8 @@ function VehicleDetails(props) {
 
     // compute the monthly payment figure
     const x = Math.pow(1 + interest, numPayments); //Math.pow computes powers
-    const payment = (principal * x * interest) / (x - 1);
+    const paymentAmount = (principal * x * interest) / (x - 1);
+    const payment=paymentAmount.toFixed(2);
 
     setShow(true);
     setPayment({

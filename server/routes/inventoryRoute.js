@@ -1,41 +1,41 @@
 const express = require("express");
 const router = express.Router();
-const fs = require("fs");
-const path = require("path");
-const { v4: uuidv4 } = require("uuid");
+const Inventory = require("../models/inventories");
 
-// read and parse inventory data file
-const inventoryDataFile = path.join(__dirname, "../data/inventories.json");
-const inventoryData = fs.readFileSync(inventoryDataFile);
-const parseInventoryData = JSON.parse(inventoryData);
 const uploadPath = "./public/images/";
-
-//function to read the inventory data
-const getInventory = () => {
-  return JSON.parse(fs.readFileSync("./data/inventories.json", "UTF-8"));
-};
 
 // return an array of inventory objects
 router.get("/", (req, res) => {
-  res.json(getInventory());
+  Inventory.find()
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch(() => {
+      res.status(500).send("Failed to fetch the inventory data.");
+    });
 });
 
 // return the vehicle details by vin number
 router.get("/:vin", (req, res) => {
   const requestedVIN = req.params.vin;
-  const foundvehicle = parseInventoryData.find((vehicle) => {
-    if (vehicle.vin === requestedVIN) {
-      return vehicle.vin;
-    }
-  });
-  res.json(foundvehicle);
+  Inventory.findOne({ vin: requestedVIN })
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch(() => {
+      res
+        .status(500)
+        .send(`Vehicle with VIN: ${requestedVIN} doesn't exist in database`);
+    });
 });
 
 /* return an array of options for dropdown */
-router.get("/dropdown/:property", (req, res) => {
+router.get("/dropdown/:property", async (req, res) => {
   const { property } = req.params;
 
-  const propertyOptions = parseInventoryData
+  const inventoryData = await Inventory.find();
+
+  const propertyOptions = inventoryData
     .map((vehicle) => {
       if (property === "dealership") {
         const { dealerId, dealerName } = vehicle;
@@ -82,7 +82,6 @@ router.post("/", (req, res) => {
   const imageFile = req.files.images;
   const imageName = imageFile.name;
   const newVehicle = {
-    id: uuidv4(),
     year,
     make,
     model,
@@ -102,15 +101,10 @@ router.post("/", (req, res) => {
     },
   };
 
-  parseInventoryData.push(newVehicle);
-
-  fs.writeFile(
-    inventoryDataFile,
-    JSON.stringify(parseInventoryData),
-    (error) => {
-      if (error) {
-        res.status(500).send("New inventory failed to add!");
-      }
+  const newInventory = new Inventory(newVehicle);
+  newInventory
+    .save()
+    .then(() => {
       imageFile.mv(uploadPath + imageFile.name, function (err) {
         if (err) {
           res.status(500).send("Image upload failed");
@@ -118,12 +112,14 @@ router.post("/", (req, res) => {
           res.status(201).send("File uploaded");
         }
       });
-    }
-  );
+    })
+    .catch(() => {
+      res.status(500).send("New inventory failed to add!");
+    });
 });
 
 // edit vehicle details
-router.put("/:vin", (req, res) => {
+router.put("/:vin", async (req, res) => {
   let imageFile;
   let imageName;
   const { vin } = req.params;
@@ -164,89 +160,73 @@ router.put("/:vin", (req, res) => {
     res.status(404).send("Error: Invalid vehicle data!");
   }
 
-  const activeVehicle = parseInventoryData.find(
-    (vehicle) => vehicle.vin === vin
-  );
+  try {
+    const activeVehicle = await Inventory.findOne({ vin: vin });
 
-  if (!activeVehicle) {
-    res
-      .status(404)
-      .send(`Error: Vehicle with vin number:${vin} doesn't exist in database!`);
-  }
+    if (!activeVehicle) {
+      res
+        .status(404)
+        .send(
+          `Error: Vehicle with vin number:${vin} doesn't exist in database!`
+        );
+    }
 
-  if (activeVehicle) {
     if (req.files && Object.keys(req.files).length !== 0) {
       imageFile = req.files.images;
       imageName = imageFile.name;
     }
-    activeVehicle.year = year;
-    activeVehicle.vin = Vin;
-    activeVehicle.make = make;
-    activeVehicle.model = model;
-    activeVehicle.trim = trim;
-    activeVehicle.dealerName = dealerName;
-    activeVehicle.dealerId = dealerId;
-    activeVehicle.price = price;
+
+    let updatedVehicle = {
+      year: year,
+      vin: Vin,
+      make: make,
+      model: model,
+      trim: trim,
+      dealerName: dealerName,
+      dealerId: dealerId,
+      price: price,
+      features: JSON.parse(features),
+      details: {
+        engine: engine,
+        driveTrain: driveTrain,
+        transmission: transmission,
+        interior: interior,
+        exterior: exterior,
+      },
+    };
+
     if (imageFile && imageName) {
-      activeVehicle.images = [`/images/${imageName}`];
+      updatedVehicle = { ...updatedVehicle, images: [`/images/${imageName}`] };
     }
-    activeVehicle.features = JSON.parse(features);
-    activeVehicle.details.engine = engine;
-    activeVehicle.details.driveTrain = driveTrain;
-    activeVehicle.details.transmission = transmission;
-    activeVehicle.details.interior = interior;
-    activeVehicle.details.exterior = exterior;
+
+    await Inventory.updateOne(
+      {
+        vin: vin,
+      },
+      updatedVehicle,
+      { upsert: true }
+    );
+
+    if (imageFile) {
+      await imageFile.mv(uploadPath + imageFile.name);
+    }
+    res.status(201).send("Vehicle data updated successfully");
+  } catch (error) {
+    console.log(error);
+    res.status(404).send("Error: data updation failed!");
   }
-
-  const updatedactiveVehicle = parseInventoryData.map((vehicle) => {
-    if (vehicle.vin === vin) {
-      vehicle = activeVehicle;
-    }
-    return vehicle;
-  });
-
-  fs.writeFile(
-    inventoryDataFile,
-    JSON.stringify(updatedactiveVehicle),
-    (error) => {
-      if (error) {
-        res.status(404).send("Error: data updation failed!");
-        return;
-      }
-      if (imageFile) {
-        imageFile.mv(uploadPath + imageFile.name, function (err) {
-          if (err) {
-            res.status(500).send("Image upload failed");
-          } else {
-            res.status(201).send("Vehicle data updated successfully");
-          }
-        });
-      } else {
-        res.status(200).send({
-          message: "Vehicle data updated successfully",
-          updatedData: activeVehicle,
-        });
-      }
-    }
-  );
 });
 
 //delete vehicle details
-router.delete("/:vin", (req, res) => {
+router.delete("/:vin", async (req, res) => {
   const requestedVIN = req.params.vin;
-  const foundvehicle = parseInventoryData.findIndex((vehicle) => {
-    if (vehicle.vin === requestedVIN) {
-      return vehicle.vin;
-    }
-  });
-
-  parseInventoryData.splice(foundvehicle, 1);
-  fs.writeFile(inventoryDataFile, JSON.stringify(parseInventoryData), (err) => {
-    if (err) {
-      console.log(err);
-    }
-  });
-  res.json(parseInventoryData);
+  await Inventory.deleteOne({ vin: requestedVIN })
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch(() => {
+      res.status(400).send(`Deletion Failed!`);
+    });
 });
 
 module.exports = router;

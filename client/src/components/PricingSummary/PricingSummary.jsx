@@ -31,7 +31,7 @@ function PricingSummary({ payment }) {
         </div>
         <div className="pricing__row">
           <p className="pricing__title">Term</p>
-          <p className="pricing__content">{term}</p>
+          <p className="pricing__content">{term} months</p>
         </div>
       </div>
       <div className="pricing__row">

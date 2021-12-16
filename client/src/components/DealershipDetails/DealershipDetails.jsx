@@ -63,6 +63,7 @@ function DealershipDetails({ vehicle }) {
         onClose={toggleModal}
         vehicle={vehicle}
         dealerEmail={dealership.emailId}
+        dealerName={dealership.dealerName}
         isOpen={modal}
       />
     </div>

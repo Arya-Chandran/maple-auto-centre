@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { Button, Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
 import "./ContactForm.scss";
+import emailjs from "emailjs-com";
 
 const host = "http://localhost:8080";
 
@@ -16,6 +17,13 @@ const initialValues = {
   email: "",
 };
 
+const emailConfig = {
+  SERVICE_ID: "service_ynz1m9f",
+  TEMPLATE_ID: "template_kugkbit",
+  USER_ID: "user_MMkM1hwqdLgOeapxHuo7P",
+  URL: "https://api.emailjs.com/api/v1.0/email/send",
+};
+
 const validationSchema = Yup.object({
   firstName: Yup.string().required("Required"),
   lastName: Yup.string().required("Required"),
@@ -25,10 +33,19 @@ const validationSchema = Yup.object({
   email: Yup.string().required("Required").email("Email is invalid"),
 });
 
-function ContactForm({ isOpen, vehicle, onClose, dealerEmail }) {
+function ContactForm({ isOpen, vehicle, onClose, dealerEmail, dealerName }) {
   const handleContactDealer = (vehicle, values, resetForm) => {
+    const {} = vehicle;
+    const {
+      year,
+      make,
+      model,
+      trim,
+      vin
+    } = vehicle;
     const { firstName, lastName, address, postalCode, phoneNumber, email } =
       values;
+    const { SERVICE_ID, TEMPLATE_ID, USER_ID, URL } = emailConfig;
 
     const contactData = {
       vehicle,
@@ -43,17 +60,37 @@ function ContactForm({ isOpen, vehicle, onClose, dealerEmail }) {
       },
     };
 
+    var data = {
+      service_id: SERVICE_ID,
+      template_id: TEMPLATE_ID,
+      user_id: USER_ID,
+      template_params: {
+        dealerEmail: "savinps@gmail.com",
+        dealerName,
+        firstName,
+        lastName,
+        address,
+        postalCode,
+        phoneNumber,
+        email,
+        year,
+        make,
+        model,
+        trim,
+        vin
+      },
+    };
+
     axios
-      .post(`${host}/contactdealer`, contactData)
-      .then((response) => {
-        resetForm();
-        onClose();
-        alert("Thank you! Email sent to the dealer");
+      .post(URL, data)
+      .then(() => {
+        alert("Your mail is sent!");
       })
       .catch((error) => {
-        onClose();
-        alert("Failed to contact dealer. Please try again!");
+        alert("Oops... " + JSON.stringify(error));
       });
+
+      resetForm();  
   };
 
   return (
@@ -63,6 +100,7 @@ function ContactForm({ isOpen, vehicle, onClose, dealerEmail }) {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
+            console.log("Calling submit");
             handleContactDealer(vehicle, values, resetForm);
           }}
         >

@@ -59,7 +59,7 @@ function InventoryList(props) {
 
   const deleteInventory = (vin) => {
     axios
-      .delete(`${host}/inventory/:vin`)
+      .delete(`${host}/inventory/${vin}`)
       .then((response) => {
         setDelete({});
         toggleModal();

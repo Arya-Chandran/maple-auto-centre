@@ -6,20 +6,27 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const dealershipRoute = require("./routes/dealershipRoute");
 const inventoryRoute = require("./routes/inventoryRoute");
-const contactDealerRoute = require("./routes/contactDealerRoute");
-const path = require("path");
-const fs = require("fs");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+const User = require("./models/users");
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 app.use(fileUpload());
 
+// DB Connection
+
+const mongoUsername= process.env.MONGO_USER;
+const mongoPassword= process.env.MONGO_PASSWORD;
+const dbURI =
+  `mongodb+srv://${mongoUsername}:${mongoPassword}@mapleautocentre.eqepg.mongodb.net/maple-auto-centre?retryWrites=true&w=majority`;
+   mongoose
+  .connect(dbURI)
+  .then((result) => console.log("connected to DB"))
+  .catch((err) => console.log(err));
+
 // Auth part
-const adminDataFile = path.join(__dirname, "./data/admin.json");
-const adminData = fs.readFileSync(adminDataFile);
-const users = JSON.parse(adminData);
 const adminUsers = ["admin@gmail.com"];
 
 const authorize = (req, res, next) => {
@@ -48,36 +55,33 @@ const authorize = (req, res, next) => {
 // Routes
 app.use("/dealership", dealershipRoute);
 app.use("/inventory", inventoryRoute);
-app.use("/contactdealer", contactDealerRoute);
 
 // Register endpoint
-app.post("/register", (req, res) => {
+app.post("/register", async (req, res) => {
   const { username, name, password, confirmPassword } = req.body;
   const newUser = { username, name, password, confirmPassword };
-
-  const foundUser = users.find((user) => user.username === newUser.username);
+  const foundUser = await User.findOne({ username: username });
+  const newPerson = new User(newUser);
   if (foundUser) {
-    return res
-      .status(400)
-      .json({ message: "This user already exist. Please try new username!" });
-  } else {
-    users.push(newUser);
-    fs.writeFile(adminDataFile, JSON.stringify(users), (error) => {
-      if (error) {
-        res.status(500).send("Failed to add new user!");
-      } else {
-        res.status(201).send("New user added");
-      }
+    return res.status(400).json({
+      message: "This user already exist. Please try new username!",
     });
+  } else {
+    await newPerson
+      .save()
+      .then(() => {
+        res.status(201).send("New user added");
+      })
+      .catch(() => {
+        res.status(500).send("Failed to add new user!");
+      });
   }
 });
 
-
-
 // Login endpoint
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const foundUser = users.find((user) => user.username === username);
+  const foundUser = await User.findOne({ username: username });
 
   if (!foundUser) {
     return res
