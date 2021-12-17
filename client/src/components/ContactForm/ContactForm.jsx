@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import axios from "axios";
 import { Button, Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
 import "./ContactForm.scss";
-import emailjs from "emailjs-com";
 
 const host = "http://localhost:8080";
 
@@ -36,13 +35,7 @@ const validationSchema = Yup.object({
 function ContactForm({ isOpen, vehicle, onClose, dealerEmail, dealerName }) {
   const handleContactDealer = (vehicle, values, resetForm) => {
     const {} = vehicle;
-    const {
-      year,
-      make,
-      model,
-      trim,
-      vin
-    } = vehicle;
+    const { year, make, model, trim, vin } = vehicle;
     const { firstName, lastName, address, postalCode, phoneNumber, email } =
       values;
     const { SERVICE_ID, TEMPLATE_ID, USER_ID, URL } = emailConfig;
@@ -65,7 +58,7 @@ function ContactForm({ isOpen, vehicle, onClose, dealerEmail, dealerName }) {
       template_id: TEMPLATE_ID,
       user_id: USER_ID,
       template_params: {
-        dealerEmail: "savinps@gmail.com",
+        dealerEmail,
         dealerName,
         firstName,
         lastName,
@@ -77,7 +70,7 @@ function ContactForm({ isOpen, vehicle, onClose, dealerEmail, dealerName }) {
         make,
         model,
         trim,
-        vin
+        vin,
       },
     };
 
@@ -90,7 +83,7 @@ function ContactForm({ isOpen, vehicle, onClose, dealerEmail, dealerName }) {
         alert("Oops... " + JSON.stringify(error));
       });
 
-      resetForm();  
+    resetForm();
   };
 
   return (

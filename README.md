@@ -14,7 +14,7 @@ Additionally, there is an admin account that maintains inventory. The admin can 
 1. Register
 
 - Creating a new user.
-- Check for existing customer 
+- Check for existing customer.
 - Validation to all fields in the register form. Check email format, confirm password. 
 
 
@@ -69,17 +69,17 @@ Client:
 
 3. React-icons- Used edit, delete and add icon from this library.
 4. Axios - Handle API calls
+5. emailjs - Used to send an email
 
 Server:
-1. Nodemailer - Used to send an email
-2. JWT - To handle user authentication
-3. express-fileupload - Used to store vehicle images.
+1. JWT - To handle user authentication
+2. express-fileupload - Used to store vehicle images.
 
 
 ## Tech used
 
 Front-end: React.js and React hooks
-Back-end: Node.js
+Back-end: Node.js and mongoDB(database)
 
 
 ### Additional Comments

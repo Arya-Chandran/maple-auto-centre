@@ -2,7 +2,6 @@ import React from "react";
 import "./PricingSummary.scss";
 
 function PricingSummary({ payment }) {
-  console.log(payment);
   const { price, amount, fees, term, frequency, downPayment } = payment;
 
   return (

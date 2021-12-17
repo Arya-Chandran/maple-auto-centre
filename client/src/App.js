@@ -50,7 +50,6 @@ class App extends React.Component {
           isLoggedIn: true,
           isAuthencating: false,
         });
-        console.log("Found user");
       })
       .catch((err) => {
         console.log("profile error", err);

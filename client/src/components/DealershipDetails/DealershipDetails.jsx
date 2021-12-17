@@ -9,7 +9,6 @@ const host = "http://localhost:8080";
 
 function DealershipDetails({ vehicle }) {
   const { dealerId } = vehicle;
-  console.log("dealerid", dealerId);
   const [dealership, setDealership] = useState({});
   const [modal, setModal] = useState(false);
   const [isTooltip, setTooltip] = useState(false);
