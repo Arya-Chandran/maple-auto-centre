@@ -40,19 +40,6 @@ function ContactForm({ isOpen, vehicle, onClose, dealerEmail, dealerName }) {
       values;
     const { SERVICE_ID, TEMPLATE_ID, USER_ID, URL } = emailConfig;
 
-    const contactData = {
-      vehicle,
-      dealerEmail,
-      customerDetails: {
-        firstName,
-        lastName,
-        address,
-        postalCode,
-        phoneNumber,
-        email,
-      },
-    };
-
     var data = {
       service_id: SERVICE_ID,
       template_id: TEMPLATE_ID,
@@ -93,7 +80,6 @@ function ContactForm({ isOpen, vehicle, onClose, dealerEmail, dealerName }) {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
-            console.log("Calling submit");
             handleContactDealer(vehicle, values, resetForm);
           }}
         >

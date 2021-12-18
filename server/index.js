@@ -17,11 +17,10 @@ app.use(fileUpload());
 
 // DB Connection
 
-const mongoUsername= process.env.MONGO_USER;
-const mongoPassword= process.env.MONGO_PASSWORD;
-const dbURI =
-  `mongodb+srv://${mongoUsername}:${mongoPassword}@mapleautocentre.eqepg.mongodb.net/maple-auto-centre?retryWrites=true&w=majority`;
-   mongoose
+const mongoUsername = process.env.MONGO_USER;
+const mongoPassword = process.env.MONGO_PASSWORD;
+const dbURI = `mongodb+srv://${mongoUsername}:${mongoPassword}@mapleautocentre.eqepg.mongodb.net/maple-auto-centre?retryWrites=true&w=majority`;
+mongoose
   .connect(dbURI)
   .then((result) => console.log("connected to DB"))
   .catch((err) => console.log(err));
