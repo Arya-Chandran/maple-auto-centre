@@ -48,7 +48,7 @@ function Login(props) {
         sessionStorage.setItem("clientAuthToken", response.data.token);
         sessionStorage.setItem("isAdmin", response.data.isAdmin);
         setLoggedIn(true);
-        fetchProfile(response.data.token);
+        fetchProfile(response.data.token); 
         history.push("/inventory");
       })
       .catch((err) => {
